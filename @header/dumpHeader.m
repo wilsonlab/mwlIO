@@ -9,13 +9,13 @@ if length(h.subheaders) == 0
     return
 end
 
-val = '%%BEGINHEADER\n';
+val = sprintf('%%%%BEGINHEADER\n');
 
 for sh=1:size(h.subheaders,1)
     val = [val dumpHeader(h.subheaders(sh))];
 end
 
-val = [val '%%ENDHEADER\n'];
+val = [val sprintf('%%%%ENDHEADER\n')];
 
 
 % $Log: dumpHeader.m,v $

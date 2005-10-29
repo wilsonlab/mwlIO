@@ -1,8 +1,6 @@
 function display(fb, c)
 %DISPLAY
 
-% $Id: display.m,v 1.1 2005/10/09 20:35:39 fabian Exp $
-
 yn_map = {'no', 'yes'};
 
 if nargin<2 | ~isscalar(c)
@@ -36,8 +34,3 @@ fieldnames(:, end+1:end+3) = repmat(' : ', nf, 1);
 
 disp( [ repmat('  ', nf, 1) fieldnames fieldvalues])
 
-
-% $Log: display.m,v $
-% Revision 1.1  2005/10/09 20:35:39  fabian
-% *** empty log message ***
-%

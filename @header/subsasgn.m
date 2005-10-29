@@ -9,7 +9,11 @@ case '()'
     if ~isa(b, 'subheader')
         error('Not a subheader')
     end
-    h.subheaders(ind) = b;
+    if length(h.subheaders)==0
+        h.subheaders = b;
+    else
+        h.subheaders(ind) = b;
+    end
 otherwise
    error('Specify value for x as p(x)')
 end

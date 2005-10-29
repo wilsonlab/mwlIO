@@ -7,7 +7,11 @@ if ~isa(sh, 'subheader')
     error('Can only append subheaders')
 end
 
-h.subheaders[end+1] = sh;
+if length(h.subheaders)==0
+    h.subheaders=sh;
+else
+    h.subheaders(end+1) = sh;
+end
 
 
 % $Log: appendHeader.m,v $

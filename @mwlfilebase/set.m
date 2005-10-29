@@ -1,8 +1,6 @@
 function fb = set(fb,varargin)
 % SET Set properties and return the updated object
 
-% $Id: set.m,v 1.1 2005/10/09 20:38:23 fabian Exp $
-
 propertyArgIn = varargin;
 while length(propertyArgIn) >= 2,
     prop = propertyArgIn{1};
@@ -29,9 +27,3 @@ while length(propertyArgIn) >= 2,
         error('Cannot set this property')
     end
 end
-
-
-% $Log: set.m,v $
-% Revision 1.1  2005/10/09 20:38:23  fabian
-% *** empty log message ***
-%

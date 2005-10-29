@@ -1,17 +1,15 @@
 function fb = mwlfilebase(varargin)
 %MWLFILEBASE
 
-% $Id: mwlfilebase.m,v 1.2 2005/10/11 19:02:19 fabian Exp $
-
 if nargin==0
-    fb.mode = '';
-    fb.filename = '';
-    fb.path = '';
-    fb.headeropen = false;
-    fb.header = header();
-    fb.headersize = 0;
-    fb.filesize = 0;
-    fb.binary = 1;
+    fb.mode = '';       % r(ead) or w(rite)
+    fb.filename = '';   % name of the file + extension
+    fb.path = '';       % path to the file
+    fb.headeropen = false;  % if header is open or closed for modification (true/false)
+    fb.header = header();   % header object
+    fb.headersize = 0;      % size of the header
+    fb.filesize = 0;        % size of the file
+    fb.binary = 1;          % binary or ascii file
     fb = class(fb, 'mwlfilebase');
 elseif isa(varargin{1}, 'mwlfilebase')
     fb = varargin{1};
@@ -35,12 +33,14 @@ else
         error('Invalid filename and/or mode')
     end
     
+    %initialize
     fb.mode = mode;
     fb.headersize = 0;
     fb.header = header();
     fb.headeropen = true;
     fb.filesize = 0;
 
+    % if file is opened in read mode
     if strcmp(fb.mode, 'r')
         olddir = pwd;
 
@@ -59,7 +59,6 @@ else
         
         fb.binary = -1; %will be set later
         fb.filename = [fb.filename ext versn];
-        %fb.isopen = true;
         fb.headeropen=false;
     
         fid = fopen(fullfile(fb.path, fb.filename), [fb.mode 'b']);
@@ -68,7 +67,6 @@ else
             error('Cannot open file')
         end
     
-        fb.header = header();
         [fb.header fb.headersize] = loadHeader(fb.header, fid);
         
         if fb.headersize == 0
@@ -80,7 +78,7 @@ else
         fb.filesize = ftell(fid);
         fseek(fid, fb.headersize, 'bof');
                     
-    else
+    else % if file is opened in write mode
         fid = fopen(filename, 'w');
         if fid == -1
             error('Cannot create file')
@@ -100,12 +98,3 @@ else
     end
     
 end
-
-
-% $Log: mwlfilebase.m,v $
-% Revision 1.2  2005/10/11 19:02:19  fabian
-% *** empty log message ***
-%
-% Revision 1.1  2005/10/09 20:37:34  fabian
-% *** empty log message ***
-%

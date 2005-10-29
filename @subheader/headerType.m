@@ -3,7 +3,7 @@ function t = headerType(sh)
 % $Id: headerType.m,v 1.1 2005/10/09 20:55:15 fabian Exp $
 
 %File Format field?
-parm_id = find( strcmp(sh.parms(:,1), 'File Contents') );
+parm_id = find( strcmp(sh.parms(:,1), 'File Format') );
 if parm_id
     t = sh.parms{parm_id, 2};
     return

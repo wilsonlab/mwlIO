@@ -5,7 +5,7 @@ function ff = closeHeader(ff)
 
 hdr = get(ff, 'header');
 
-if len(header) == 0
+if len(hdr) == 0
     sh = subheader();
 else
     sh  = hdr(1);

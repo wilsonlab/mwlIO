@@ -1,8 +1,6 @@
 function frf = mwlfixedrecordfile(varargin)
 %MWLFIXEDRECORDFILE
 
-% $Id: mwlfixedrecordfile.m,v 1.1 2005/10/09 20:42:35 fabian Exp $
-
 if nargin==0
     frf.recordsize = -1;
     frf.nrecords = -1;
@@ -38,9 +36,3 @@ else
     
     frf = class(frf, 'mwlfixedrecordfile', rfb);
 end
-
-
-% $Log: mwlfixedrecordfile.m,v $
-% Revision 1.1  2005/10/09 20:42:35  fabian
-% *** empty log message ***
-%

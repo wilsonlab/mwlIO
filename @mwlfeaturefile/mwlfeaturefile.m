@@ -1,8 +1,6 @@
 function ff = mwlfeaturefile(varargin)
 %MWLDIODEFILE
 
-% $Id: mwlfeaturefile.m,v 1.1 2005/10/09 20:34:21 fabian Exp $
-
 if nargin==0
     ff = struct();
     frf = mwlfixedrecordfile();
@@ -26,8 +24,3 @@ else
     ff = class(ff, 'mwlfeaturefile', frf);
 end
 
-
-% $Log: mwlfeaturefile.m,v $
-% Revision 1.1  2005/10/09 20:34:21  fabian
-% *** empty log message ***
-%

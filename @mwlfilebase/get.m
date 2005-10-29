@@ -1,16 +1,11 @@
 function val = get(fb, propName)
 %GET
 
-% $Id: get.m,v 1.1 2005/10/09 20:36:58 fabian Exp $
-
-try
-    val = fb.(propName);
-catch
+flds = {'mode', 'filename', 'path', 'headeropen', 'header', 'headersize', 'filesize', 'binary'};
+id = find( strcmp(flds, propName) );
+if ~isempty(id)
+    val = fb.(flds{id});
+else
     error('No such property.')
 end
-
-
-% $Log: get.m,v $
-% Revision 1.1  2005/10/09 20:36:58  fabian
-% *** empty log message ***
-%
+    

@@ -1,8 +1,6 @@
 function bf = mwlbinaryfile(varargin)
 %MWLBINARYFILE
 
-% $Id: mwlbinaryfile.m,v 1.1 2005/10/09 19:51:53 fabian Exp $
-
 if nargin==0
     bf = struct();
     fb = mwlfilebase();
@@ -29,8 +27,3 @@ else
     bf = class(bf, 'mwlbinaryfile', fb);
 end
 
-
-% $Log: mwlbinaryfile.m,v $
-% Revision 1.1  2005/10/09 19:51:53  fabian
-% *** empty log message ***
-%

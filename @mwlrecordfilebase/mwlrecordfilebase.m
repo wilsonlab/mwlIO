@@ -1,7 +1,5 @@
 function rfb = mwlrecordfilebase(varargin)
-%MWLBINARYFILE
-
-% $Id: mwlrecordfilebase.m,v 1.2 2005/10/11 19:02:33 fabian Exp $
+%MWLRECORDFILEBASE
 
 if nargin==0
     rfb.fields = [];
@@ -37,12 +35,3 @@ else
     
     rfb = class(rfb, 'mwlrecordfilebase', bf);
 end
-
-
-% $Log: mwlrecordfilebase.m,v $
-% Revision 1.2  2005/10/11 19:02:33  fabian
-% *** empty log message ***
-%
-% Revision 1.1  2005/10/09 20:48:56  fabian
-% *** empty log message ***
-%
