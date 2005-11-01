@@ -12,6 +12,8 @@ switch filetype
         f = mwleventfile(filename, 'w');
     case 'pxyabw'
         f = mwlfeaturefile(filename, 'w');
+    case 'fixedrecord'
+        f = mwlfixedrecordfile(filename, 'w');
     case 'rawpos'
         %f = mwlposfile(filename, 'w');
         error 'Not implemented'
