@@ -25,5 +25,10 @@ target = lower(target);
 %  mex -Iinclude src/p2mat.c src/mwlIOLib.c src/mwlParseFilterParams.c
 %end
 
-  
-  
+cfiles = {'findrecord', 'mwlio', 'mwlwrite', 'poscountrecords', 'posfindrecord', 'posfindtimerange', 'posloadrecordrange'};
+
+for i=1:length(cfiles)
+     if (ismember(cfiles{i}, target) | ismember('all', target))
+         eval(['mex -Iinclude src/' cfiles{i} '.c'])
+     end
+end  
