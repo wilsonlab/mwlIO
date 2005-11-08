@@ -11,7 +11,7 @@ else
     sh  = hdr(1);
 end
 
-sh = setParam(sh, 'File Format', 'pxyabw');
+sh = setParam(sh, 'File Format', 'feature');
 
 hdr(1) = sh;
 

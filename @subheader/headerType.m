@@ -36,7 +36,7 @@ if parm_id
     elseif findstr(program, 'posextract')
         t = 'diode';
     elseif findstr(program, 'spikeparms')
-        t = 'pxyabw';
+        t = 'feature';
     elseif findstr(program, 'crextract')
         t = 'cr';
     elseif findstr(lower(program), 'xclust')

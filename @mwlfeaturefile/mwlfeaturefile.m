@@ -13,7 +13,7 @@ else
     if strcmp(frf.mode, 'r')
         
         %diode pos file?
-        if ~strcmp( getFileType(frf), 'pxyabw')
+        if ~strcmp( getFileType(frf), 'feature')
             error('Not a feature file')
         end
         

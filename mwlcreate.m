@@ -10,7 +10,7 @@ switch filetype
         f = mwleegfile(filename,'w');
     case 'event'
         f = mwleventfile(filename, 'w');
-    case 'pxyabw'
+    case 'feature'
         f = mwlfeaturefile(filename, 'w');
     case 'fixedrecord'
         f = mwlfixedrecordfile(filename, 'w');
@@ -32,7 +32,7 @@ if isa(args.Header, 'header')
 end
 
 %set fields
-if strcmp(filetype, 'pxyabw')
+if strcmp(filetype, 'feature')
     f = setFields(f, args.Fields);
 else
     f=setFields(f);
