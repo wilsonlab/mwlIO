@@ -20,7 +20,7 @@ for f=1:nfields
     
     switch typestr
         case 'char'
-            if fields(4)>1 %treat as string
+            if fields{f,4}>1 %treat as string
                 fmt = [fmt 's'];
             else
                 fmt = [fmt 'u8'];
