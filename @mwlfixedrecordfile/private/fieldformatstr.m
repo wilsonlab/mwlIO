@@ -47,6 +47,8 @@ for f=1:nfields
         end
     
         fmtstr = [fmtstr fmt2];
+    else
+        fmtstr = fmt;
     end
     
 end
