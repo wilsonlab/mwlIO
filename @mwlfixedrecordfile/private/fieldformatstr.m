@@ -39,13 +39,15 @@ for f=1:nfields
             error('Incorrect field type')
     end
     
-    fmt2='';
+    if ~strcmp(typestr, 'char')
+        fmt2='';
     
-    for i = 1:(fields{f,4})
-        fmt2 = [fmt2 fmt];
+        for i = 1:(fields{f,4})
+            fmt2 = [fmt2 fmt];
+        end
+    
+        fmtstr = [fmtstr fmt2];
     end
-    
-    fmtstr = [fmtstr fmt2];
     
 end
 
