@@ -1,24 +1,26 @@
 function f = mwlcreate(filename, filetype, varargin)
 
-args = struct('Header', [], 'Data', [], 'Fields', {[]});
+args = struct('Header', [], 'Data', [], 'Fields', {[]}, 'FileType', 'binary');
 args = parseArgs(varargin, args);
+
+b = (args.FileType(1)=='b');
 
 switch filetype
     case 'diode'
-        f = mwldiodefile(filename,'w');
+        f = mwldiodefile(filename,'w',b);
     case 'eeg'
-        f = mwleegfile(filename,'w');
+        f = mwleegfile(filename,'w',b);
     case 'event'
-        f = mwleventfile(filename, 'w');
+        f = mwleventfile(filename, 'w',b);
     case 'feature'
-        f = mwlfeaturefile(filename, 'w');
+        f = mwlfeaturefile(filename, 'w',b);
     case 'fixedrecord'
-        f = mwlfixedrecordfile(filename, 'w');
+        f = mwlfixedrecordfile(filename, 'w',b);
     case 'rawpos'
         %f = mwlposfile(filename, 'w');
         error 'Not implemented'
     case 'waveform'
-        f = mwlwaveformfile(filename, 'w');
+        f = mwlwaveformfile(filename, 'w',b);
     case 'cluster'
         %f = mwlfixedrecordfile(filename, 'w');
         error 'Not implemented'
@@ -32,16 +34,16 @@ if isa(args.Header, 'header')
 end
 
 %set fields
-if strcmp(filetype, 'feature')
+if strcmp(filetype, 'feature') && ~isempty(args.Fields)
     f = setFields(f, args.Fields);
 else
     f=setFields(f);
 end
 
-%close header
-f =closeHeader(f);
-
 %write data
 if ~isempty(args.Data)
+    %close header
+    f =closeHeader(f);    
+    
     f = appendData(f, args.Data);
 end

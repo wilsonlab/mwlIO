@@ -14,8 +14,10 @@ switch filetype
         f = mwleegfile(filename);
     case 'event'
         f = mwleventfile(filename);
-    case 'pxyabw'
+    case 'feature'
         f = mwlfeaturefile(filename);
+    case 'fixedrecord'
+        f = mwlfixedrecordfile(filename);
     case 'rawpos'
         f = mwlposfile(filename);
     case 'waveform'
