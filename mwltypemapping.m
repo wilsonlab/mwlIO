@@ -11,7 +11,7 @@ if nargin~=2
 end
 
 map = {'char', 'short', 'int', 'float', 'double', 'func', 'ffunc', 'ulong'};
-matmap = {'uint8', 'int16', 'int32', 'float32', 'float64', '', '', 'uint32'};
+matmap = {'uint8', 'int16', 'int32', 'single', 'double', '', '', 'uint32'};
 mexmap = [9, 10, 12, 7, 6, 0, 0, 13];
 sizemap = [1 2 4 4 8 -1 -1 4];
 
