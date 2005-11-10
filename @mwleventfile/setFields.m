@@ -11,7 +11,7 @@ fields = {};
 fields(1,1:4) = {'timestamp' 'long' 4 1};
 fields(2,1:4) = {'string' 'char' 1 ef.string_size};
 
-ef.mwlfixedrecordfile = setFields(ef.mwlrecordfilebase, fields);
+ef.mwlfixedrecordfile = setFields(ef.mwlfixedrecordfile, fields);
 
 
 % $Log: setFields.m,v $
