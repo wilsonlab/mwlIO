@@ -11,7 +11,7 @@ end
 
 val = sprintf('%%%%BEGINHEADER\n');
 
-for sh=1:size(h.subheaders,1)
+for sh=1:length(h.subheaders)
     val = [val dumpHeader(h.subheaders(sh))];
 end
 
