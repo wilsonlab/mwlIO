@@ -24,8 +24,12 @@ if iscell(data)
         elseif nrows~=size(data{f},1)
             error('Incorrect number of rows')
         end
-            
-        datatype = mwltypemapping(fields{f, 2}, 'str2mat');
+        
+        if strcmp(fields{f,2}, 'char') && fields{f,4}>1
+            datatype = 'char';
+        else
+            datatype = mwltypemapping(fields{f, 2}, 'str2mat');
+        end
         eval( ['data{f}=' datatype '(data{f});']);
     end
     
@@ -46,7 +50,11 @@ elseif isstruct(data)
         elseif nrows~=size(data.(fields{f,1}),1)
             error('Incorrect number of rows')
         end
-        datatype = mwltypemapping(fields{f, 2}, 'str2mat');
+        if strcmp(fields{f,2}, 'char') && fields{f,4}>1
+            datatype = 'char';
+        else
+            datatype = mwltypemapping(fields{f, 2}, 'str2mat');
+        end        
         eval( ['data.(fields{f,1}) = ' datatype '(data.(fields{f,1}));']);
     end
     
@@ -58,15 +66,59 @@ elseif isnumeric(data) % for matrices there is no support for multiple element f
     tmpdata = {};
     nrows = size(data,1);
     for f=1:nfields
-        datatype = mwltypemapping(fields{f, 2}, 'str2mat');
+        if strcmp(fields{f,2}, 'char') && fields{f,4}>1
+            datatype = 'char';
+        else
+            datatype = mwltypemapping(fields{f, 2}, 'str2mat');
+        end          
         eval(['tmpdata{f}=' datatype '(data(:,f));']);
     end
     data = tmpdata;
     clear tmpdata;
 end
 
-%write data to file
-mwlwrite(fullfile(frf), data, nrows);
+if isbinary(frf)
+    %write data to file
+    mwlwrite(fullfile(frf), data, nrows);
+else %ascii
+    fid = fopen(fullfile(frf), 'a');
+    fmt = [fieldformatstr(fields, [], '\t', 1) '\n'];
+    if isstruct(data)
+        %convert to cell matrix
+        fo = 0;
+        tmp = {};
+        for f = 1:nfields
+            if strcmp(fields{f,2},'char') && fields{f,4}>1
+                tmp(1:nrows, [1:1]+fo) = mat2cell( data.(fields{f,1}), ones(nrows,1), fields{f,4});
+                fo = fo + 1;
+            else    
+                tmp(1:nrows, [1:fields{f,4}]+fo) = mat2cell( data.(fields{f,1}), ones(nrows,1), ones(1, fields{f,4}));
+                fo = fo + fields{f,4};
+            end
+        end
+    else
+        %convert to cell matrix
+        fo = 0;
+        tmp = {};
+        for f = 1:nfields
+            if strcmp(fields{f,2},'char') && fields{f,4}>1
+                tmp(1:nrows, [1:1]+fo) = mat2cell( data{f}, ones(nrows,1), fields{f,4});
+                fo = fo + 1;
+            else    
+                tmp(1:nrows, [1:fields{f,4}]+fo) = mat2cell( data{f}, ones(nrows,1), ones(1, fields{f,4}));
+                fo = fo + fields{f,4};
+            end           
+        end        
+    end
+    
+    %save
+    for i=1:nrows
+        fprintf(fid, fmt, tmp{i,:});
+    end
+    
+    fclose(fid);
+end
+
 
 %reload file
 frf = reopen(frf);

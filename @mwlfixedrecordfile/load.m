@@ -103,7 +103,21 @@ else %ascii
         end
     
         %create structure
-        data = cell2struct(data', flds);       
+        %data = cell2struct(data', flds);       
+        outdata = struct();
+        ofs = 0;
+        for f=1:length(flds)
+            field_id = find(strcmp(fields(:,1), flds{f}));
+            if fields{field_id, 4}>1 && strcmp(fields{field_id, 2}, 'char')
+                outdata.(flds{f}) = data{1 + ofs};
+                ofs = ofs + 1;
+            else
+                outdata.(flds{f}) = cell2mat( data( [1:fields{field_id,4}] + ofs ) );
+                ofs = ofs + fields{field_id,4};
+            end
+        end
+            
+        data = outdata;
         
         fclose(fid);
     end

@@ -34,7 +34,7 @@ if isa(args.Header, 'header')
 end
 
 %set fields
-if strcmp(filetype, 'feature') && ~isempty(args.Fields)
+if (strcmp(filetype, 'feature') | strcmp(filetype, 'fixedrecord') ) && ~isempty(args.Fields)
     f = setFields(f, args.Fields);
 else
     f=setFields(f);

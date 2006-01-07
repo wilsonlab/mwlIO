@@ -24,6 +24,8 @@ switch filetype
         f = mwlwaveformfile(filename);
     case 'cluster'
         f = mwlfixedrecordfile(filename);
+    case 'clbound'
+        f = mwlboundfile(filename);
     otherwise
         error('Unsupported filetype')
 end
