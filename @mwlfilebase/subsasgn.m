@@ -1,5 +1,15 @@
 function fb = subsasgn(fb,s, b)
-% SUBSREF 
+%SUBSASGN subscripted assignment
+%
+%   Syntax
+%   f.property = value
+%
+%   Examples
+%
+%   See also 
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 switch s.type
 case '.'

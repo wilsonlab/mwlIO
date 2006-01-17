@@ -1,5 +1,23 @@
 function fb = set(fb,varargin)
-% SET Set properties and return the updated object
+%SET set object properties and return the updated object
+%
+%   Syntax
+%   f = set( f, property1, value1, property2, value2, ...)
+%
+%   Valid properties that can be set for mwlfilebase objects which are in
+%   'write' or 'overwrite' mode: 'header', 'format'
+%
+%   Examples
+%
+%   See also 
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
+
+if ismember( fb.mode, {'read', 'append'} )
+    error(['File is in ' fb.mode ' mode')
+end
+    
 
 propertyArgIn = varargin;
 while length(propertyArgIn) >= 2,
@@ -8,20 +26,16 @@ while length(propertyArgIn) >= 2,
     propertyArgIn = propertyArgIn(3:end);
     switch prop
     case 'header'
-        if ~fb.headeropen
-            error('Header is already closed.')
-        elseif ~isa(val, 'header')
-            error('Not a header.')
+        if ~isa(val, 'header')
+            error('Invalid header')
         else
             fb.header = val;
         end
     case 'binary'
-        if ~fb.headeropen
-            error('Header is already closed.')
-        elseif (val~=0 & val~=1)
-            error('Invalid value for binary parameter')
+        if ~ismember(val, {'binary', 'ascii'})
+            error('Invalid format')
         else
-            fb.binary = val;
+            fb.format = val;
         end            
     otherwise
         error('Cannot set this property')

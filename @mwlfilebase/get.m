@@ -1,8 +1,25 @@
 function val = get(fb, propName)
-%GET
+%GET get oject properties
+%
+%   Syntax
+%   value = get(f, property)
+%
+%   Valid properties for mwlfilebase objects are:
+%   'mode', 'filename', 'path', 'header', 'headersize', 'filesize',
+%   'format'
+%
+%   Examples
+%
+%   See also 
+%
 
-flds = {'mode', 'filename', 'path', 'headeropen', 'header', 'headersize', 'filesize', 'binary'};
+%  Copyright 2005-2006 Fabian Kloosterman
+
+
+flds = {'mode', 'filename', 'path', 'header', 'headersize', 'filesize', 'format'};
+
 id = find( strcmp(flds, propName) );
+
 if ~isempty(id)
     val = fb.(flds{id});
 else

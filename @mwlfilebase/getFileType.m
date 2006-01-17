@@ -1,8 +1,21 @@
 function ft = getFileType(fb)
-%GETFILETYPE
+%GETFILETYPE return file type based on first subheader
+%
+%   Syntax
+%   filetype = getFileType( f )
+%
+%   This method returns the file type of mwlfilebase object f as determined
+%   from the first subheader.
+%
+%   Examples
+%
+%   See also HEADER
+%
 
-if fb.headeropen
-    error('Header is still open')
+%  Copyright 2005-2006 Fabian Kloosterman
+
+if ismember(fb.mode, {'write', 'overwrite'})
+    error('File is in write mode')
 end
 
 ft = headerType(fb.header(1));

@@ -1,7 +1,6 @@
 function display(fb, c)
 %DISPLAY
-
-yn_map = {'no', 'yes'};
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<2 | ~isscalar(c)
     c = 0;
@@ -11,20 +10,8 @@ if ~(c)
     disp(['-- FILE OBJECT --'])
 end
 
-if strcmp(fb.mode, 'r')
-    filemode = 'read';
-else
-    filemode = 'write';
-end
-
-if isbinary(fb)
-    filetype = 'binary';
-else
-    filetype = 'ascii';
-end
-
-fieldnames = {'file name', 'file path', 'file mode', 'file type', 'header open', 'file size', 'header size'};
-fieldvalues = {fb.filename, fb.path, filemode, filetype, yn_map{fb.headeropen+1}, [num2str(fb.filesize) ' bytes'], [num2str(fb.headersize) ' bytes']};
+fieldnames = {'file name', 'file path', 'file mode', 'file type', 'file size', 'header size'};
+fieldvalues = {fb.filename, fb.path, fb.mode, fb.format, [num2str(fb.filesize) ' bytes'], [num2str(fb.headersize) ' bytes']};
 
 nf = length(fieldnames);
 

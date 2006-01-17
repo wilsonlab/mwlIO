@@ -1,13 +1,19 @@
 function fb = closeHeader(fb)
-%CLOSEHEADER
+%CLOSEHEADER write header to disk and reopen file in append mode
+%
+%   Syntax
+%   f = closeHeader( f )
+%
+%   Examples
+%
+%   See also 
+%
 
-if ~strcmp(fb.mode, 'w') || ~fb.headeropen
+%  Copyright 2005-2006 Fabian Kloosterman
+
+
+if ismember(fb.mode, {'read', 'append'})
     return
-end
-
-fid = fopen(fullfile(fb), 'w');
-if fid<1
-    error('Cannot open file for writing')
 end
 
 hdr = get(fb, 'header');
@@ -18,7 +24,7 @@ else
     sh  = hdr(1);
 end
 
-if fb.binary
+if ismember(fb.format, 'binary')
     sh = setParam(sh, 'File type', 'Binary');
 else
     sh = setParam(sh, 'File type', 'Ascii');
@@ -30,10 +36,14 @@ fb = set(fb, 'header', hdr);
 
 fid = fopen(fullfile(fb), 'w');
 
+if fid<1
+    error('Cannot open file for writing')
+end
+
 fwrite(fid, dumpHeader(fb.header));
 
 fb.headersize = ftell(fid);
-fb.headeropen = false;
+fb.mode = 'append';
 
 fclose(fid);
 

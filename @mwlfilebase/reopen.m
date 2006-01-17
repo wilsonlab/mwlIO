@@ -1,8 +1,18 @@
 function f = reopen(fb)
-%REOPEN
+%REOPEN reopen file
+%
+%   Syntax
+%   f = reopen( f )
+%
+%   Examples
+%
+%   See also 
+%
 
-if fb.headeropen
-    error('File is in write mode. Cannot reopen.')
+%  Copyright 2005-2006 Fabian Kloosterman
+
+if ismember(fb.mode, {'write', 'overwrite'})
+    error('File is in ' fb.mode ' mode. Cannot reopen.')
 end
 
 if nargout<1
@@ -10,7 +20,6 @@ if nargout<1
     return  
 end
 
-
 cl = class(fb);
 
-eval(['f = ' cl '( ''' fullfile(fb.path, fb.filename) ''', ''r'' );']);
+eval(['f = ' cl '( ''' fullfile(fb.path, fb.filename) ''', ''' fb.mode  ''' );']);
