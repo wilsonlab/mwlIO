@@ -1,7 +1,16 @@
 function sh = setParam(sh, parm, val)
-%SETPARAM
+%SETPARAM set the value of a subheader parameter
+%
+%   Syntax
+%   h = setParam(h, param, val)
+%
+%   Example
+%
+%   See also 
+%
 
-% $Id: setParam.m,v 1.1 2005/10/09 20:55:47 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 if ~ischar(parm) | strcmp(parm, '')
     error('Parameter name should be non-empty string')
@@ -36,7 +45,3 @@ else
 end
 
 
-% $Log: setParam.m,v $
-% Revision 1.1  2005/10/09 20:55:47  fabian
-% *** empty log message ***
-%

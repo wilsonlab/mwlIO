@@ -1,14 +1,20 @@
 function [result, i] = getComments(sh)
-%GETCOMMENTS
+%GETCOMMENTS return all comments in subheader
+%
+%   Syntax
+%   [c, i] = getComments( h )
+%
+%   This method will return all comments c in subheader h. the indices at
+%   which those comments were found in the subheader are returned in i.
+%
+%   Example
+%
+%   See also 
+%
 
-% $Id: getComments.m,v 1.1 2005/10/09 20:54:34 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 i = find( strcmp(sh.parms(:,1), '') );
 
 result = sh.parms(i,2);
 
-
-% $Log: getComments.m,v $
-% Revision 1.1  2005/10/09 20:54:34  fabian
-% *** empty log message ***
-%

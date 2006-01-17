@@ -1,7 +1,15 @@
 function val = dumpHeader(sh)
-%DUMPHEADER
+%DUMPHEADER dump subheader contents as string
+%
+%   Syntax
+%   s = dumpHeader( h )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: dumpHeader.m,v 1.1 2005/10/09 20:54:18 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 val = '';
 
@@ -22,9 +30,3 @@ for p=1:size(sh.parms,1)
 end
 
 val = [val sprintf('%%\n')];
-
-
-% $Log: dumpHeader.m,v $
-% Revision 1.1  2005/10/09 20:54:18  fabian
-% *** empty log message ***
-%

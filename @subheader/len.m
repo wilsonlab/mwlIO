@@ -1,13 +1,16 @@
-function l = length(sh)
-%LENGTH
-% number of parameters in header
+function l = len(sh)
+%LEN return number of parameters in subheader
+%
+%   Syntax
+%   l = len( h )
+%
+%   Example
+%
+%   See also 
+%
 
-% $Id: len.m,v 1.1 2005/10/09 20:55:33 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 l = length(sh.parms);
 
-
-% $Log: len.m,v $
-% Revision 1.1  2005/10/09 20:55:33  fabian
-% *** empty log message ***
-%

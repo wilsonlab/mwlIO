@@ -1,7 +1,17 @@
 function sh = subheader(varargin)
-%SUBHEADER
+%SUBHEADER constructor
+%
+%   Syntax
+%   h = subheader()     default constructor
+%   h = subheader( h )  copy constructor
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: subheader.m,v 1.1 2005/10/09 20:56:08 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 if nargin==0
     sh.parms = cell(0,2);
@@ -13,7 +23,4 @@ else
 end
 
 
-% $Log: subheader.m,v $
-% Revision 1.1  2005/10/09 20:56:08  fabian
-% *** empty log message ***
-%
+

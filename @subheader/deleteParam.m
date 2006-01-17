@@ -1,7 +1,17 @@
 function sh = deleteParam(sh, parm)
-%DELETEPARAM
+%DELETEPARAM remove parameter from subheader
+%
+%   Syntax
+%   h = deleteParam( h, param )
+%
+%   This method will remove the parameter param from the subheader h.
+%
+%   Example
+%
+%   See also 
+%
 
-% $Id: deleteParam.m,v 1.1 2005/10/09 20:53:46 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if ~ischar(parm) | strcmp(parm, '')
     error('Parameter name should be non-empty string')
@@ -17,8 +27,3 @@ if length(id)==1
     sh.parms(id,:) = [];
 end
 
-
-% $Log: deleteParam.m,v $
-% Revision 1.1  2005/10/09 20:53:46  fabian
-% *** empty log message ***
-%
