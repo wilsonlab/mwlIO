@@ -1,0 +1,17 @@
+function retval = matcode( field )
+%MATCODE return the field type converted to matlab type
+%
+%   Syntax
+%   m = matcode( field )
+%
+%   Examples
+%   field = mwlfield( 'char', 1 );
+%   matcode( field )  % will return: 'uint8'
+%
+%   See also 
+%
+
+%  Copyright 2006-2006 Fabian Kloosterman
+
+typestr = mwltypemapping( [field.type], 'code2str');
+retval = mwltypemapping( typestr, 'str2mat');
