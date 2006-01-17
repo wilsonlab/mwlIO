@@ -1,26 +1,20 @@
 function pf = setFields(pf)
-%SETFIELDS
+%SETFIELDS create fields for new record file
+%
+%   Syntax
+%   f = setFields( f, fields )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: setFields.m,v 1.2 2005/10/11 19:02:11 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin>1
     warning('This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = {};
-fields(1,1:4) = {'timestamp' 'long' 4 1};
-fields(2,1:4) = {'xfront' 'short' 2 1};
-fields(3,1:4) = {'xback' 'short' 2 1};
-fields(4,1:4) = {'yfront' 'short' 2 1};
-fields(5,1:4) = {'yback' 'short' 2 1};
+fields = mwlField( {'timestamp', 'xfront', 'xback', 'yfront', 'yback'}, {'long', 'short', 'short', 'short', 'short'}, 1);
 
 pf.mwlfixedrecordfile = setFields(pf.mwlfixedrecordfile, fields);
-
-
-% $Log: setFields.m,v $
-% Revision 1.2  2005/10/11 19:02:11  fabian
-% *** empty log message ***
-%
-% Revision 1.1  2005/10/09 19:54:24  fabian
-% *** empty log message ***
-%

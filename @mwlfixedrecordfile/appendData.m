@@ -16,6 +16,12 @@ function frf = appendData(frf, data)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
+%can only append data in append mode
+
+if ~strcmp( get(frf, 'mode'), 'append' )
+    error('Cannot append data if not in append mode')
+end
+
 fields = get(frf, 'fields');
 nfields = numel(fields);
 
