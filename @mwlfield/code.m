@@ -5,7 +5,7 @@ function retval = code( field )
 %   c = code( field )
 %
 %   Examples
-%   field = mwlfield( 'char', 1 );
+%   field = mwlfield( 'test', 'char', 1 );
 %   code( field )  % will return: 1
 %
 %   See also 

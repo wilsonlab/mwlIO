@@ -5,7 +5,7 @@ function retval = print( field )
 %   f = print( field )
 %
 %   Examples
-%   field = mwlfield( 'double', 1 );
+%   field = mwlfield( 'test', 'double', 1 );
 %   f = print( field );
 %
 %   See also 

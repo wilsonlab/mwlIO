@@ -5,7 +5,7 @@ function retval = elementsize( field )
 %   sz = elementsize( field )
 %
 %   Examples
-%   field = mwlfield( 'char', 1 );
+%   field = mwlfield( 'test', 'char', 1 );
 %   elementsize( field )  % will return: 1
 %
 %   See also 

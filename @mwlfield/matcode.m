@@ -5,7 +5,7 @@ function retval = matcode( field )
 %   m = matcode( field )
 %
 %   Examples
-%   field = mwlfield( 'char', 1 );
+%   field = mwlfield( 'test', 'char', 1 );
 %   matcode( field )  % will return: 'uint8'
 %
 %   See also 

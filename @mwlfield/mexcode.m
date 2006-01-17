@@ -5,7 +5,7 @@ function retval = mexcode( field )
 %   m = mexcode( field )
 %
 %   Examples
-%   field = mwlfield( 'char', 1 );
+%   field = mwlfield( 'test', 'char', 1 );
 %   mexcode( field )  % will return: 9
 %
 %   See also 
