@@ -1,6 +1,17 @@
 function bf = set(bf,varargin)
-% SET
+%SET set object properties and return the updated object
+%
+%   Syntax
+%   f = set( f, property1, value1, property2, value2, ...)
+%
+%   Valid properties that can be set for mwlboundfile objects (in addition
+%   to those inherited from mwlfilebase): none
+%
+%   Examples
+%
+%   See also 
 
+%  Copyright 2005-2006 Fabian Kloosterman
 
 propertyArgIn = varargin;
 while length(propertyArgIn) >= 2,

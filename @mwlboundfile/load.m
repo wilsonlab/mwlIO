@@ -1,5 +1,15 @@
 function cb = load(bf, cid)
-%LOAD
+%LOAD load cluster boundaries
+%
+%   Syntax
+%   bounds = load( f [, clusterid] )
+%
+%   Examples
+%
+%   See also 
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 fid = fopen( fullfile(bf), 'r');
 

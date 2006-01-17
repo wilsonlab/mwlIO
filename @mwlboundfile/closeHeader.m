@@ -1,5 +1,15 @@
 function bf = closeHeader(bf)
-%CLOSEHEADER
+%CLOSEHEADER write header to disk and reopen file in append mode
+%
+%   Syntax
+%   f = closeHeader( f )
+%
+%   Examples
+%
+%   See also 
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargout~=1
     warning('It is safer to provide an output argument. Aborted.')

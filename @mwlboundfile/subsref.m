@@ -1,5 +1,15 @@
 function b = subsref(bf,s)
-% SUBSREF 
+%SUBSREF subscripted indexing
+%
+%   Syntax
+%   f.property
+%
+%   Examples
+%
+%   See also MWLFILEBASE
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 switch s.type
 case '.'
