@@ -1,5 +1,17 @@
 function ff = mwlfeaturefile(varargin)
-%MWLDIODEFILE
+%MWLFEATUREFILE constructor
+%
+%   Syntax
+%   f = mwlfeaturefile()      default constructor
+%   f = mwlfeaturefile( f )   copy constructor
+%   f = mwlfeaturefile( filename [, mode [, format] )
+%
+%   Examples
+%
+%   See also MWLFIXEDRECORDFILE
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     ff = struct();
@@ -10,9 +22,9 @@ elseif isa(varargin{1}, 'mwlfeaturefile')
 else
     frf = mwlfixedrecordfile(varargin{:});
     
-    if strcmp(frf.mode, 'r')
+    if ismember(frf.mode, {'read', 'append'})
         
-        %diode pos file?
+        %feature file?
         if ~strcmp( getFileType(frf), 'feature')
             error('Not a feature file')
         end
