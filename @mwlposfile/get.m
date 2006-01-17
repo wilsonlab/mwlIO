@@ -1,7 +1,18 @@
 function val = get(pf, propName)
-%GET
+%GET get oject properties
+%
+%   Syntax
+%   value = get(f, property)
+%
+%   Valid properties for mwlposfilebase objects are (in addition to
+%   those inherited from mwlrecordfilebase): 'currentrecord',
+%   'currentoffset', 'currenttimestamp', 'nrecords'
+%
+%   Examples
+%
+%   See also MWLRECORDFILEBASE
 
-% $Id: get.m,v 1.1 2005/10/09 20:45:31 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 try
     val = pf.(propName);
@@ -9,8 +20,3 @@ catch
     val = get(pf.mwlrecordfilebase, propName);
 end
 
-
-% $Log: get.m,v $
-% Revision 1.1  2005/10/09 20:45:31  fabian
-% *** empty log message ***
-%

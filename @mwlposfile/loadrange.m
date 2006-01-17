@@ -1,51 +1,55 @@
 function data = loadrange(frf, loadflds, range, rangefield)
-%LOADRANGE
+%LOADRANGE load data from mwl pos file
+%
+%   Syntax
+%   data = loadrange( f [, fields [, range, range_field]] )
+%
+%   This method loads (part of) the data from raw position file f. The
+%   fields parameter can be a string or cell array of strings indicating
+%   which fields to load from the file. Valid fields are: 'nitems',
+%   'frame', 'timestamp', 'target x', 'target y'. In case fields = 'all',
+%   then all fields will be loaded (this is also the default if no fields
+%   parameter is specified). The range parameter is a two-element vector
+%   specifying the first and last record indices of the data range to load
+%   (default = from current record to end of file). If range_field is set
+%   to 'timestamp' then the range vector is in timestamps, rather than
+%   record indices.
+%   
+%   Examples
+%
+%   See also 
+%
 
-% $Id: loadrange.m,v 1.1 2005/10/09 20:46:17 fabian Exp $
-
-if nargin<3
-    help(mfilename)
-    return
-end
-
-try
-    range = double(range);
-catch
-    error('Invalid range argument')
-end
+%  Copyright 2005-2006 Fabian Kloosterman
 
 fields = get(frf, 'fields');
 
-if (length(range)~=2)
-    error('Range should be two element vector')
-end
-
-if ischar(loadflds)
-    if strcmp(loadflds, 'all')
-        loadflds = fields(:,1);
-    else
-        loadflds = {flds};
-    end
+if nargin<2 || isempty(loadflds)
+    loadflds = name(fields);
+elseif ischar(loadflds)
+    loadflds = {loadflds};
 elseif ~iscell(loadflds)
-    error('Expecting cell array of field names')
+    error('Invalid fields')
 end
 
-
-fieldmask = 0;
-for f = 1:length(loadflds)
-   field_id = find(strcmp( fields(:,1), loadflds{f}));
-   if field_id == 5
-       field_id = 4; %just because we are treating target x and target y fields as one pos field
-   end
-   if ~isempty(field_id)
-       fieldmask = bitor(fieldmask, 2.^(field_id-1));
-   elseif strcmp(loadflds{f}, 'pos')
-       fieldmask = bitor(fieldmask, 8);
-   end
+if ismember( 'all', loadflds )
+    loadflds = name(fields);
 end
+
+if nargin<3 || isempty(range)
+    range = [frf.currentrecord frf.nrecords-1 ];
+elseif ~isnumeric(range) || numel(range)~=2
+    error('Invalid range')
+else
+    range = double(range);
+end
+
+[dummy, id] = ismember( name(fields), loadflds );
+id( id==5 ) = 4; %because we are treating target x and target y fields as one pos field
+fieldmask = sum( bitset(0, unique(id( id~=0 )) ) );
 
 if fieldmask==0
-    error('Invalid fields for loading')
+    error('Invalid fields')
 end
 
 if nargin<4 || isempty(rangefield)
@@ -53,12 +57,7 @@ if nargin<4 || isempty(rangefield)
     frf = setCurrentRecord(frf, range(1));
     data = posloadrecordrange( fullfile(frf), frf.currentoffset, range(2)-range(1)+1, fieldmask);
 else
-    fieldid = find(strcmp(fields(:,1), rangefield));
-    if isempty(fieldid)
-        error('Invalid range field')
-    end
-   %only support timestamp field
-   if ~strcmp(fields{fieldid,1}, 'timestamp')
+    if ~ismember( rangefield, 'timestamp' )
        error('Filtering only supported for timestamp field')
    end
     
@@ -68,8 +67,3 @@ else
 
 end
 
-
-% $Log: loadrange.m,v $
-% Revision 1.1  2005/10/09 20:46:17  fabian
-% *** empty log message ***
-%

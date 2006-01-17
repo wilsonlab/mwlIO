@@ -1,9 +1,17 @@
 function f = setCurrentRecord(f, recid)
-%SETCURRENTRECORD
+%SETCURRENTRECORD move file pointer to record
+%
+%   Syntax
+%   f = setCurrentRecord( f, record_id)
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: setCurrentRecord.m,v 1.1 2005/10/09 20:47:02 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
-if strcmp(get(f, 'mode'), 'w')
+if ismember(get(f, 'mode'), {'write', 'overwrite'})
     error('Cannot set current record in write mode')
 end
 
@@ -32,9 +40,3 @@ end
 f.currentrecord = record + newrecid;
 f.currentoffset = newoffset;
 f.currenttimestamp = newtimestamp;
-
-
-% $Log: setCurrentRecord.m,v $
-% Revision 1.1  2005/10/09 20:47:02  fabian
-% *** empty log message ***
-%

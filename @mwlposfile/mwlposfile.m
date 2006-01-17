@@ -1,7 +1,17 @@
 function pf = mwlposfile(varargin)
-%MWLPOSFILE
+%MWLPOSFILE constructor
+%
+%   Syntax
+%   f = mwlposfile()      default constructor
+%   f = mwlposfile( f )   copy constructor
+%   f = mwlposfile( filename [, mode, format] )
+%
+%   Examples
+%
+%   See also MWLRECORDFILEBASE
+%
 
-% $Id: mwlposfile.m,v 1.1 2005/10/09 20:46:47 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     pf = struct('currentrecord', 0, 'currentoffset', 0, 'currenttimestamp', 0, 'nrecords', 0);
@@ -12,7 +22,7 @@ elseif isa(varargin{1}, 'mwlposfile')
 else
     rfb = mwlrecordfilebase(varargin{:});
     
-    if ~isbinary(rfb)
+    if ~ismember( rfb.format, {'binary'} )
         error('Ascii pos files are not supported.')
     end
     
@@ -21,15 +31,16 @@ else
      pf.currenttimestamp = 0;
      pf.currentoffset = 0;    
     
-     if strcmp(rfb.mode, 'r')
+     if ismember( rfb.mode, {'read', 'append'})
         
         %rawpos file?
         if ~strcmp( getFileType(rfb), 'rawpos')
             error('Not a raw position file')
         end
         
-        fields = rfb.fields;
-        if size(fields, 1) ~=5 | ~strcmp(fields{1,1}, 'nitems') | ~strcmp(fields{2,1}, 'frame') | ~strcmp(fields{3,1}, 'timestamp') | ~strcmp(fields{4,1}, 'target x') | ~strcmp(fields{5,1}, 'target y')
+        %check fields
+        fields = mwlField( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
+        if ~all( fields==rfb.fields )
             error('Invalid raw position file')
         end
      
@@ -40,14 +51,9 @@ else
      
      pf = class(pf, 'mwlposfile', rfb);
      
-     if strcmp( get(pf,'mode'), 'r')
+     if ismember( rfb.mode, {'read', 'append'})
         pf = setCurrentRecord(pf, 0);
      end
      
 end
 
-
-% $Log: mwlposfile.m,v $
-% Revision 1.1  2005/10/09 20:46:47  fabian
-% *** empty log message ***
-%
