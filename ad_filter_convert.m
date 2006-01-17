@@ -1,4 +1,22 @@
 function [lp, hp] = ad_filter_convert(FilterSetting)
+%AD_FILTER_CONVERT convert ad filter setting
+%
+%   Syntax
+%   [lp, hp] = ad_filter_convert( filter )
+%
+%   this function will convert a filter value as used by the nearalynx
+%   amplifiers (and as found in mwl file type headers) to low-pass and
+%   high-pass cut off frequencies.
+%
+%   Examples
+%   filter_setting = 136;
+%   [low_pass, high_pass] = ad_filter_convert( filter_setting )
+%
+%   See also 
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 lp = -1;
 hp = -1;

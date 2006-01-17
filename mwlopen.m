@@ -1,7 +1,15 @@
 function f = mwlopen(filename)
-%MWLOPEN
+%MWLOPEN open a mwl-type file
+%
+%   Syntax
+%   f = mwlopen(filename)
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: mwlopen.m,v 1.1 2005/10/09 21:05:11 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 f = mwlfilebase(filename);
 filetype = getFileType(f);
@@ -29,9 +37,3 @@ switch filetype
     otherwise
         error('Unsupported filetype')
 end
-
-
-% $Log: mwlopen.m,v $
-% Revision 1.1  2005/10/09 21:05:11  fabian
-% *** empty log message ***
-%

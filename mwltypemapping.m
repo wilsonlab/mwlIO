@@ -1,9 +1,27 @@
 function retval = mwltypemapping(mwltype, mapping)
-%MWLTYPE2STRING
-% mwltype = value to convert
-% mapping method: 'code2str', 'str2code', 'code2size', 'str2size'
+%MWLTYPEMAPPING type conversions
+%
+%   Syntax
+%   new_type = mwltypemapping(type, mapping)
+%
+%   This function will convert one type code to another type code. The
+%   conversion is done according to the mapping parameter, which can be one
+%   of: 'code2str', 'str2code', 'code2size', 'str2size', 'str2mat',
+%   'str2mex'
+%
+%   description of type codes:
+%       code = numeric type-code as used in mwl files
+%       str = string type-code as used in mwl files
+%       size = size of type
+%       mat = string type code as used in matlab
+%       mex = numeric type-code as used in mex files
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: mwltypemapping.m,v 1.1 2005/10/09 21:05:27 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin~=2
     help(mfilename)
@@ -17,81 +35,75 @@ sizemap = [1 2 4 4 8 -1 -1 4];
 
 switch mapping
     case 'code2str'
-        if ~isscalar(mwltype)
+        if ~isnumeric(mwltype) || any(mwltype<1) || any(mwltype>8)
             error('Invalid mwl type code')
-        end
-        if mwltype<1 | mwltype>8
-            retval = 'invalid';
         else
-            retval = map{mwltype};
+            retval = map(mwltype);
         end
     case 'str2code'
-        if ~ischar(mwltype)
+        if ischar(mwltype)
+            mwltype = cellstr( mwltype );
+        end
+        if ~iscellstr(mwltype)
             error('Invalid mwl type string')
         end
-        if strcmp('long', mwltype)
-            mwltype = 'ulong';
-        end
-        id = find( strcmp( map, mwltype ) );
-        if isempty(id)
-            retval = 0;
-        else
-            retval = id;
-        end
+
+        mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
+
+        [dummy, retval] = ismember( mwltype, map );
+        
+        retval( retval == 0) = -1;
+        
     case 'code2size'
-        if ~isscalar(mwltype)
+        if ~isnumeric(mwltype) || any(mwltype<1) || any(mwltype>8)
             error('Invalid mwl type code')
-        end
-        if mwltype<1 | mwltype>8
-            retval = -1;
         else
             retval = sizemap(mwltype);
         end        
     case 'str2size'
-        if ~ischar(mwltype)
+        if ischar(mwltype)
+            mwltype = cellstr( mwltype );
+        end
+        if ~iscellstr(mwltype)
             error('Invalid mwl type string')
         end
-        if strcmp('long', mwltype)
-            mwltype = 'ulong';
-        end        
-        id = find( strcmp( map, mwltype ) );
-        if isempty(id)
-            retval = -1;
-        else
-            retval = sizemap(id);
-        end        
+        mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
+           
+        [dummy, retval] = ismember( mwltype, map );
+        
+        retval( retval == 0) = -1;
+        
+        retval( retval~=-1 ) = sizemap( retval( retval~=-1) );
+    
     case 'str2mat'
-        if ~ischar(mwltype)
+        if ischar(mwltype)
+            mwltype = cellstr( mwltype );
+        end
+        if ~iscellstr(mwltype)
             error('Invalid mwl type string')
         end
-        if strcmp('long', mwltype)
-            mwltype = 'ulong';
-        end 
-        id = find( strcmp( map, mwltype ) );
-        if isempty(id)
-            retval = '';
-        else
-            retval = matmap{id};
-        end
+        mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
+           
+        [dummy, id] = ismember( mwltype, map );        
+
+        retval={};
+        retval( id==0 ) = {''};
+        retval( id~=0 ) = matmap( id( id~=0 ) );
+
     case 'str2mex'
-        if ~ischar(mwltype)
+        if ischar(mwltype)
+            mwltype = cellstr( mwltype );
+        end
+        if ~iscellstr(mwltype)
             error('Invalid mwl type string')
         end
-        if strcmp('long', mwltype)
-            mwltype = 'ulong';
-        end 
-        id = find( strcmp( map, mwltype ) );
-        if isempty(id)
-            retval = 0;
-        else
-            retval = mexmap(id);
-        end        
+        mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
+           
+        [dummy, retval] = ismember( mwltype, map );
+        
+        retval( retval == 0) = -1;
+        
+        retval( retval~=-1 ) = mexmap( retval( retval~=-1) );        
     otherwise
         error('Invalid mapping method')
 end
-
-
-% $Log: mwltypemapping.m,v $
-% Revision 1.1  2005/10/09 21:05:27  fabian
-% *** empty log message ***
-%
