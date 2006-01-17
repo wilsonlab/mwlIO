@@ -1,7 +1,15 @@
 function ef = closeHeader(ef)
-%CLOSEHEADER
+%CLOSEHEADER write header to disk and reopen file in append mode
+%
+%   Syntax
+%   f = closeHeader( f )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: closeHeader.m,v 1.1 2005/10/09 19:55:04 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 hdr = get(ef, 'header');
 
@@ -19,8 +27,3 @@ ef = set(ef, 'header', hdr);
 
 ef.mwlfixedrecordfile = closeHeader(ef.mwlfixedrecordfile);
 
-
-% $Log: closeHeader.m,v $
-% Revision 1.1  2005/10/09 19:55:04  fabian
-% *** empty log message ***
-%

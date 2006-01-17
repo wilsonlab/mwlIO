@@ -1,16 +1,23 @@
 function data = load(ef, flds, i)
-%LOAD
+%LOAD load eeg data
+%
+%   Syntax
+%   data = load( f, load_fields [, indices] )
+%
+%   This method allows you to load data from multiple fields, as specified
+%   by the cell array load_fields. The parameter indices is an optional
+%   vector of record indices. In eeg files each record contains a full
+%   buffer of eeg data. Random access is possible.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: load.m,v 1.1 2005/10/09 20:27:25 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 data = load(ef.mwlfixedrecordfile, flds, i);
 
 if isfield(data, 'data')
     data.data = reshape(data.data', ef.nchannels, size(data.data, 1)*ef.nsamples)';
 end
-
-
-% $Log: load.m,v $
-% Revision 1.1  2005/10/09 20:27:25  fabian
-% *** empty log message ***
-%

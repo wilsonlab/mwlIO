@@ -5,7 +5,7 @@ function val = get(frf, propName)
 %   value = get(f, property)
 %
 %   Valid properties for mwlfixedrecordfile objects are (in addition to
-%   those inherited from mwlfilebase): 'recordsize', 'nrecords'
+%   those inherited from mwlrecordfilebase): 'recordsize', 'nrecords'
 %
 %   Examples
 %

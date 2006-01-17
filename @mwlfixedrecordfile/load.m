@@ -4,7 +4,7 @@ function data = load(frf, load_fields, i)
 %   Syntax
 %   data = load( f, load_fields [, indices] )
 %
-%   This multiple allows you to load data from multiple fields, as specified
+%   This method allows you to load data from multiple fields, as specified
 %   by the cell array load_fields. The parameter indices is an optional
 %   vector of record indices. For binary files random access is supported;
 %   for ascii files only a contiguous block of indices id supported. By

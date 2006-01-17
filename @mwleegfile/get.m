@@ -1,7 +1,17 @@
 function val = get(ef, propName)
-%GET
+%GET get oject properties
+%
+%   Syntax
+%   value = get(f, property)
+%
+%   Valid properties for mwleegfile objects are (in addition to
+%   those inherited from mwlfixedrecordfile): 'nsamples', 'nchannels'
+%
+%   Examples
+%
+%   See also MWLFILEBASE
 
-% $Id: get.m,v 1.1 2005/10/09 20:26:30 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 try
     val = ef.(propName);
@@ -9,8 +19,3 @@ catch
     val = get(ef.mwlfixedrecordfile, propName);
 end
 
-
-% $Log: get.m,v $
-% Revision 1.1  2005/10/09 20:26:30  fabian
-% *** empty log message ***
-%

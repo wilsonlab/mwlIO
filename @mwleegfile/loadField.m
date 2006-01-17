@@ -1,7 +1,18 @@
 function data = loadField(ef, field, varargin)
-%LOADFIELD
+%LOADFIELD load data from single field
+%
+%   Syntax
+%   data = loadField( f, field [, range] )
+%
+%   This method loads data from a single field. Optionally a record range
+%   can be specified.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: loadField.m,v 1.1 2005/10/09 20:26:59 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<2
     help(mfilename)
@@ -12,9 +23,3 @@ data = loadField(ef.mwlfixedrecordfile, field, varargin{:});
 if strcmp(field, 'data')
     data = permute(reshape(data', ef.nchannels, size(data, 1)*ef.nsamples), [2 1]);
 end
-
-
-% $Log: loadField.m,v $
-% Revision 1.1  2005/10/09 20:26:59  fabian
-% *** empty log message ***
-%

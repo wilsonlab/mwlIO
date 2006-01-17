@@ -1,22 +1,32 @@
 function ef = mwleegfile(varargin)
-%MWLWAVEFORMFILE
+%MWLEEGFILE constructor
+%
+%   Syntax
+%   f = mwleegfile()      default constructor
+%   f = mwleegfile( f )   copy constructor
+%   f = mwleegfile( filename [, mode [, nchannels, nsamples] )
+%
+%   Examples
+%
+%   See also MWLFIXEDRECORDFILE
+%
 
-% $Id: mwleegfile.m,v 1.1 2005/10/09 20:28:16 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     ef = struct('nsamples', 0, 'nchannels', 0);
     frf = mwlfixedrecordfile();
-    ef = class(ef, 'mwlwaveformfile', frf);
+    ef = class(ef, 'mwleegfile', frf);
 elseif isa(varargin{1}, 'mwleegfile')
     wf = varargin{1};
 else
     frf = mwlfixedrecordfile(varargin{:});
     
-    if ~isbinary(frf)
+    if strcmp(frf.format, 'ascii')
         error('Ascii eeg files are not supported.')
     end
     
-    if strcmp(frf.mode, 'r')
+    if ismember(frf.mode, {'read', 'append'})
         
         %eeg file?
         if ~strcmp( getFileType(frf), 'eeg')
@@ -24,13 +34,14 @@ else
         end
         
         fields = frf.fields;
-        if size(fields, 1) ~=2 | ~strcmp(fields{1,1}, 'timestamp') | ~strcmp(fields{2,1}, 'data')
+        
+        if ~all(ismember(name(fields), {'timestamp', 'data'}))
             error('Invalid eeg file')
         end        
+                
+        ef.nsamples = length(fields(2));
         
-        ef.nsamples = fields{2,4};
-        
-        ef.nchannels = 0;
+        ef.nchannels = 0;raw position
         
         hdr = get(frf, 'header');
         for h=1:len(hdr)
@@ -70,9 +81,3 @@ else
     ef = class(ef, 'mwleegfile', frf);
     
 end
-
-
-% $Log: mwleegfile.m,v $
-% Revision 1.1  2005/10/09 20:28:16  fabian
-% *** empty log message ***
-%
