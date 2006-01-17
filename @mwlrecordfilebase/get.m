@@ -1,16 +1,21 @@
 function val = get(rfb, propName)
-%GET
+%GET get oject properties
+%
+%   Syntax
+%   value = get(f, property)
+%
+%   Valid properties for mwlrecordfilebase objects are (in addition to
+%   those inherited from mwlfilebase): 'mode', 'filename', 'path',
+%   'header', 'headersize', 'filesize', 'format'
+%
+%   Examples
+%
+%   See also MWLFILEBASE
 
-% $Id: get.m,v 1.1 2005/10/09 20:48:37 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 try
     val = rfb.(propName);
 catch
     val = get(rfb.mwlfilebase, propName);
 end
-
-
-% $Log: get.m,v $
-% Revision 1.1  2005/10/09 20:48:37  fabian
-% *** empty log message ***
-%

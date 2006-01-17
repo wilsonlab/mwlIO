@@ -1,9 +1,20 @@
 function rfb = mwlrecordfilebase(varargin)
-%MWLRECORDFILEBASE
+%MWLRECORDFILEBASE constructor
+%
+%   Syntax
+%   f = mwlrecordfilebase()      default constructor
+%   f = mwlrecordfilebase( f )   copy constructor
+%   f = mwlfilerecordfilebase( filename [, mode, format] )
+%
+%   Examples
+%
+%   See also MWLFILEBASE
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     rfb.fields = [];
-    rfb.immutable_fields = false;
     bf = mwlfilebase();
     rfb = class(rfb, 'mwlrecordfilebase', bf);
    
@@ -13,7 +24,7 @@ else
     
     bf = mwlfilebase(varargin{:});
     
-    if strcmp(bf.mode, 'r')
+    if ismember(bf.mode, {'read', 'append'})
         flds = [];
         hdr = bf.header;
         for h = 1:len(hdr)  
@@ -23,14 +34,12 @@ else
             end
         end
         if isempty(flds)
-            error('No fields parameter in header')
+            error('No Fields parameter in header')
         end
        
         rfb.fields = processFields(flds);
-        rfb.immutable_fields = false;        
     else
         rfb.fields = [];        
-        rfb.immutable_fields = false;
     end
     
     rfb = class(rfb, 'mwlrecordfilebase', bf);

@@ -1,23 +1,23 @@
 function rfb = closeHeader(rfb)
-%CLOSEHEADER
+%CLOSEHEADER write header to disk and reopen file in append mode
+%
+%   Syntax
+%   f = closeHeader( f )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: closeHeader.m,v 1.1 2005/10/09 20:48:07 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 if nargout~=1
     warning('It is safer to provide an output argument. Aborted.')
     return;
 end
 
-nfields = size(rfb.fields,1);
-
-fldstr = '';
-
-for f=1:nfields
-    fldstr = [fldstr sprintf('%s,%d,%d,%d\t',rfb.fields{f,1},mwltypemapping(rfb.fields{f,2}, 'str2code'),rfb.fields{f,3},rfb.fields{f,4})];
-end
-
-%remove last tab
-fldstr(end)=[];
+fldstr = print( rfb.fields );
 
 hdr = get(rfb, 'header');
 
@@ -34,9 +34,3 @@ hdr(1) = sh;
 rfb = set(rfb, 'header', hdr);
 
 rfb.mwlfilebase = closeHeader(rfb.mwlfilebase);
-
-
-% $Log: closeHeader.m,v $
-% Revision 1.1  2005/10/09 20:48:07  fabian
-% *** empty log message ***
-%

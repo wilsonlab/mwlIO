@@ -1,7 +1,18 @@
 function retval = processFields(flds)
-%PROCESSFIELDS
+%PROCESSFIELDS parse fields description
+%
+%   Syntax
+%   mwlfield = processFields( field_string )
+%
+%   This function will parse the value of the Fields parameter in mwl file
+%   headers and return them as a mwlField object
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: processFields.m,v 1.1 2005/10/09 20:50:40 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<1 | ~ischar(flds)
     error('Expecting fieldstring')
@@ -16,50 +27,63 @@ if ~isempty(strfind(flds, ','))
     
     fields = strread(strtrim(flds), '%s', 'delimiter', '\t');
     
-    for f = 1:length(fields)
+    nfields = length(fields);
+    
+    field_name = cell(nfields,1);
+    field_type = zeros(nfields,1);
+    field_size = zeros(nfields,1);
         
+    for f = 1:nfields
+        %get field attributes
         attr = strread(strtrim(fields{f}), '%s', 'delimiter', ',');
         if length(attr)~=4
-            warning(['Cannot process field: ' fields{f}])
+            error(['Cannot process field: ' fields{f}])
         else
-            attr{2} = mwltypemapping(str2num(attr{2}), 'code2str');
-            attr{3} = str2num(attr{3});
-            attr{4} = str2num(attr{4});
-            retval(f,1:4) = attr;
+            field_name{f} = attr{1};
+            field_type(f) = str2num( attr{2} );
+            field_size(f) = str2num( attr{4} );
         end
         
     end
+    
+    retval = mwlfield( field_name, field_type, field_size );
     
 else
     %assume old style field descriptor
     rexp = '(?<name>[A-Za-z_]+)(?<size>\[[0-9]+\])?';
     %split on semi colon
     fields = strread(strtrim(flds), '%s', 'delimiter', ';');
+
+    nfields = length(fields);
     
-    for f = 1:length(fields)
+    field_name = cell(nfields,1);
+    field_type = cell(nfields,1);
+    field_size = zeros(nfields,1);    
+    
+    for f = 1:nfields
         
         attr = strread(strtrim(fields{f}), '%s', 'delimiter', ' ');
         if length(attr)~=2
-            warning(['Cannot process field: ' fields{f}])
+            error(['Cannot process field: ' fields{f}])
         else
-            matches = regexp(attr{1}, rexp, 'names');
+            matches = regexp(attr{2}, rexp, 'names');
             if ~isempty(matches)
-                retval{f,1} = matches.name;
+                field_name{f} = matches.name;
                 if isfield(matches, 'size')
-                    retval{f,3} = strread(matches.size, '[%d]');
+                    field_size(f) = strread(matches.size, '[%d]');
                 else
-                    retval{f,3} = 1;
+                    field_size(f) = 1;
                 end
+            else
+                error(['Cannot process field: ' fields{f}])
             end
-            retval(f, 2) = attr{1};
-            retval(f, 4) = {1};
+            
+            field_type{f} = attr{1};
          end
         
     end
+    
+    retval = mwlfield( field_name, field_type, field_size );
+    
 end
     
-
-% $Log: processFields.m,v $
-% Revision 1.1  2005/10/09 20:50:40  fabian
-% *** empty log message ***
-%
