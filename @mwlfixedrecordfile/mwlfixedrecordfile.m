@@ -1,5 +1,17 @@
 function frf = mwlfixedrecordfile(varargin)
-%MWLFIXEDRECORDFILE
+%MWLFIXEDRECORDFILE constructor
+%
+%   Syntax
+%   f = mwlfixedrecordfile()      default constructor
+%   f = mwlfixedrecordfile( f )   copy constructor
+%   f = mwlfixedrecordfile( filename [, mode, format] )
+%
+%   Examples
+%
+%   See also MWLRECORDFILEBASE
+%
+
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     frf.recordsize = -1;
@@ -15,18 +27,15 @@ else
     frf.recordsize = -1;
     frf.nrecords = -1;
     
-    if strcmp(rfb.mode, 'r')
+    if ismember(rfb.mode, {'read', 'append'})
         
         fields = get(rfb, 'fields');
-        nfields = size(fields, 1);
-        
-        if isbinary(rfb) %if ascii, recordsize has no meaning and we can't calculate nrecords
+    
+        if ismember(rfb.format, {'binary'}) %if ascii, recordsize has no meaning and we can't calculate nrecords
         
             frf.recordsize = 0;
             
-            for f=1:nfields
-                frf.recordsize = frf.recordsize + fields{f,3}*fields{f,4};
-            end
+            frf.recordsize = sum( size(fields) );
         
             frf.nrecords = (get(rfb, 'filesize') - get(rfb, 'headersize') ) ./ frf.recordsize;
             

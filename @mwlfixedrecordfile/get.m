@@ -1,7 +1,17 @@
 function val = get(frf, propName)
-%GET
+%GET get oject properties
+%
+%   Syntax
+%   value = get(f, property)
+%
+%   Valid properties for mwlfixedrecordfile objects are (in addition to
+%   those inherited from mwlfilebase): 'recordsize', 'nrecords'
+%
+%   Examples
+%
+%   See also MWLFILEBASE
 
-% $Id: get.m,v 1.1 2005/10/09 20:41:04 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 try
     val = frf.(propName);
@@ -9,8 +19,3 @@ catch
     val = get(frf.mwlrecordfilebase, propName);
 end
 
-
-% $Log: get.m,v $
-% Revision 1.1  2005/10/09 20:41:04  fabian
-% *** empty log message ***
-%

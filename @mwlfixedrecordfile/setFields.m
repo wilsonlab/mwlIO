@@ -1,21 +1,19 @@
 function frf = setFields(frf, fields)
-%SETFIELDS
+%SETFIELDS create fields for new fixed record file
+%
+%   Syntax
+%   f = setFields( f, fields )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: setFields.m,v 1.1 2005/10/09 20:42:51 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 frf.mwlrecordfilebase = setFields(frf.mwlrecordfilebase, fields);
 
-frf.recordsize = 0;
-
 fields = get(frf, 'fields');
-nfields = size(fields, 1);
 
-for f=1:nfields
-    frf.recordsize = frf.recordsize + fields{f,3}*fields{f,4};
-end
+frf.recordsize = sum( size(fields) );
 
-
-% $Log: setFields.m,v $
-% Revision 1.1  2005/10/09 20:42:51  fabian
-% *** empty log message ***
-%

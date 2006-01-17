@@ -1,7 +1,18 @@
-function data = loadField(frf, field, startid, endid)
-%LOADFIELD
+function data = loadField(frf, loadfield, range)
+%LOADFIELD load data from single field
+%
+%   Syntax
+%   data = loadField( f, field [, range] )
+%
+%   This method loads data from a single field. Optionally a record range
+%   can be specified. This method reads both binary and ascii files.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: loadField.m,v 1.1 2005/10/09 20:41:26 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<2
     help(mfilename)
@@ -9,40 +20,31 @@ if nargin<2
 end
 
 fields = get(frf, 'fields');
-nfields = size(fields, 1);
+nfields = numel(fields);
 
-if ischar(field)
-    field = find(strcmp(fields, field));
-    if isempty(field)
+if isempty(loadfield) || ~ischar(loadfield)
+    error('Please specify a valid field')
+else
+    fieldid = ismember( loadfield, name(fields));
+    if fieldid==0
         error('Unknown field')
     end
 end
 
-if field<1 | field>nfields
-    error('Invalid field number')
-end
+isbinary = ismember( frf.format, 'binary');
 
-if isbinary(frf)
-    nrecords = get(frf, 'nrecords');
+if nargin<3 || isempty(range)
+    if isbinary
+        range = [0 frf.nrecords-1 ];
+    else
+        range = [0 -1];
+    end
+elseif ~isnumeric(range) || numel(range)~=2
+    error('Invalid range')
 else
-    nrecords = 0;
+    range = double(range);
 end
 
-if nargin<3
-    %load all records
-    startid = 0;
-    endid = nrecords-1;
-elseif nargin<4 
-    endid = nrecords-1;
-end
-
-if ischar(startid) | ischar(endid) | ~isscalar(startid) | ~isscalar(endid)
-    error('Incorrect types of startid and endid')
-end
-
-if (startid<0 | startid>endid | endid>nrecords-1) & endid~=-1
-    error('Invalid indices')
-end
 
 fid = fopen( fullfile( get(frf, 'path'), get(frf, 'filename') ), 'r' );
 
@@ -50,44 +52,44 @@ if fid == -1
     error('Cannot open file')
 end
 
+if ismember(frf.format, {'binary'})
 
-
-if isbinary(frf)
-   
-    offset = 0;
-    if field>1
-        offset = sum([fields{1:field-1,3}]' .* [fields{1:field-1,4}]');
+    if range(2)==-1
+        range(2) = frf.nrecords-1;
+    elseif range(1)>range(2) || range(1)<0 || range(2)>frf.nrecords
+        error('Invalid range')
     end
+    
+    offset = byteoffset( fields );
+    offset = offset( fieldid );
 
-    fseek(fid, get(frf, 'headersize') + offset + frf.recordsize * startid, -1);
+    fseek(fid, get(frf, 'headersize') + offset + frf.recordsize * range(1), -1);
 
     data = fread( fid, fields{field, 4}*(endid-startid+1), [num2str(fields{field, 4}) '*' mwltypemapping(fields{field,2}, 'str2mat')], frf.recordsize - fields{field, 3}*fields{field, 4});
-
-    data = reshape(data, fields{field, 4}, endid-startid+1)';
+    data = fread( fid, length(fields(fieldid))*(diff(range)+1), [num2str(length(fields(fieldid))) '*' char(matcode(fields(fieldid)))], frf.recordsize - size(fields(fieldid)));
+    
+    data = reshape(data, length(fields(fieldid)), diff(range)+1)';
     
 else %ascii file
-   
+    
     %create format string for textscan
     skip = ones(nfields,1);
-    skip(field)=0;
-    fmt = fieldformatstr(fields, skip)
+    skip(fieldid)=0;
+    fmt = formatstr(fields, skip)
     %fseek to header offset
     fseek(fid, get(frf, 'headersize'), -1);
     %do a textscan for (endid-startid+1) lines
-    if endid==-1
-        data = textscan(fid, fmt, 'headerLines', startid);
+    if range(2)==-1
+        data = textscan(fid, fmt, 'headerLines', range(1));
+    elseif range(1)<=range(2) && range(1)>=0
+        data = textscan(fid, fmt, diff(range)+1, 'headerLines', range(1));
     else
-        data = textscan(fid, fmt, endid-startid+1, 'headerLines', startid);
+        error('Invalid range')
     end
+    
     %transform data to matrix if necessary
     data = cell2mat(data);
     
 end
 
 fclose(fid);
-
-
-% $Log: loadField.m,v $
-% Revision 1.1  2005/10/09 20:41:26  fabian
-% *** empty log message ***
-%

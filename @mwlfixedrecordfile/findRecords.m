@@ -1,25 +1,34 @@
 function i = findRecords(f, field, bounds)
-%FINDRECORDS
+%FINDRECORDS find records
+%
+%   Syntax
+%   i = findRecords( f, filter_field, range)
+%
+%   This method finds all records that meet the condition that the value of
+%   the field filter_field is within the range specified. The method
+%   returns a vector of record indices.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: findRecords.m,v 1.1 2005/10/09 20:40:48 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 if nargin<3
     help(mfilename)
 end
 
-%fields = get(f, 'fields');
-%nfields = size(fields, 1);
-
-if ~isnumeric(bounds) & length(bounds)~=2
+if isnumeric(bounds)
+    if length(bounds)==1
+        bounds = [bounds bounds];
+    end
+    
+    data = loadField( f, field );
+    
+    i = find( data>=bounds(1) & data<=bounds(2) );
+else
     error('Invalid bounds')
 end
 
-data = loadField(f, field);
-
-i = find( data>=bounds(1) & data<=bounds(2) );
-
-
-% $Log: findRecords.m,v $
-% Revision 1.1  2005/10/09 20:40:48  fabian
-% *** empty log message ***
-%

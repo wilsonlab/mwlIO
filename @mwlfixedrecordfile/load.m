@@ -1,27 +1,42 @@
-function data = load(frf, flds, i)
-%LOAD
+function data = load(frf, load_fields, i)
+%LOAD load multiple fields from fixed record file
+%
+%   Syntax
+%   data = load( f, load_fields [, indices] )
+%
+%   This multiple allows you to load data from multiple fields, as specified
+%   by the cell array load_fields. The parameter indices is an optional
+%   vector of record indices. For binary files random access is supported;
+%   for ascii files only a contiguous block of indices id supported. By
+%   default the whole file is loaded.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: load.m,v 1.1 2005/10/09 20:41:51 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
+
 
 fields = get(frf, 'fields');
-nfields = size(fields, 1);
+nfields = numel(fields);
 
-if nargin<2 | isempty(flds)
-    flds = 'all';
+if nargin<2 || isempty(load_fields) || ismember( {'all'}, load_fields )
+    load_fields = name(fields);
 end
 
-if ischar(flds)
-    if strcmp(flds, 'all')
-        flds = fields(:,1);
-    else
-        flds = {flds};
-    end
-elseif ~iscell(flds)
-    error('Expecting cell array of field names')
-end
+field_names = name(fields);
+[dummy, field_id] = ismember( load_fields,field_names );
 
-if nargin<3 | isempty(i)
-    i = -1;
+field_id = field_id( field_id~=0 );
+load_fields = field_names( field_id );
+    
+for f=1:numel(field_id)
+    load_fields{f}(find(load_fields{f}==' ' | load_fields{f}=='-')) = '_';    
+end
+    
+if nargin<3 || isempty(i)
+    i = -1; %load all records
 end
 
 if ~isa(i, 'double')
@@ -32,20 +47,12 @@ if ~isa(i, 'double')
     end
 end
 
-if isbinary(frf)
+if ismember(get(frf, 'format'), {'binary'})
     %check validity of field names
     %and create field definition array
 
-    field_def = zeros(0,3);
-    field_offsets = [0 cumsum([fields{1:end-1,3}].*[fields{1:end-1,4}])];
-    for f = 1: length(flds)
-        field_id = find(strcmp(fields(:,1), flds{f}));
-        if isempty( field_id )
-            error([ 'Invalid field name: ' flds{f}])
-        else
-            field_def(end+1, 1:3) = [field_offsets(field_id) mwltypemapping(fields{field_id,2}, 'str2mex') fields{field_id, 4}];
-        end
-    end
+    field_def = mex_fielddef( fields );
+    field_offsets = byteoffset( fields );
 
     if i==-1
         i = 0:frf.nrecords-1;
@@ -55,14 +62,13 @@ if isbinary(frf)
 
     %transpose arrays and construct names
 
-    for f=1:length(flds)
+    for f=1:numel(field_id)
         data{f} = data{f}';
-        flds{f}(find(flds{f}==' ' | flds{f}=='-')) = '_';    
     end
 
     %create structure
 
-    data = cell2struct(data, flds);
+    data = cell2struct(data, load_fields);
 else %ascii
     
     if (max(diff(i)))>1
@@ -76,18 +82,10 @@ else %ascii
         end
         
         skip = ones(nfields,1);
-        for f = 1: length(flds)
-            field_id = find(strcmp(fields(:,1), flds{f}));
-            if isempty( field_id )
-                error([ 'Invalid field name: ' flds{f}])
-            else
-                skip(field_id)=0;
-            end
-        end
+        skip(field_id) = 0;
         
-        fmt = fieldformatstr(fields, skip);
-        
-        
+        fmt = formatstr(fields, skip);
+               
         %fseek to header offset
         fseek(fid, get(frf, 'headersize'), -1);    
         if i==-1
@@ -96,24 +94,15 @@ else %ascii
             data = textscan(fid, fmt, length(i), 'headerLines', i(1));
         end
     
-        flds = fields(find(skip==0),1);
-        for f=1:length(flds)
-            %data{f} = data{f}';
-            flds{f}(find(flds{f}==' ' | flds{f}=='-')) = '_';    
-        end
-    
-        %create structure
-        %data = cell2struct(data', flds);       
         outdata = struct();
         ofs = 0;
-        for f=1:length(flds)
-            field_id = find(strcmp(fields(:,1), flds{f}));
-            if fields{field_id, 4}>1 && strcmp(fields{field_id, 2}, 'char')
-                outdata.(flds{f}) = data{1 + ofs};
+        for f=1:numel(field_id)
+            if length(fields(f))>1 && strcmp(type(fields(f)), 'char')
+                outdata.(load_fields{f}) = data{1 + ofs};
                 ofs = ofs + 1;
             else
-                outdata.(flds{f}) = cell2mat( data( [1:fields{field_id,4}] + ofs ) );
-                ofs = ofs + fields{field_id,4};
+                outdata.(load_fields{f}) = cell2mat( data( [1:length(fields(f))] + ofs ) );
+                ofs = ofs + length(fields(f));
             end
         end
             
@@ -123,9 +112,3 @@ else %ascii
     end
     
 end
-
-
-% $Log: load.m,v $
-% Revision 1.1  2005/10/09 20:41:51  fabian
-% *** empty log message ***
-%
