@@ -9,7 +9,7 @@ function val = get(ef, propName)
 %
 %   Examples
 %
-%   See also MWLFILEBASE
+%   See also MWLFIXEDRECORDFILE
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

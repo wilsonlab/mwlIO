@@ -1,7 +1,19 @@
 function data = load(ef, flds, i)
-%LOAD
+%LOAD load event strings
+%
+%   Syntax
+%   data = load( f, load_fields [, indices] )
+%
+%   This method allows you to load data from multiple fields, as specified
+%   by the cell array load_fields. The parameter indices is an optional
+%   vector of record indices.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: load.m,v 1.1 2005/10/09 20:32:15 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<3
     i = [];
@@ -20,11 +32,4 @@ if isfield(data, 'string')
         data.string{i,1} = sprintf('%s', tmp(i,:));
     end
     data.string = deblank(data.string);
-    %data.string = cellstr(char(data.string));
 end
-
-
-% $Log: load.m,v $
-% Revision 1.1  2005/10/09 20:32:15  fabian
-% *** empty log message ***
-%

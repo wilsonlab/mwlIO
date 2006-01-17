@@ -1,7 +1,15 @@
 function wf = closeHeader(wf)
-%CLOSEHEADER
+%CLOSEHEADER write header to disk and reopen file in append mode
+%
+%   Syntax
+%   f = closeHeader( f )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: closeHeader.m,v 1.1 2005/10/09 20:51:11 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 hdr = get(wf, 'header');
 
@@ -18,9 +26,3 @@ hdr(1) = sh;
 wf = set(wf, 'header', hdr);
 
 wf.mwlfixedrecordfile = closeHeader(wf.mwlfixedrecordfile);
-
-
-% $Log: closeHeader.m,v $
-% Revision 1.1  2005/10/09 20:51:11  fabian
-% *** empty log message ***
-%

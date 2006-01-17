@@ -1,7 +1,18 @@
 function display(fb, c)
-%DISPLAY
+%DISPLAY display object information
+%
+%   Syntax
+%   display(h [,hidetitle])
+%
+%   This method will display object information. An optional title will
+%   be displayed if hidetitle = 0 (default)
+%
+%   Example
+%
+%   See also 
+%
 
-% $Id: display.m,v 1.1 2005/10/09 20:30:52 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<2 | ~isscalar(c)
     c = 0;
@@ -25,8 +36,3 @@ fieldnames(:, end+1:end+3) = repmat(' : ', nf, 1);
 
 disp( [ repmat('  ', nf, 1) fieldnames fieldvalues])
 
-
-% $Log: display.m,v $
-% Revision 1.1  2005/10/09 20:30:52  fabian
-% *** empty log message ***
-%

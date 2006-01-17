@@ -41,7 +41,7 @@ else
                 
         ef.nsamples = length(fields(2));
         
-        ef.nchannels = 0;raw position
+        ef.nchannels = 0;
         
         hdr = get(frf, 'header');
         for h=1:len(hdr)

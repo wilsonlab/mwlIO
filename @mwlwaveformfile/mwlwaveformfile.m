@@ -1,7 +1,17 @@
 function wf = mwlwaveformfile(varargin)
-%MWLWAVEFORMFILE
+%MWLWAVEFORMFILE constructor
+%
+%   Syntax
+%   f = mwlwaveformfile()      default constructor
+%   f = mwlwaveformfile( f )   copy constructor
+%   f = mwlwaveformfile( filename [, mode [, nchannels, nsamples] )
+%
+%   Examples
+%
+%   See also MWLFIXEDRECORDFILE
+%
 
-% $Id: mwlwaveformfile.m,v 1.1 2005/10/09 20:52:37 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     wf = struct('nsamples', 0, 'nchannels', 0);
@@ -12,11 +22,11 @@ elseif isa(varargin{1}, 'mwlwaveformfile')
 else
     frf = mwlfixedrecordfile(varargin{:});
     
-    if ~isbinary(frf)
+    if strcmp(frf.format, 'ascii')
         error('Ascii waveform files are not supported.')
     end    
     
-    if strcmp(frf.mode, 'r')
+    if ismember(frf.mode, {'read', 'append'})
         
         %waveform file?
         if ~strcmp( getFileType(frf), 'waveform')
@@ -24,11 +34,11 @@ else
         end
         
         fields = frf.fields;
-        if size(fields, 1) ~=2 | ~strcmp(fields{1,1}, 'timestamp') | ~strcmp(fields{2,1}, 'waveform')
+        if ~all(ismember(name(fields), {'timestamp', 'waveform'}))
             error('Invalid waveform file')
-        end        
+        end  
         
-        wf.nsamples = fields{2,4};
+        wf.nsamples = length(fields(2));
         
         wf.nchannels = 0;
         
@@ -70,9 +80,3 @@ else
     wf = class(wf, 'mwlwaveformfile', frf);
     
 end
-        
-
-% $Log: mwlwaveformfile.m,v $
-% Revision 1.1  2005/10/09 20:52:37  fabian
-% *** empty log message ***
-%

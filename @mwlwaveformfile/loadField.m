@@ -1,7 +1,18 @@
 function data = loadField(wf, field, varargin)
-%LOADFIELD
+%LOADFIELD load data from single field
+%
+%   Syntax
+%   data = loadField( f, field [, range] )
+%
+%   This method loads data from a single field. Optionally a record range
+%   can be specified.
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: loadField.m,v 1.1 2005/10/09 20:52:01 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin<2
     help(mfilename)
@@ -13,8 +24,3 @@ if strcmp(field, 'waveform')
     data = permute(reshape(data, size(data, 1), wf.nchannels, wf.nsamples), [3 2 1]);
 end
 
-
-% $Log: loadField.m,v $
-% Revision 1.1  2005/10/09 20:52:01  fabian
-% *** empty log message ***
-%
