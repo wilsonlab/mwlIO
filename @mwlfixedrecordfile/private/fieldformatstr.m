@@ -1,76 +1,69 @@
 function fmtstr = fieldformatstr(fields, skip, delimiter, fmttype)
-%FIELDFORMATSTR
-% creates format string from field descriptions
-% skip is an array that specifies whether field should be skipped or not
+%FORMATSTR convert fields to format string for use with textscan and fprintf
+%
+%   Syntax
+%   format_string = formatstr( field, skip, delimiter, type )
+%
+%   This method converts melfield objects to format strings that can be
+%   used by textscan and fprintf. The parameter skip is an optional vector
+%   indicating for each field whether is should be skipped (1) or not (0).
+%   Delimiter is an optional string used as a delimiter between field
+%   format strings. The parameter type is used to select the type of format
+%   string (0 for textscan compatible, 1 for fprintf compatible)
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: fieldformatstr.m,v 1.1 2005/10/09 20:44:25 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<4 || isempty(fmttype)
-    fmttype = 0; % for textscan, 1 is for fprintf
+nfields = numel(fields);
+
+if nargin<2 || isempty(skip)
+    skip = zeros(nfields,1);
+elseif ~isnumeric(skip) || numel(skip) ~= nfields
+    error('Invalid skip vector')
 end
 
 if nargin<3 || isempty(delimiter)
     delimiter = '';
 end
 
-fmtstr = '';
-
-nfields = size(fields, 1);
-
-if nargin<2 || isempty(skip)
-    skip = zeros(nfields,1);
+if nargin<4 || isempty(fmttype) || fmttype==0
+    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd'};
+else
+    mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32'};
 end
 
+fmtstr = '';
+
+field_type = type( fields );
+
 for f=1:nfields
+    
     if skip(f)
         fmt =  '%*';
     else
         fmt = '%';
     end
     
-    typestr = fields{f,2};
-    
-    switch typestr
-        case 'char'
-            if fields{f,4}>1 %treat as string
-                fmt = [fmt 's'];
-            else
-                if fmttype
-                    fmt = [fmt 'd'];
-                else
-                    fmt = [fmt 'u8'];
-                end
-            end
-        case 'short'
-            if fmttype
-                fmt = [fmt 'd'];
-            else
-                fmt = [fmt 'd16'];
-            end
-        case 'int'
-            if fmttype
-                fmt = [fmt 'd'];
-            else
-                fmt = [fmt 'd32'];
-            end
-        case 'float'
-            fmt = [fmt 'f'];
-        case 'double'
-            fmt = [fmt 'f'];
-        case 'ulong'
-            if fmttype
-                fmt = [fmt 'd'];
-            else            
-                fmt = [fmt 'd32'];
-            end
-        otherwise
-            error('Incorrect field type')
+    if field_type(f)==1 %char
+        if size(fields(f))>1 %treat as string
+            fmt = [fmt 's'];
+        else
+            fmt = [fmt field_type{f}];
+        end
+    elseif field_type(f)>=2 && field_type(f)<=8
+        fmt = [fmt mapping{field_type(f)}];
+    else
+        error('Incorrect field type')
     end
-    
-    if ~strcmp(typestr, 'char')
+
+    if ~field_type(f)==1 %char
         fmt2='';
     
-        for i = 1:(fields{f,4})
+        for i = 1:size(fields(f))
             fmt2 = [fmt2 fmt delimiter];
         end
     
@@ -80,9 +73,3 @@ for f=1:nfields
     end
     
 end
-
-
-% $Log: fieldformatstr.m,v $
-% Revision 1.1  2005/10/09 20:44:25  fabian
-% *** empty log message ***
-%
