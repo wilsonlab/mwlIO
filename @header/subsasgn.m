@@ -1,7 +1,22 @@
 function h = subsasgn(h,s,b)
-% SUBSASGN
+%SUBSASGN subscripted assignment
+%
+%   Syntax
+%   header( n ) = subheader
+%
+%   This method will allow subscripted assignment to add subheaders to
+%   a header
+%
+%   Examples
+%   sh = subheader();
+%   sh = setParam( sh, 'Test', 1)
+%   h = header();
+%   h(1) = sh;
+%
+%   See also 
+%
 
-% $Id: subsasgn.m,v 1.1 2005/10/08 04:26:58 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 switch s.type
 case '()'
@@ -17,9 +32,3 @@ case '()'
 otherwise
    error('Specify value for x as p(x)')
 end
-
-
-% $Log: subsasgn.m,v $
-% Revision 1.1  2005/10/08 04:26:58  fabian
-% *** empty log message ***
-%

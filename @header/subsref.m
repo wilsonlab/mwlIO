@@ -1,7 +1,18 @@
 function b = subsref(h,s)
-% SUBSREF 
+% SUBSREF subscripted indexing
+%
+%   Syntax
+%   header( n )
+%
+%   This method will allow subscripted indexing to retrieve subheaders in a
+%   header
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: subsref.m,v 1.1 2005/10/08 04:27:27 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 switch s.type
 case '()'
@@ -11,8 +22,3 @@ otherwise
    error('Specify value for x as p(x)')
 end
 
-
-% $Log: subsref.m,v $
-% Revision 1.1  2005/10/08 04:27:27  fabian
-% *** empty log message ***
-%

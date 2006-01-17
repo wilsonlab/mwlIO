@@ -1,7 +1,15 @@
 function h = appendHeader(h, sh)
-%ADDHEADER
+%APPENDHEADER append subheader to header
+%
+%   Syntax
+%   h = appendHeader(h, subheader)
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: appendHeader.m,v 1.1 2005/10/08 04:22:15 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if ~isa(sh, 'subheader')
     error('Can only append subheaders')
@@ -14,7 +22,3 @@ else
 end
 
 
-% $Log: appendHeader.m,v $
-% Revision 1.1  2005/10/08 04:22:15  fabian
-% *** empty log message ***
-%

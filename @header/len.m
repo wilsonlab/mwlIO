@@ -1,5 +1,13 @@
-function l = length(h)
-%LENGTH
-% number of parameters in header
+function l = len(h)
+%LEN return number of subheaders
+%
+%   Syntax
+%   l = len( h )
+%
+%   Example
+%
+%   See also 
+%
+%  Copyright 2005-2006 Fabian Kloosterman
 
 l = length(h.subheaders);

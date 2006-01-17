@@ -1,7 +1,16 @@
 function h = header(varargin)
 %HEADER constructor
+%
+%   Syntax
+%   h = header()      default constructor
+%   h = header( h )   copy constructor
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: header.m,v 1.1 2005/10/08 04:20:38 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 if nargin==0
     h.subheaders = [];
@@ -11,8 +20,3 @@ elseif isa(varargin{1}, 'header')
 else
     error 'header constructor takes no arguments'
 end
-
-% $Log: header.m,v $
-% Revision 1.1  2005/10/08 04:20:38  fabian
-% *** empty log message ***
-%

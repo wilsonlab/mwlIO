@@ -1,7 +1,15 @@
 function val = dumpHeader(h)
-%DUMPHEADER
+%DUMPHEADER dump header contents as string
+%
+%   Syntax
+%   s = dumpHeader( h )
+%
+%   Examples
+%
+%   See also 
+%
 
-% $Id: dumpHeader.m,v 1.1 2005/10/08 04:24:19 fabian Exp $
+%  Copyright 2005-2006 Fabian Kloosterman
 
 val = '';
 
@@ -18,7 +26,3 @@ end
 val = [val sprintf('%%%%ENDHEADER\n')];
 
 
-% $Log: dumpHeader.m,v $
-% Revision 1.1  2005/10/08 04:24:19  fabian
-% *** empty log message ***
-%
