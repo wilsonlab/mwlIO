@@ -44,7 +44,7 @@ else
     range = double(range);
 end
 
-[dummy, id] = ismember( name(fields), loadflds );
+[dummy, id] = ismember( loadflds, name(fields));
 id( id==5 ) = 4; %because we are treating target x and target y fields as one pos field
 fieldmask = sum( bitset(0, unique(id( id~=0 )) ) );
 
@@ -57,7 +57,7 @@ if nargin<4 || isempty(rangefield)
     frf = setCurrentRecord(frf, range(1));
     data = posloadrecordrange( fullfile(frf), frf.currentoffset, range(2)-range(1)+1, fieldmask);
 else
-    if ~ismember( rangefield, 'timestamp' )
+    if ~ismember( rangefield, {'timestamp'} )
        error('Filtering only supported for timestamp field')
    end
     
