@@ -10,6 +10,7 @@ RPM_NAME = mwlIO
 build:
 	mkdir -p $(BUILD_DIR)/$(RPM_NAME)
 	cp -r -f doc $(BUILD_DIR)/$(RPM_NAME)
+	cp -r -f private $(BUILD_DIR)/$(RPM_NAME)
 	cp -r -f @header $(BUILD_DIR)/$(RPM_NAME)
 	cp -r -f @subheader $(BUILD_DIR)/$(RPM_NAME)
 	cp -r -f @mwl* $(BUILD_DIR)/$(RPM_NAME)
