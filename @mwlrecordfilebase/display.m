@@ -1,15 +1,19 @@
 function display(fb, c)
-%DISPLAY show record file information
+%DISPLAY display object information
 %
 %   Syntax
-%   display( field )
+%   display(h [,hidetitle])
 %
-%   Examples
+%   This method will display object information. An optional title will
+%   be displayed if hidetitle = 0 (default)
+%
+%   Example
 %
 %   See also 
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
+
 
 if nargin<2 | ~isscalar(c)
     c = 0;

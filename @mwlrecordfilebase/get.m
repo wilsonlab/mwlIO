@@ -5,8 +5,7 @@ function val = get(rfb, propName)
 %   value = get(f, property)
 %
 %   Valid properties for mwlrecordfilebase objects are (in addition to
-%   those inherited from mwlfilebase): 'mode', 'filename', 'path',
-%   'header', 'headersize', 'filesize', 'format'
+%   those inherited from mwlfilebase): 'fields'
 %
 %   Examples
 %
