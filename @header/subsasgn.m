@@ -1,19 +1,21 @@
 function h = subsasgn(h,s,b)
 %SUBSASGN subscripted assignment
 %
-%   Syntax
-%   header( n ) = subheader
+%  Syntax
 %
-%   This method will allow subscripted assignment to add subheaders to
-%   a header
+%      header( n ) = subheader
 %
-%   Examples
-%   sh = subheader();
-%   sh = setParam( sh, 'Test', 1)
-%   h = header();
-%   h(1) = sh;
+%  Description
 %
-%   See also 
+%    This method will allow subscripted assignment to add subheaders to
+%    a header
+%
+%  Examples
+%
+%      sh = subheader();
+%      sh = setParam( sh, 'Test', 1)
+%      h = header();
+%      h(1) = sh;
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

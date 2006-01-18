@@ -15,7 +15,7 @@ function ef = mwleventfile(varargin)
 
 if nargin==0
     ef = struct('string_size', 80);
-    frf = mwlfixedrecordfle();
+    frf = mwlfixedrecordfile();
     ef = class(ef, 'mwleventfile', frf);
 elseif isa(varargin{1}, 'mwleventfile')
     ef = varargin{1};

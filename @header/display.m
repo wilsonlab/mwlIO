@@ -1,15 +1,14 @@
 function display(h, c)
 %DISPLAY show information about header
 %
-%   Syntax
-%   display(h [,hidetitle])
+%  Syntax
 %
-%   This method will display the header contents. An optional title will
-%   be displayed if hidetitle = 0 (default)
+%      display(h [,hidetitle])
 %
-%   Example
+%  Description
 %
-%   See also 
+%    This method will display the header contents. An optional title will
+%    be displayed if hidetitle = 0 (default)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

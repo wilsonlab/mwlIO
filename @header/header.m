@@ -1,14 +1,12 @@
 function h = header(varargin)
 %HEADER constructor
 %
-%   Syntax
-%   h = header()      default constructor
-%   h = header( h )   copy constructor
+%  Syntax
 %
-%   Examples
+%      h = header()      default constructor
+%      h = header( h )   copy constructor
 %
-%   See also 
-%
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

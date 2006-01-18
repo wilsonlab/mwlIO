@@ -1,16 +1,13 @@
 function [h, hsize] = loadheader(f)
 %LOADHEADER read and parse header from file
 %
-%   Syntax
-%   [header, headersize] = loadheader( file )
+%  Syntax
 %
-%   This function will read the header from file and return a header
-%   object. The parameter file can be either a file name or file identifier
-%   returned by fopen.
+%      [header, headersize] = loadheader( file )
 %
-%   Examples
-%
-%   See also 
+%    This function will read the header from file and return a header
+%    object. The parameter file can be either a file name or file identifier
+%    returned by fopen.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

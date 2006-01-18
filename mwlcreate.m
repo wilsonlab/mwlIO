@@ -1,24 +1,25 @@
 function f = mwlcreate(filename, filetype, varargin)
 %MWLCREATE create a new mwl-type file
 %
-%   Syntax
-%   f = mwlcreate(filename, filetype)
+%  Syntax
 %
-%   This function will create a new mwl file object with the specified file
-%   name and of the specified file type. This function currently does not
-%   support 'overwrite' mode. Valid file types are:
-%   'diode', 'eeg', 'event', 'feature', 'fixedrecord', 'waveform'
+%      f = mwlcreate(filename, filetype)
 %
-%   Options
-%    Header = initialize header of new file with this header object
-%    Data = data to save to file
-%    Fields = field definition for 'feature' and 'mwlfixedrecord' files
-%    FileFormat = 'ascii' or 'binary' (default = 'binary')
+%  Description
 %
-%   Examples
+%    This function will create a new mwl file object with the specified file
+%    name and of the specified file type. This function currently does not
+%    support 'overwrite' mode. Valid file types are:
+%    'diode', 'eeg', 'event', 'feature', 'fixedrecord', 'waveform'
 %
-%   See also 
+%  Options
 %
+%      Header = initialize header of new file with this header object
+%      Data = data to save to file
+%      Fields = field definition for 'feature' and 'mwlfixedrecord' files
+%      FileFormat = 'ascii' or 'binary' (default = 'binary')
+%
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

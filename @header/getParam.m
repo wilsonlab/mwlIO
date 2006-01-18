@@ -1,16 +1,16 @@
 function [val, subh] = getParam(h, parm)
 %GETPARAM get value of header parameter
 %
-%   Syntax
-%   [val, sh] = getParam( h, param )
+%  Syntax
 %
-%   This method will return the value of parameter param in the subheaders
-%   of h. The subheader indices will be returned in sh.
+%      [val, sh] = getParam( h, param )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method will return the value of parameter param in the subheaders
+%    of h. The subheader indices will be returned in sh.
 %
+
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ~ischar(parm) | strcmp(parm, '')

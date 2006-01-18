@@ -1,13 +1,11 @@
 function val = dumpHeader(h)
 %DUMPHEADER dump header contents as string
 %
-%   Syntax
-%   s = dumpHeader( h )
+%  Syntax
 %
-%   Examples
+%      s = dumpHeader( h )
 %
-%   See also 
-%
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

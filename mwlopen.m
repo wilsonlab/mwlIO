@@ -1,12 +1,9 @@
 function f = mwlopen(filename)
 %MWLOPEN open a mwl-type file
 %
-%   Syntax
-%   f = mwlopen(filename)
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f = mwlopen(filename)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

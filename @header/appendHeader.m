@@ -1,12 +1,9 @@
 function h = appendHeader(h, sh)
 %APPENDHEADER append subheader to header
 %
-%   Syntax
-%   h = appendHeader(h, subheader)
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      h = appendHeader(h, subheader)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

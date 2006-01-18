@@ -1,24 +1,23 @@
 function retval = mwltypemapping(mwltype, mapping)
 %MWLTYPEMAPPING type conversions
 %
-%   Syntax
-%   new_type = mwltypemapping(type, mapping)
+%  Syntax
 %
-%   This function will convert one type code to another type code. The
-%   conversion is done according to the mapping parameter, which can be one
-%   of: 'code2str', 'str2code', 'code2size', 'str2size', 'str2mat',
-%   'str2mex'
+%      new_type = mwltypemapping(type, mapping)
 %
-%   description of type codes:
-%       code = numeric type-code as used in mwl files
-%       str = string type-code as used in mwl files
-%       size = size of type
-%       mat = string type code as used in matlab
-%       mex = numeric type-code as used in mex files
+%  Description
 %
-%   Examples
+%    This function will convert one type code to another type code. The
+%    conversion is done according to the mapping parameter, which can be one
+%    of: 'code2str', 'str2code', 'code2size', 'str2size', 'str2mat',
+%    'str2mex'
 %
-%   See also 
+%    List of type codes:
+%      code = numeric type-code as used in mwl files
+%      str = string type-code as used in mwl files
+%      size = size of type
+%      mat = string type code as used in matlab
+%      mex = numeric type-code as used in mex files
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

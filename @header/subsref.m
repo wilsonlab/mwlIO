@@ -1,16 +1,16 @@
 function b = subsref(h,s)
-% SUBSREF subscripted indexing
+%SUBSREF subscripted indexing
 %
-%   Syntax
-%   header( n )
+%  Syntax
 %
-%   This method will allow subscripted indexing to retrieve subheaders in a
-%   header
+%      header( n )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method will allow subscripted indexing to retrieve subheaders in a
+%    header
 %
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
