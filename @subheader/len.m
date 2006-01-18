@@ -1,12 +1,9 @@
 function l = len(sh)
 %LEN return number of parameters in subheader
 %
-%   Syntax
-%   l = len( h )
+%  Syntax
 %
-%   Example
-%
-%   See also 
+%      l = len( h )
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

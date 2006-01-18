@@ -1,12 +1,9 @@
 function val = getParam(sh, parm)
 %GETPARAM get value of subheader parameter
 %
-%   Syntax
-%   val = getParam( h, param )
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      val = getParam( h, param )
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

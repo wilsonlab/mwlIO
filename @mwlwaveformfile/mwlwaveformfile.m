@@ -1,14 +1,13 @@
 function wf = mwlwaveformfile(varargin)
 %MWLWAVEFORMFILE constructor
 %
-%   Syntax
-%   f = mwlwaveformfile()      default constructor
-%   f = mwlwaveformfile( f )   copy constructor
-%   f = mwlwaveformfile( filename [, mode [, nchannels, nsamples] )
+%  Syntax
 %
-%   Examples
+%      f = mwlwaveformfile()      default constructor
+%      f = mwlwaveformfile( f )   copy constructor
+%      f = mwlwaveformfile( filename [, mode [, nchannels, nsamples] )
 %
-%   See also MWLFIXEDRECORDFILE
+%  See also MWLFIXEDRECORDFILE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

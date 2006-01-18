@@ -1,15 +1,17 @@
 function val = get(rfb, propName)
 %GET get oject properties
 %
-%   Syntax
-%   value = get(f, property)
+%  Syntax
 %
-%   Valid properties for mwlrecordfilebase objects are (in addition to
-%   those inherited from mwlfilebase): 'fields'
+%      value = get(f, property)
 %
-%   Examples
+%  Description
 %
-%   See also MWLFILEBASE
+%    Valid properties for mwlrecordfilebase objects are (in addition to
+%    those inherited from mwlfilebase): 'fields'
+%
+%  See also MWLFILEBASE
+%
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

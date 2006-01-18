@@ -1,12 +1,9 @@
 function fb = subsasgn(fb,s, b)
 %SUBSASGN subscripted assignment
 %
-%   Syntax
-%   f.property = value
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f.property = value
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

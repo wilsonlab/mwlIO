@@ -1,17 +1,16 @@
 function data = load(ef, flds, i)
 %LOAD load eeg data
 %
-%   Syntax
-%   data = load( f, load_fields [, indices] )
+%  Syntax
 %
-%   This method allows you to load data from multiple fields, as specified
-%   by the cell array load_fields. The parameter indices is an optional
-%   vector of record indices. In eeg files each record contains a full
-%   buffer of eeg data. Random access is possible.
+%      data = load( f, load_fields [, indices] )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method allows you to load data from multiple fields, as specified
+%    by the cell array load_fields. The parameter indices is an optional
+%    vector of record indices. In eeg files each record contains a full
+%    buffer of eeg data. Random access is possible.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

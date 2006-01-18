@@ -1,12 +1,9 @@
 function sh = setParam(sh, parm, val)
 %SETPARAM set the value of a subheader parameter
 %
-%   Syntax
-%   h = setParam(h, param, val)
+%  Syntax
 %
-%   Example
-%
-%   See also 
+%      h = setParam(h, param, val)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

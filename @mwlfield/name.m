@@ -1,14 +1,14 @@
 function retval = name( field )
 %NAME return the field name
 %
-%   Syntax
-%   n = name( field )
+%  Syntax
 %
-%   Examples
-%   field = mwlfield( 'test', 8, 1 );
-%   name( field )  % will return: 'test'
+%      n = name( field )
 %
-%   See also 
+%  Examples
+%
+%      field = mwlfield( 'test', 8, 1 );
+%      name( field )  % will return: 'test'
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

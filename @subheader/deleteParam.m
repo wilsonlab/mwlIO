@@ -1,14 +1,13 @@
 function sh = deleteParam(sh, parm)
 %DELETEPARAM remove parameter from subheader
 %
-%   Syntax
-%   h = deleteParam( h, param )
+%  Syntax
 %
-%   This method will remove the parameter param from the subheader h.
+%      h = deleteParam( h, param )
 %
-%   Example
+%  Description
 %
-%   See also 
+%    This method will remove the parameter param from the subheader h.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

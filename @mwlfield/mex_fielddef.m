@@ -1,13 +1,11 @@
 function retval = mex_fielddef( field )
 %MEX_FIELDDEF return a field definition cell array for use in mex files
 %
-%   Syntax
-%   m = mex_fielddef( field )
+%  Syntax
 %
-%   Example
+%      m = mex_fielddef( field )
 %
-%   See also 
-%
+
 
 %  Copyright 2006-2006 Fabian Kloosterman
 

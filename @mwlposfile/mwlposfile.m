@@ -1,14 +1,13 @@
 function pf = mwlposfile(varargin)
 %MWLPOSFILE constructor
 %
-%   Syntax
-%   f = mwlposfile()      default constructor
-%   f = mwlposfile( f )   copy constructor
-%   f = mwlposfile( filename [, mode, format] )
+%  Syntax
 %
-%   Examples
+%      f = mwlposfile()      default constructor
+%      f = mwlposfile( f )   copy constructor
+%      f = mwlposfile( filename [, mode, format] )
 %
-%   See also MWLRECORDFILEBASE
+%  See also MWLRECORDFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

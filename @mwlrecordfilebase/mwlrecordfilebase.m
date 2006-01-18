@@ -1,14 +1,13 @@
 function rfb = mwlrecordfilebase(varargin)
 %MWLRECORDFILEBASE constructor
 %
-%   Syntax
-%   f = mwlrecordfilebase()      default constructor
-%   f = mwlrecordfilebase( f )   copy constructor
-%   f = mwlrecordfilebase( filename [, mode, format] )
+%  Syntax
 %
-%   Examples
+%      f = mwlrecordfilebase()      default constructor
+%      f = mwlrecordfilebase( f )   copy constructor
+%      f = mwlrecordfilebase( filename [, mode, format] )
 %
-%   See also MWLFILEBASE
+%  See also MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

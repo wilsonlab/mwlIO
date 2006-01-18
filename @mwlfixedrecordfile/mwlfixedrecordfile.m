@@ -1,14 +1,13 @@
 function frf = mwlfixedrecordfile(varargin)
 %MWLFIXEDRECORDFILE constructor
 %
-%   Syntax
-%   f = mwlfixedrecordfile()      default constructor
-%   f = mwlfixedrecordfile( f )   copy constructor
-%   f = mwlfixedrecordfile( filename [, mode, format] )
+%  Syntax
 %
-%   Examples
+%      f = mwlfixedrecordfile()      default constructor
+%      f = mwlfixedrecordfile( f )   copy constructor
+%      f = mwlfixedrecordfile( filename [, mode, format] )
 %
-%   See also MWLRECORDFILEBASE
+%  See also MWLRECORDFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

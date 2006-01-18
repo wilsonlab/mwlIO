@@ -1,12 +1,9 @@
 function f = setCurrentRecord(f, recid)
 %SETCURRENTRECORD move file pointer to record
 %
-%   Syntax
-%   f = setCurrentRecord( f, record_id)
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f = setCurrentRecord( f, record_id)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

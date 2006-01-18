@@ -1,22 +1,21 @@
 function fb = mwlfilebase(varargin)
 %MWLFILEBASE constructor
 %
-%   Syntax
-%   f = mwfilebase()       default constructor
-%   f = mwlfilebase( f )   copy constructor
-%   f = mwlfilebase( filename [, mode, format] )
+%  Syntax
 %
-%   If a file name is supplied to the constructor it will open the file and
-%   read the header. By default the file is opened in 'read' mode and the
-%   format determined from the file header. Opening the file in 'append'
-%   mode will allow data to be appended to the file. Creating a new file is
-%   done by setting mode to 'write' or 'overwrite'. In the latter case if
-%   the file already exists, it will be overwritten. The format parameter
-%   can be set to 'binary' or 'ascii' for new files.
+%      f = mwfilebase()       default constructor
+%      f = mwlfilebase( f )   copy constructor
+%      f = mwlfilebase( filename [, mode, format] )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    If a file name is supplied to the constructor it will open the file and
+%    read the header. By default the file is opened in 'read' mode and the
+%    format determined from the file header. Opening the file in 'append'
+%    mode will allow data to be appended to the file. Creating a new file is
+%    done by setting mode to 'write' or 'overwrite'. In the latter case if
+%    the file already exists, it will be overwritten. The format parameter
+%    can be set to 'binary' or 'ascii' for new files.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

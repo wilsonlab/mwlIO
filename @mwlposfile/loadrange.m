@@ -1,23 +1,22 @@
 function data = loadrange(frf, loadflds, range, rangefield)
 %LOADRANGE load data from mwl pos file
 %
-%   Syntax
-%   data = loadrange( f [, fields [, range, range_field]] )
+%  Syntax
 %
-%   This method loads (part of) the data from raw position file f. The
-%   fields parameter can be a string or cell array of strings indicating
-%   which fields to load from the file. Valid fields are: 'nitems',
-%   'frame', 'timestamp', 'target x', 'target y'. In case fields = 'all',
-%   then all fields will be loaded (this is also the default if no fields
-%   parameter is specified). The range parameter is a two-element vector
-%   specifying the first and last record indices of the data range to load
-%   (default = from current record to end of file). If range_field is set
-%   to 'timestamp' then the range vector is in timestamps, rather than
-%   record indices.
-%   
-%   Examples
+%      data = loadrange( f [, fields [, range, range_field]] )
 %
-%   See also 
+%  Description
+%
+%    This method loads (part of) the data from raw position file f. The
+%    fields parameter can be a string or cell array of strings indicating
+%    which fields to load from the file. Valid fields are: 'nitems',
+%    'frame', 'timestamp', 'target x', 'target y'. In case fields = 'all',
+%    then all fields will be loaded (this is also the default if no fields
+%    parameter is specified). The range parameter is a two-element vector
+%    specifying the first and last record indices of the data range to load
+%    (default = from current record to end of file). If range_field is set
+%    to 'timestamp' then the range vector is in timestamps, rather than
+%    record indices.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

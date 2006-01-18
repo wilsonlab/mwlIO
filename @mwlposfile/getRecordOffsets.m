@@ -1,17 +1,16 @@
 function offsets = getRecordOffsets(pf, range)
 %GETRECORDOFFSETS retrieve byte offsets for a range of position records
 %
-%   Syntax
-%   offsets = getRecordOffsets( f [,range] )
+%  Syntax
 %
-%   This method will return the byte offsets into the file of a range of
-%   records. The range parameter is a two-element vector specifying the
-%   record range (default is all records). After completion of this method,
-%   the current record has been set to the first record in range.
+%      offsets = getRecordOffsets( f [,range] )
 %
-%   Examples
+%  Description
 %
-%   See also
+%    This method will return the byte offsets into the file of a range of
+%    records. The range parameter is a two-element vector specifying the
+%    record range (default is all records). After completion of this method,
+%    the current record has been set to the first record in range.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

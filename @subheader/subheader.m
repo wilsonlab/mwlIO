@@ -1,13 +1,10 @@
 function sh = subheader(varargin)
 %SUBHEADER constructor
 %
-%   Syntax
-%   h = subheader()     default constructor
-%   h = subheader( h )  copy constructor
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      h = subheader()     default constructor
+%      h = subheader( h )  copy constructor
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

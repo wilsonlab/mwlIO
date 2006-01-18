@@ -1,14 +1,14 @@
 function retval = elementsize( field )
 %ELEMENTSIZE return the field type size
 %
-%   Syntax
-%   sz = elementsize( field )
+%  Syntax
 %
-%   Examples
-%   field = mwlfield( 'test', 'char', 1 );
-%   elementsize( field )  % will return: 1
+%      sz = elementsize( field )
 %
-%   See also 
+%  Examples
+%
+%      field = mwlfield( 'test', 'char', 1 );
+%      elementsize( field )  % will return: 1
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

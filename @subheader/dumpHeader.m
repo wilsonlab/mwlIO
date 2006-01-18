@@ -1,12 +1,9 @@
 function val = dumpHeader(sh)
 %DUMPHEADER dump subheader contents as string
 %
-%   Syntax
-%   s = dumpHeader( h )
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      s = dumpHeader( h )
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

@@ -1,17 +1,16 @@
 function frf = appendData(frf, data)
 %APPENDDATA append new data to existing fixed record file
 %
-%   Syntax
-%   f = appendData( f, data )
+%  Syntax
 %
-%   This method appends data to file f. The parameter data can be any of
-%   the following: a matrix with as many columns as there are fields in the
-%   file; a structure, whose fields corresponds to the fields in the file;
-%   a cell array with as many cells as there are fields.
+%      f = appendData( f, data )
 %
-%   Example
+%  Description
 %
-%   See also 
+%    This method appends data to file f. The parameter data can be any of
+%    the following: a matrix with as many columns as there are fields in the
+%    file; a structure, whose fields corresponds to the fields in the file;
+%    a cell array with as many cells as there are fields.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

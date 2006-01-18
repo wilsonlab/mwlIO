@@ -1,14 +1,14 @@
 function retval = print( field )
 %PRINT print mwlfield information in mwl header format
 %
-%   Syntax
-%   f = print( field )
+%  Syntax
 %
-%   Examples
-%   field = mwlfield( 'test', 'double', 1 );
-%   f = print( field );
+%      f = print( field )
 %
-%   See also 
+%  Examples
+%
+%      field = mwlfield( 'test', 'double', 1 );
+%      f = print( field );
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

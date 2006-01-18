@@ -1,16 +1,16 @@
 function display(fb, c)
 %DISPLAY display object information
 %
-%   Syntax
-%   display(h [,hidetitle])
+%  Syntax
 %
-%   This method will display object information. An optional title will
-%   be displayed if hidetitle = 0 (default)
+%      display(h [,hidetitle])
 %
-%   Example
+%  Description
 %
-%   See also 
+%    This method will display object information. An optional title will
+%    be displayed if hidetitle = 0 (default)
 %
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

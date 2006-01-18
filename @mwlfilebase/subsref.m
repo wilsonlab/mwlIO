@@ -1,12 +1,9 @@
 function b = subsref(fb,s)
 %SUBSREF subscripted indexing
 %
-%   Syntax
-%   f.property
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f.property
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

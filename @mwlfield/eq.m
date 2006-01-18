@@ -1,12 +1,9 @@
 function e = eq( A, B )
 %EQ equality test for mwlfield objects
 %
-%   Syntax
-%   A == B
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      A == B
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

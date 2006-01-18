@@ -1,22 +1,21 @@
 function data = loadrange(frf, fields, range, rangefield)
 %LOADRANGE load data from mwl fixed record file
 %
-%   Syntax
-%   data = loadrange( f [, fields [, range, range_field]] )
+%  Syntax
 %
-%   This method loads (part of) the data from a fixed record file f. The
-%   fields parameter can be a string or cell array of strings indicating
-%   which fields to load from the file. In case fields = 'all', then all
-%   fields will be loaded (this is also the default if no fields parameter
-%   is specified). The range parameter is a two-element vector specifying
-%   the first and last record indices of the data range to load (default =
-%   all records). The range_field parameter can be set to a field to use as
-%   the source for the range, rather than record indices. This method only
-%   reads binary files.
-%   
-%   Examples
+%      data = loadrange( f [, fields [, range, range_field]] )
 %
-%   See also 
+%  Description
+%
+%    This method loads (part of) the data from a fixed record file f. The
+%    fields parameter can be a string or cell array of strings indicating
+%    which fields to load from the file. In case fields = 'all', then all
+%    fields will be loaded (this is also the default if no fields parameter
+%    is specified). The range parameter is a two-element vector specifying
+%    the first and last record indices of the data range to load (default =
+%    all records). The range_field parameter can be set to a field to use as
+%    the source for the range, rather than record indices. This method only
+%    reads binary files.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

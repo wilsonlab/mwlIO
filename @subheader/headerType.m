@@ -1,24 +1,23 @@
 function t = headerType(sh)
 %HEADERTYPE return the mwl-type of the subheader
 %
-%   Syntax
-%   t = headerType( h )
+%  Syntax
 %
-%   This method will return the mwl header type of h. The type is
-%   determined as follows:
-%   If the subheader contains the parameter 'File Format', then the type is
-%   the value of this parameter. Otherwise the type is determined by
-%   checking the values of the parameters 'Program' and 'Extraction type'
-%   (in case of adextract). If there is no 'Program' parameter but there is
-%   a 'adversion' parameters it is assumed that subheader is from a raw ad
-%   data file.
-%   Here is a list of possible types returned by this method:
-%   'event', 'eeg', 'rawpos', 'waveform', 'diode', 'feature', 'cr',
-%   'cluster', 'clbound', 'ad', 'unknown'
+%      t = headerType( h )
 %
-%   Example
+%  Description
 %
-%   See also 
+%    This method will return the mwl header type of h. The type is
+%    determined as follows:
+%    If the subheader contains the parameter 'File Format', then the type is
+%    the value of this parameter. Otherwise the type is determined by
+%    checking the values of the parameters 'Program' and 'Extraction type'
+%    (in case of adextract). If there is no 'Program' parameter but there is
+%    a 'adversion' parameters it is assumed that subheader is from a raw ad
+%    data file.
+%    Here is a list of possible types returned by this method:
+%    'event', 'eeg', 'rawpos', 'waveform', 'diode', 'feature', 'cr',
+%    'cluster', 'clbound', 'ad', 'unknown'
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

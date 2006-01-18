@@ -1,14 +1,13 @@
 function ff = mwlfeaturefile(varargin)
 %MWLFEATUREFILE constructor
 %
-%   Syntax
-%   f = mwlfeaturefile()      default constructor
-%   f = mwlfeaturefile( f )   copy constructor
-%   f = mwlfeaturefile( filename [, mode [, format] )
+%  Syntax
 %
-%   Examples
+%      f = mwlfeaturefile()      default constructor
+%      f = mwlfeaturefile( f )   copy constructor
+%      f = mwlfeaturefile( filename [, mode [, format] )
 %
-%   See also MWLFIXEDRECORDFILE
+%  See also MWLFIXEDRECORDFILE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

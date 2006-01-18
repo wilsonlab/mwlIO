@@ -1,20 +1,22 @@
 function field = mwlfield(varargin)
 %MWLFIELD constructor
 %
-%   Syntax
-%   field = mwlfield()        default constructor
-%   field = mwlfield( field ) copy constructor
-%   field = mwlfield( name, type [, n] )
+%  Syntax
 %
-%   Create a new mwlfield object of specified type and name and number of
-%   elements n. If n is not specified it defaults to 1. Supported types
-%   are: 'char', 'short', 'int', 'float', 'double', 'func', 'ffunc',
-%   'ulong'. Or their numeric equivalents 1, 2, 3, ..., 8.
+%      field = mwlfield()        default constructor
+%      field = mwlfield( field ) copy constructor
+%      field = mwlfield( name, type [, n] )
 %
-%   Examples
-%   field = mwlfield( 'pos_x', 'short', 2 )
+%  Description
 %
-%   See also 
+%    Create a new mwlfield object of specified type and name and number of
+%    elements n. If n is not specified it defaults to 1. Supported types
+%    are: 'char', 'short', 'int', 'float', 'double', 'func', 'ffunc',
+%    'ulong'. Or their numeric equivalents 1, 2, 3, ..., 8.
+%
+%  Examples
+%
+%      field = mwlfield( 'pos_x', 'short', 2 )
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

@@ -1,12 +1,9 @@
 function pf = setFields(pf)
 %SETFIELDS create fields for new pos file
 %
-%   Syntax
-%   f = setFields( f, fields )
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f = setFields( f, fields )
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

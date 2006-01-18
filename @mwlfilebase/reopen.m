@@ -1,12 +1,9 @@
 function f = reopen(fb)
 %REOPEN reopen file
 %
-%   Syntax
-%   f = reopen( f )
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f = reopen( f )
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

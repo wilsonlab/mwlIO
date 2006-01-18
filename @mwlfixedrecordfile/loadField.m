@@ -1,15 +1,14 @@
 function data = loadField(frf, loadfield, range)
 %LOADFIELD load data from single field
 %
-%   Syntax
-%   data = loadField( f, field [, range] )
+%  Syntax
 %
-%   This method loads data from a single field. Optionally a record range
-%   can be specified. This method reads both binary and ascii files.
+%      data = loadField( f, field [, range] )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method loads data from a single field. Optionally a record range
+%    can be specified. This method reads both binary and ascii files.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

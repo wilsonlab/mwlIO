@@ -1,15 +1,14 @@
 function fb = set(fb,varargin)
 %SET set object properties and return the updated object
 %
-%   Syntax
-%   f = set( f, property1, value1, property2, value2, ...)
+%  Syntax
 %
-%   Valid properties that can be set for mwlfilebase objects which are in
-%   'write' or 'overwrite' mode: 'header', 'format'
+%      f = set( f, property1, value1, property2, value2, ...)
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    Valid properties that can be set for mwlfilebase objects which are in
+%    'write' or 'overwrite' mode: 'header', 'format'
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

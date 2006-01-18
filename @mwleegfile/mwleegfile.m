@@ -1,14 +1,13 @@
 function ef = mwleegfile(varargin)
 %MWLEEGFILE constructor
 %
-%   Syntax
-%   f = mwleegfile()      default constructor
-%   f = mwleegfile( f )   copy constructor
-%   f = mwleegfile( filename [, mode [, nchannels, nsamples] )
+%  Syntax
 %
-%   Examples
+%      f = mwleegfile()      default constructor
+%      f = mwleegfile( f )   copy constructor
+%      f = mwleegfile( filename [, mode [, nchannels, nsamples] )
 %
-%   See also MWLFIXEDRECORDFILE
+%  See also MWLFIXEDRECORDFILE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

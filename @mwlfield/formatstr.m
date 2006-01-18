@@ -1,19 +1,18 @@
 function fmtstr = formatstr(fields, skip, delimiter, fmttype)
 %FORMATSTR convert fields to format string for use with textscan and fprintf
 %
-%   Syntax
-%   format_string = formatstr( field, skip, delimiter, type )
+%  Syntax
 %
-%   This method converts melfield objects to format strings that can be
-%   used by textscan and fprintf. The parameter skip is an optional vector
-%   indicating for each field whether is should be skipped (1) or not (0).
-%   Delimiter is an optional string used as a delimiter between field
-%   format strings. The parameter type is used to select the type of format
-%   string (0 for textscan compatible, 1 for fprintf compatible)
+%      format_string = formatstr( field, skip, delimiter, type )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method converts melfield objects to format strings that can be
+%    used by textscan and fprintf. The parameter skip is an optional vector
+%    indicating for each field whether is should be skipped (1) or not (0).
+%    Delimiter is an optional string used as a delimiter between field
+%    format strings. The parameter type is used to select the type of format
+%    string (0 for textscan compatible, 1 for fprintf compatible)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

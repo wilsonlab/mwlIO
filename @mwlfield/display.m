@@ -1,12 +1,9 @@
 function display( field )
 %DISPLAY show field information
 %
-%   Syntax
-%   display( field )
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      display( field )
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

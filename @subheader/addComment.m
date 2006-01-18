@@ -1,14 +1,13 @@
 function sh = addComment(sh, comment)
 %ADDCOMMENT add comment to subheader
 %
-%   Syntax
-%   h = addComment( h, comment )
+%  Syntax
 %
-%   This method adds the comment string to a subheader.
+%      h = addComment( h, comment )
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method adds the comment string to a subheader.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

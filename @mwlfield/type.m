@@ -1,14 +1,14 @@
 function retval = type( field )
 %TYPE return the field type
 %
-%   Syntax
-%   n = type( field )
+%  Syntax
 %
-%   Examples
-%   field = mwlfield( 'test', 8, 1 );
-%   type( field )  % will return: 'ulong'
+%      n = type( field )
 %
-%   See also 
+%  Examples
+%
+%      field = mwlfield( 'test', 8, 1 );
+%      type( field )  % will return: 'ulong'
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

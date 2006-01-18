@@ -1,12 +1,9 @@
 function fb = closeHeader(fb)
 %CLOSEHEADER write header to disk and reopen file in append mode
 %
-%   Syntax
-%   f = closeHeader( f )
+%  Syntax
 %
-%   Examples
-%
-%   See also 
+%      f = closeHeader( f )
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

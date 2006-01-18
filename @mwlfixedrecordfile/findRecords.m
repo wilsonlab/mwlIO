@@ -1,16 +1,15 @@
 function i = findRecords(f, field, bounds)
 %FINDRECORDS find records
 %
-%   Syntax
-%   i = findRecords( f, filter_field, range)
+%  Syntax
 %
-%   This method finds all records that meet the condition that the value of
-%   the field filter_field is within the range specified. The method
-%   returns a vector of record indices.
+%      i = findRecords( f, filter_field, range)
 %
-%   Examples
+%  Description
 %
-%   See also 
+%    This method finds all records that meet the condition that the value of
+%    the field filter_field is within the range specified. The method
+%    returns a vector of record indices.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

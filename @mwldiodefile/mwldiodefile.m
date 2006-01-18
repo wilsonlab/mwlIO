@@ -1,14 +1,13 @@
 function pf = mwldiodefile(varargin)
 %MWLDIODEFILE constructor
 %
-%   Syntax
-%   f = mwldiodefile()      default constructor
-%   f = mwldiodefile( f )   copy constructor
-%   f = mwldiodefile( filename [, mode, format] )
+%  Syntax
 %
-%   Examples
+%      f = mwldiodefile()      default constructor
+%      f = mwldiodefile( f )   copy constructor
+%      f = mwldiodefile( filename [, mode, format] )
 %
-%   See also MWLFIXEDRECORDFILE
+%  See also MWLFIXEDRECORDFILE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

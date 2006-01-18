@@ -1,14 +1,13 @@
 function ef = mwleventfile(varargin)
 %MWLEVENTFILE constructor
 %
-%   Syntax
-%   f = mwleventfile()      default constructor
-%   f = mwleventfile( f )   copy constructor
-%   f = mwleventfile( filename [, mode [, string_size] )
+%  Syntax
 %
-%   Examples
+%      f = mwleventfile()      default constructor
+%      f = mwleventfile( f )   copy constructor
+%      f = mwleventfile( filename [, mode [, string_size] )
 %
-%   See also MWLFIXEDRECORDFILE
+%  See also MWLFIXEDRECORDFILE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
