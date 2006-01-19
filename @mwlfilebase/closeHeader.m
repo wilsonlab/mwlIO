@@ -28,7 +28,7 @@ else
 end
 
 sh = setParam(sh, 'Program', 'Matlab mwlIO toolbox');  
-sh = setParam(sh, 'Program version', '0.2-1');  
+sh = setParam(sh, 'Program version', '');  
 
 hdr(1) = sh;
 
