@@ -15,10 +15,10 @@ function h = newheader(varargin)
 %
 %   Examples
 %
-%       s = struct('Name', 'Test', 'Version', 1);
-%       h = subheader( s );
+%      s = struct('Name', 'Test', 'Version', 1);
+%      h = subheader( s );
 %
-%       h = subheader( 'Name', 'Test', 'Version', 1);
+%      h = subheader( 'Name', 'Test', 'Version', 1);
 %
 %  See also SUBHEADER, HEADER
 %

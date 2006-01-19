@@ -24,14 +24,14 @@ function f = mwlcreate(filename, filetype, varargin)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 
-args = struct('Header', [], 'Data', [], 'Fields', {[]}, 'FileFormat', 'binary');
+args = struct('Header', [], 'Data', [], 'Fields', {[]}, 'FileFormat', 'binary', 'NSamples', [], 'NChannels', []);
 args = parseArgs(varargin, args);
 
 switch filetype
     case 'diode'
         f = mwldiodefile(filename,'w', args.FileFormat);
     case 'eeg'
-        f = mwleegfile(filename,'w', args.FileFormat);
+        f = mwleegfile(filename,'w', args.NChannels, args.NSamples);
     case 'event'
         f = mwleventfile(filename, 'w', args.FileFormat);
     case 'feature'
@@ -42,7 +42,7 @@ switch filetype
         %f = mwlposfile(filename, 'w');
         error 'Not implemented'
     case 'waveform'
-        f = mwlwaveformfile(filename, 'w', args.FileFormat);
+        f = mwlwaveformfile(filename, 'w', args.NChannels, args.NSamples);
     case 'cluster'
         %f = mwlfixedrecordfile(filename, 'w');
         error 'Not implemented'

@@ -27,6 +27,9 @@ else
     sh = setParam(sh, 'File type', 'Ascii');
 end
 
+sh = setParam(sh, 'Program', 'Matlab mwlIO toolbox');  
+sh = setParam(sh, 'Program version', '0.2-1');  
+
 hdr(1) = sh;
 
 fb = set(fb, 'header', hdr);

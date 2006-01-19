@@ -17,6 +17,7 @@ else
 end
 
 sh = setParam(sh, 'File Format', 'eeg');
+sh = setParam(sh, 'nelect_chan', wf.nchannels);
 
 hdr(1) = sh;
 
