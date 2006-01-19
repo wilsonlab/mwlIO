@@ -10,7 +10,6 @@ function f = mwlopen(filename)
 
 f = mwlfilebase(filename);
 filetype = getFileType(f);
-f = close(f);
 
 switch filetype
     case 'diode'
