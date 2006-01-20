@@ -31,7 +31,7 @@ RPM_REL=$(shell sed -e '/^Release: */!d; s///;q' $(RPM_NAME).spec)
 mex: build
 	cd $(BUILD_DIR)/$(RPM_NAME) ; \
 	sed -i -e "/Program version/s/''/'$(RPM_VER)-$(RPM_REL)'/g" \@mwlfilebase/closeHeader.m ; \
-	matlabR14 -nojvm -nosplash -nodisplay -r "makesources,quit" ; \
+	matlabR14 -nosplash -nodisplay -r "makesources,generate_toolbox_help('.','$(RPM_NAME)'),quit" ; \
 	sed -i -e "s/VERSIONNUMBER/$(RPM_VER)-$(RPM_REL)/g" doc/$(RPM_NAME)_product_page.html
 
 tar: mex
