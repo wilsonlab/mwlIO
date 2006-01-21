@@ -14,7 +14,7 @@ function fb = set(fb,varargin)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ismember( fb.mode, {'read', 'append'} )
-    error(['File is in ' fb.mode ' mode')
+    error(['File is in ' fb.mode ' mode'])
 end
     
 
