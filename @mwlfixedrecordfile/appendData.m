@@ -71,7 +71,7 @@ elseif isstruct(data)
         else
             datatype = matcode(fields(f));
         end        
-        eval( ['data.(fields{f,1}) = ' datatype '(data.(fields{f,1}));']);
+        eval( ['data.(name(fields(1))) = ' datatype '(data.(name(fields(1))));']);
     end
     
 elseif isnumeric(data) % for matrices there is no support for multiple element fields
@@ -107,10 +107,10 @@ else %ascii
         tmp = {};
         for f = 1:nfields
             if strcmp(type(fields(f)),'char') && length(fields(f))>1
-                tmp(1:nrows, [1:1]+fo) = mat2cell( data.(names(fields(f))), ones(nrows,1), length(fields(f)));
+                tmp(1:nrows, [1:1]+fo) = mat2cell( data.(name(fields(f))), ones(nrows,1), length(fields(f)));
                 fo = fo + 1;
             else    
-                tmp(1:nrows, [1:length(fields(f))]+fo) = mat2cell( data.(names(fields(f))), ones(nrows,1), ones(1, length(fields(f))));
+                tmp(1:nrows, [1:length(fields(f))]+fo) = mat2cell( data.(name(fields(f))), ones(nrows,1), ones(1, length(fields(f))));
                 fo = fo + length(fields(f));
             end
         end

@@ -111,7 +111,7 @@ else
                     
     else % if file is opened in write mode
         if exist(filename, 'file') && ismember(fb.mode, {'write'})
-            error('Error creating new file: file already exist')
+            error('Error creating new file: file already exists')
         end
         
         fid = fopen(filename, 'w');

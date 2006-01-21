@@ -19,9 +19,10 @@ if nargin==0
 elseif isa(varargin{1}, 'mwlwaveformfile')
     wf = varargin{1};
 else
-    frf = mwlfixedrecordfile(varargin{:});
     
-    if strcmp(frf.format, 'ascii')
+    frf = mwlfixedrecordfile(varargin{1:(min(end,2))});
+
+	if strcmp(frf.format, 'ascii')
         error('Ascii waveform files are not supported.')
     end    
     
@@ -59,15 +60,16 @@ else
         
     else
         
-        if nargin<3
+        if nargin<4 || isempty(varargin{4})
             wf.nsamples = 32;
-            wf.nchannels = 4;
-        elseif nargin<4
-            wf.nsamples = 32;
-            wf.nchannels = varargin{3};
+		else
+			wf.nsamples = varargin{4};
+		end
+
+		if nargin<3 || isempty(varargin{3})
+			wf.nchannels = 4;
         else
             wf.nchannels = varargin{3};
-            wf.nsamples = varargin{4};
         end
         
         if ~isscalar(wf.nsamples) || ~isscalar(wf.nchannels) || ~isnumeric(wf.nchannels) || ~isnumeric(wf.nsamples)

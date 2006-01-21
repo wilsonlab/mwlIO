@@ -34,15 +34,15 @@ if iscell(data) && numel(data)==2 && isnumeric(data{2}) && ndims(data{2})<=3
     
     f.mwlfixedrecordfile = appendData( f.mwlfixedrecordfile, data);
     
-elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'waveform'} ) ) && isnumeric(data.data) && ndims(data.data)<=3
+elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'waveform'} ) ) && isnumeric(data.timestamp) && isnumeric(data.waveform) && ndims(data.waveform)<=3
     
-    [nsamples, nchannels, nrecords] = size(data.data);
+    [nsamples, nchannels, nrecords] = size(data.waveform);
     
     if nsamples~=f.nsamples || nchannels~=f.nchannels
         error('Invalid data matrix')
     end
     
-    data.data = reshape( permute( data.data, [3 2 1] ), nrecords, nsamples.*nchannels );
+    data.waveform = reshape( permute( data.waveform, [3 2 1] ), nrecords, nsamples.*nchannels );
     
     f.mwlfixedrecordfile = appendData( f.mwlfixedrecordfile, data);
     
