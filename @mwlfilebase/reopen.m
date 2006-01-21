@@ -9,7 +9,7 @@ function f = reopen(fb)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ismember(fb.mode, {'write', 'overwrite'})
-    error('File is in ' fb.mode ' mode. Cannot reopen.')
+    error(['File is in ' fb.mode ' mode. Cannot reopen.'])
 end
 
 if nargout<1
