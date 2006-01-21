@@ -31,7 +31,7 @@ field_id = field_id( field_id~=0 );
 load_fields = field_names( field_id );
     
 for f=1:numel(field_id)
-    load_fields{f}( (load_fields{f}==' ' || load_fields{f}=='-') ) = '_';    
+    load_fields{f}( (load_fields{f}==' ' | load_fields{f}=='-') ) = '_';    
 end
     
 if nargin<3 || isempty(i)
