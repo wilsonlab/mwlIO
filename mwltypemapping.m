@@ -106,3 +106,7 @@ switch mapping
     otherwise
         error('Invalid mapping method')
 end
+
+if iscell(retval) && numel(retval)==1
+    retval = retval{1};
+end

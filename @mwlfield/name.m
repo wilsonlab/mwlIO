@@ -14,3 +14,7 @@ function retval = name( field )
 %  Copyright 2006-2006 Fabian Kloosterman
 
 retval = {field.name};
+
+if numel(retval)==1
+    retval = retval{1};
+end
