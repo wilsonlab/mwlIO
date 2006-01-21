@@ -57,7 +57,7 @@ if ismember(get(frf, 'format'), {'binary'})
         i = 0:frf.nrecords-1;
     end
     
-    data = mwlio( fullfile(get(frf,'path'), get(frf, 'filename')), i, field_def, get(frf, 'headersize'), get(frf, 'recordsize'));
+    data = mwlio( fullfile(get(frf,'path'), get(frf, 'filename')), i, field_def(field_id,:), get(frf, 'headersize'), get(frf, 'recordsize'));
 
     %transpose arrays and construct names
 
