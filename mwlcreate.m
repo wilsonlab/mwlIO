@@ -29,20 +29,20 @@ args = parseArgs(varargin, args);
 
 switch filetype
     case 'diode'
-        f = mwldiodefile(filename,'w', args.FileFormat);
+        f = mwldiodefile(filename,'write', args.FileFormat);
     case 'eeg'
-        f = mwleegfile(filename,'w', args.NChannels, args.NSamples);
+        f = mwleegfile(filename,'write', args.NChannels, args.NSamples);
     case 'event'
-        f = mwleventfile(filename, 'w', args.FileFormat);
+        f = mwleventfile(filename, 'write', args.FileFormat);
     case 'feature'
-        f = mwlfeaturefile(filename, 'w', args.FileFormat);
+        f = mwlfeaturefile(filename, 'write', args.FileFormat);
     case 'fixedrecord'
-        f = mwlfixedrecordfile(filename, 'w', args.FileFormat);
+        f = mwlfixedrecordfile(filename, 'write', args.FileFormat);
     case 'rawpos'
         %f = mwlposfile(filename, 'w');
         error 'Not implemented'
     case 'waveform'
-        f = mwlwaveformfile(filename, 'w', args.NChannels, args.NSamples);
+        f = mwlwaveformfile(filename, 'write', args.NChannels, args.NSamples);
     case 'cluster'
         %f = mwlfixedrecordfile(filename, 'w');
         error 'Not implemented'

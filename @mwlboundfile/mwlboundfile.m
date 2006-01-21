@@ -26,7 +26,7 @@ else
     if nargin>=2
         base = mwlfilebase(varargin{1:2}, 'ascii');
     else
-        base = mwlfilebase(varargin{1}, 'r', 'ascii');
+        base = mwlfilebase(varargin{1}, 'read', 'ascii');
     end
             
 
