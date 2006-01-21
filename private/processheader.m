@@ -33,7 +33,7 @@ for i=1:length(h)
         linetype = 2; %parameter
     else
         th = strread(strtrim(h{i}), '%s', 'delimiter', '\n\t');
-        if isempty(th) & ~(linetype==1)
+        if isempty(th) && ~(linetype==1)
             %empty line signals new header
             %but only if not preceded by empty line
             linetype = 1; %new header

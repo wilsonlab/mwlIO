@@ -13,7 +13,7 @@ function [val, subh] = getParam(h, parm)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if ~ischar(parm) | strcmp(parm, '')
+if ~ischar(parm) || strcmp(parm, '')
     error('Parameter name should be non-empty string')
 end
 

@@ -11,7 +11,7 @@ function val = dumpHeader(h)
 
 val = '';
 
-if length(h.subheaders) == 0
+if isempty(h.subheaders)
     return
 end
 

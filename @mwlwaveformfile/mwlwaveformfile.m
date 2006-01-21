@@ -70,7 +70,7 @@ else
             wf.nsamples = varargin{4};
         end
         
-        if ~isscalar(wf.nsamples) | ~isscalar(wf.nchannels) | ~isnumeric(wf.nchannels) | ~isnumeric(wf.nsamples)
+        if ~isscalar(wf.nsamples) || ~isscalar(wf.nchannels) || ~isnumeric(wf.nchannels) || ~isnumeric(wf.nsamples)
             error('Invalid nsamples and/or nchannels parameters')
         end
         

@@ -96,8 +96,6 @@ else
             fclose(fid);
             error('No valid header in file')
         end
-        
-        result = 0;
 
         fileformat = getParam(fb.header, 'File type');
 
@@ -112,7 +110,7 @@ else
         fseek(fid, fb.headersize, 'bof');
                     
     else % if file is opened in write mode
-        if exist(filename) && ismember(fb.mode, {'write'})
+        if exist(filename, 'file') && ismember(fb.mode, {'write'})
             error('Error creating new file: file already exist')
         end
         

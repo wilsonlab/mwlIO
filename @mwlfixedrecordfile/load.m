@@ -31,7 +31,7 @@ field_id = field_id( field_id~=0 );
 load_fields = field_names( field_id );
     
 for f=1:numel(field_id)
-    load_fields{f}(find(load_fields{f}==' ' | load_fields{f}=='-')) = '_';    
+    load_fields{f}( (load_fields{f}==' ' || load_fields{f}=='-') ) = '_';    
 end
     
 if nargin<3 || isempty(i)
@@ -51,7 +51,6 @@ if ismember(get(frf, 'format'), {'binary'})
     %and create field definition array
 
     field_def = mex_fielddef( fields );
-    field_offsets = byteoffset( fields );
 
     if i==-1
         i = 0:frf.nrecords-1;

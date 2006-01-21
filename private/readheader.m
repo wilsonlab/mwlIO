@@ -26,7 +26,7 @@ close_at_end = false;
 
 open_files = fopen('all');
 
-if isscalar(f) & find(open_files == f)
+if isscalar(f) && find(open_files == f)
     %f is a file id of an open file
 elseif ischar(f)
     %f is a filename
@@ -41,7 +41,7 @@ fpos = ftell(f);
 fseek(f, 0, 'bof');
 
 l = fgetl(f);
-if ~ischar(l) | ~strcmp(l, magic_start)
+if ~ischar(l) || ~strcmp(l, magic_start)
     %no recognizable header
     return
 end

@@ -12,7 +12,7 @@ if ismember(get(f, 'mode'), {'write', 'overwrite'})
     error('Cannot set current record in write mode')
 end
 
-if recid > get(f, 'nrecords') | recid<0
+if recid > get(f, 'nrecords') || recid<0
     error('Invalid record index')
 end
 
@@ -32,7 +32,7 @@ else
     record = f.currentrecord;
 end
 
-[newrecid, newoffset, newtimestamp] = posfindrecord( fullfile(get(f, 'path'), get(f, 'filename')), get(f, 'headersize'), index );
+[newrecid, newoffset, newtimestamp] = posfindrecord( fullfile(get(f, 'path'), get(f, 'filename')), offset, index );
 
 f.currentrecord = record + newrecid;
 f.currentoffset = newoffset;

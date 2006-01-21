@@ -14,11 +14,9 @@ function retval = processFields(flds)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<1 | ~ischar(flds)
+if nargin<1 || ~ischar(flds)
     error('Expecting fieldstring')
 end
-
-retval = {};
 
 if ~isempty(strfind(flds, ','))
     %assume new style field descriptors

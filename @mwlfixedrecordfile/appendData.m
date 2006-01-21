@@ -66,7 +66,7 @@ elseif isstruct(data)
         elseif nrows~=size(data.(names{f}),1)
             error('Incorrect number of rows')
         end
-        if strcmp(type(fields(f), 'char') && length(fields(f))>1
+        if strcmp(type(fields(f)), 'char') && length(fields(f))>1
             datatype = 'char';
         else
             datatype = matcode(fields(f));

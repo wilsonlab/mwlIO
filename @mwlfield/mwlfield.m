@@ -46,7 +46,7 @@ else
         elseif iscellstr(arg_type) && numel(arg_type)==n
             arg_type = num2cell( mwltypemapping(arg_type, 'str2code') );
             [field(1:n).type] = deal( arg_type{:} );
-        elseif isnumeric(arg_type) && ~any( arg_type<1 ) && ~any( arg_type>8 ) && ( numel(arg_type)==1 | numel(arg_type)==n )
+        elseif isnumeric(arg_type) && ~any( arg_type<1 ) && ~any( arg_type>8 ) && ( numel(arg_type)==1 || numel(arg_type)==n )
             arg_type = num2cell( fix( arg_type ) );
             [field(1:n).type] = deal( arg_type{:} );
         else

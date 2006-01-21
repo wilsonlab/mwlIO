@@ -64,7 +64,7 @@ if ismember(frf.format, {'binary'})
 
     fseek(fid, get(frf, 'headersize') + offset + frf.recordsize * range(1), -1);
 
-    data = fread( fid, fields{field, 4}*(endid-startid+1), [num2str(fields{field, 4}) '*' mwltypemapping(fields{field,2}, 'str2mat')], frf.recordsize - fields{field, 3}*fields{field, 4});
+    %data = fread( fid, fields{field, 4}*(endid-startid+1), [num2str(fields{field, 4}) '*' mwltypemapping(fields{field,2}, 'str2mat')], frf.recordsize - fields{field, 3}*fields{field, 4});
     data = fread( fid, length(fields(fieldid))*(diff(range)+1), [num2str(length(fields(fieldid))) '*' char(matcode(fields(fieldid)))], frf.recordsize - size(fields(fieldid)));
     
     data = reshape(data, length(fields(fieldid)), diff(range)+1)';
@@ -74,7 +74,7 @@ else %ascii file
     %create format string for textscan
     skip = ones(nfields,1);
     skip(fieldid)=0;
-    fmt = formatstr(fields, skip)
+    fmt = formatstr(fields, skip);
     %fseek to header offset
     fseek(fid, get(frf, 'headersize'), -1);
     %do a textscan for (endid-startid+1) lines

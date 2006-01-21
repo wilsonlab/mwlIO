@@ -26,7 +26,7 @@ case '()'
     if ~isa(b, 'subheader')
         error('Not a subheader')
     end
-    if length(h.subheaders)==0
+    if isempty(h.subheaders)
         h.subheaders = b;
     else
         h.subheaders(ind) = b;

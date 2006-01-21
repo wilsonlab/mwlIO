@@ -17,7 +17,7 @@ if nargin==0
     frf = mwlfixedrecordfile();
     ef = class(ef, 'mwleegfile', frf);
 elseif isa(varargin{1}, 'mwleegfile')
-    wf = varargin{1};
+    ef = varargin{1};
 else
     frf = mwlfixedrecordfile(varargin{:});
     
@@ -71,7 +71,7 @@ else
             ef.nsamples = varargin{4};
         end
         
-        if ~isscalar(ef.nsamples) | ~isscalar(ef.nchannels) | ~isnumeric(ef.nchannels) | ~isnumeric(ef.nsamples)
+        if ~isscalar(ef.nsamples) || ~isscalar(ef.nchannels) || ~isnumeric(ef.nchannels) || ~isnumeric(ef.nsamples)
             error('Invalid nsamples and/or nchannels parameters')
         end
         

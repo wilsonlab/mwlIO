@@ -29,15 +29,15 @@ else
         end
         
         fields = frf.fields;
-        names = name(fields)
-        if numel(fields) ~=2 | ~strcmp(names(1), 'timestamp') | ~strcmp(names(2), 'string')
+        names = name(fields);
+        if numel(fields) ~=2 || ~strcmp(names(1), 'timestamp') || ~strcmp(names(2), 'string')
             error('Invalid event file')
         end
         
         ef.string_size = length(fields(2));
         
     else
-        if nargin>2 & isscalar(varargin{3}) & ~ischar(varargin{3}) & varargin{3}>0
+        if nargin>2 && isscalar(varargin{3}) && ~ischar(varargin{3}) && varargin{3}>0
             ef.string_size = varargin{3};
         else
             ef.string_size = 80;

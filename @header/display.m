@@ -13,7 +13,7 @@ function display(h, c)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<2 | ~isscalar(c)
+if nargin<2 || ~isscalar(c)
     c = 0;
 end
 
@@ -26,7 +26,7 @@ nsh = len(h);
 
 disp(['  # subheaders: ' num2str(nsh)])
 
-if ~(c) & len(h)>0
+if ~(c) && len(h)>0
     disp(' ')
     disp( ['contains subheaders:'] )
     for sh=1:nsh

@@ -15,7 +15,7 @@ function offsets = getRecordOffsets(pf, range)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<2 | isempty(range)
+if nargin<2 || isempty(range)
     range = [0 pf.nrecords-1];
 end
 

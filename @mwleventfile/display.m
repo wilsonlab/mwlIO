@@ -13,7 +13,7 @@ function display(fb, c)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<2 | ~isscalar(c)
+if nargin<2 || ~isscalar(c)
     c = 0;
 end
 

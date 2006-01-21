@@ -9,7 +9,7 @@ function sh = setParam(sh, parm, val)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 
-if ~ischar(parm) | strcmp(parm, '')
+if ~ischar(parm) || strcmp(parm, '')
     error('Parameter name should be non-empty string')
 end
 
@@ -34,7 +34,7 @@ else
     error('Conversion of value to string is not possible')
 end
   
-if length(id)==0
+if isempty(id)
     %no such parameter yet, append
     sh.parms(end+1,1:2) = {parm val};
 else

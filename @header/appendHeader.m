@@ -12,7 +12,7 @@ if ~isa(sh, 'subheader')
     error('Can only append subheaders')
 end
 
-if length(h.subheaders)==0
+if isempty(h.subheaders)
     h.subheaders=sh;
 else
     h.subheaders(end+1) = sh;
