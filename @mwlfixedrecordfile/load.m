@@ -50,13 +50,15 @@ if ismember(get(frf, 'format'), {'binary'})
     %check validity of field names
     %and create field definition array
 
+    nrecords = get(frf, 'nrecords');
+    
     field_def = mex_fielddef( fields );
 
     if i==-1
-        i = 0:frf.nrecords-1;
+        i = 0:nrecords-1;
     end
     
-    if any( i>=frf.nrecords || i<0)
+    if any( i>=nrecords || i<0)
         error('Invalid index array (out of bounds)')
     end
     

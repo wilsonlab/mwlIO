@@ -30,7 +30,7 @@ if ismember(frf.format, {'ascii'})
 end
 
 if nargin<3 || isempty(range)
-    range = [0 frf.nrecords-1 ];
+    range = [0 get(frf,'nrecords')-1 ];
 elseif ~isnumeric(range) || numel(range)~=2
     error('Invalid range')
 else

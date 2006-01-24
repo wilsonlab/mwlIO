@@ -25,7 +25,7 @@ display(get(fb, 'mwlrecordfilebase'), 1)
 
 
 fieldnames = {'record size', 'n records'};
-fieldvalues = {num2str(fb.recordsize), num2str(fb.nrecords)};
+fieldvalues = {num2str(fb.recordsize), num2str(get(fb,'nrecords'))};
 
 nf = length(fieldnames);
 

@@ -22,7 +22,7 @@ if ~(c)
 end
 
 fieldnames = {'file name', 'file path', 'file mode', 'file type', 'file size', 'header size'};
-fieldvalues = {fb.filename, fb.path, fb.mode, fb.format, [num2str(fb.filesize) ' bytes'], [num2str(fb.headersize) ' bytes']};
+fieldvalues = {fb.filename, fb.path, fb.mode, fb.format, [num2str(get(fb,'filesize')) ' bytes'], [num2str(fb.headersize) ' bytes']};
 
 nf = length(fieldnames);
 

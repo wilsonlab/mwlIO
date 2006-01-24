@@ -20,6 +20,7 @@ end
 
 fields = get(frf, 'fields');
 nfields = numel(fields);
+nrecords = get(frf, 'nrecords');
 
 if isempty(loadfield) || ~ischar(loadfield)
     error('Please specify a valid field')
@@ -34,7 +35,7 @@ isbinary = ismember( frf.format, 'binary');
 
 if nargin<3 || isempty(range)
     if isbinary
-        range = [0 frf.nrecords-1 ];
+        range = [0 nrecords-1 ];
     else
         range = [0 -1];
     end
@@ -54,8 +55,8 @@ end
 if ismember(frf.format, {'binary'})
 
     if range(2)==-1
-        range(2) = frf.nrecords-1;
-    elseif range(1)>range(2) || range(1)<0 || range(2)>frf.nrecords
+        range(2) = nrecords-1;
+    elseif range(1)>range(2) || range(1)<0 || range(2)>nrecords
         error('Invalid range')
     end
     

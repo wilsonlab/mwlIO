@@ -26,7 +26,7 @@ if nargin==0
     fb.path = '';       % path to the file
     fb.header = header();   % header object
     fb.headersize = 0;      % size of the header
-    fb.filesize = 0;        % size of the file
+    %fb.filesize = 0;        % size of the file
     fb.format = 'binary';   % binary or ascii file
     fb = class(fb, 'mwlfilebase');
 elseif isa(varargin{1}, 'mwlfilebase')
@@ -62,7 +62,7 @@ else
     fb.mode = mode;
     fb.headersize = 0;
     fb.header = header();
-    fb.filesize = 0;
+    %fb.filesize = 0;
 
     % if file is opened in read mode
     if ismember(fb.mode, {'read', 'append'})
@@ -106,7 +106,7 @@ else
         end
         
         fseek(fid, 0, 'eof');
-        fb.filesize = ftell(fid);
+        %fb.filesize = ftell(fid);
         fseek(fid, fb.headersize, 'bof');
                     
     else % if file is opened in write mode

@@ -15,9 +15,23 @@ function val = get(frf, propName)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-try
-    val = frf.(propName);
-catch
-    val = get(frf.mwlrecordfilebase, propName);
+if strcmp( 'nrecords', propName)
+    if ismember(frf.format, {'binary'})
+        if ismember( fb.mode, {'read', 'append'} )    
+            val = (get(frf, 'filesize') - get(frf, 'headersize') ) ./ frf.recordsize;
+        else
+            val = -1;
+        end
+    else
+        val = -1;
+    end
+    
+else
+    
+    try
+        val = frf.(propName);
+    catch
+        val = get(frf.mwlrecordfilebase, propName);
+    end
+    
 end
-

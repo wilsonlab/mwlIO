@@ -14,7 +14,7 @@ function frf = mwlfixedrecordfile(varargin)
 
 if nargin==0
     frf.recordsize = -1;
-    frf.nrecords = -1;
+    %frf.nrecords = -1;
     rfb = mwlrecordfilebase();
     frf = class(frf, 'mwlfixedrecordfile', rfb);
    
@@ -24,7 +24,7 @@ else
     
     rfb = mwlrecordfilebase(varargin{:});
     frf.recordsize = -1;
-    frf.nrecords = -1;
+    %frf.nrecords = -1;
     
     if ismember(rfb.mode, {'read', 'append'})
         
@@ -36,7 +36,7 @@ else
             
             frf.recordsize = sum( size(fields) );
         
-            frf.nrecords = (get(rfb, 'filesize') - get(rfb, 'headersize') ) ./ frf.recordsize;
+            %frf.nrecords = (get(rfb, 'filesize') - get(rfb, 'headersize') ) ./ frf.recordsize;
             
         end
         

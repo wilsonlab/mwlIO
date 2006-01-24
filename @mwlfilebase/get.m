@@ -15,12 +15,21 @@ function val = get(fb, propName)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 
-flds = {'mode', 'filename', 'path', 'header', 'headersize', 'filesize', 'format'};
+flds = {'mode', 'filename', 'path', 'header', 'headersize', 'format'};
 
 id = find( strcmp(flds, propName) );
 
 if ~isempty(id)
     val = fb.(flds{id});
+elseif strcmp( 'filesize', propName )
+    if ismember( fb.mode, {'read', 'append'} )
+        fid = fopen(fullfile(fb.path, fb.filename), ['rb']);
+        fseek(fid, 0, 'eof');
+        val = ftell(fid);
+        fclose(fid);
+    else
+        val = 0;
+    end
 else
     error('No such property.')
 end
