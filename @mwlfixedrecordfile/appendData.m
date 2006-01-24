@@ -71,7 +71,7 @@ elseif isstruct(data)
         else
             datatype = matcode(fields(f));
         end        
-        eval( ['data.(name(fields(1))) = ' datatype '(data.(name(fields(1))));']);
+        eval( ['data.(name(fields(f))) = ' datatype '(data.(name(fields(f))));']);
     end
     
 elseif isnumeric(data) % for matrices there is no support for multiple element fields
