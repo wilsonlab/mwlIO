@@ -16,8 +16,8 @@ function val = get(frf, propName)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if strcmp( 'nrecords', propName)
-    if ismember(frf.format, {'binary'})
-        if ismember( fb.mode, {'read', 'append'} )    
+    if ismember(get(frf, 'format'), {'binary'})
+        if ismember( get(frf, 'mode'), {'read', 'append'} )    
             val = (get(frf, 'filesize') - get(frf, 'headersize') ) ./ frf.recordsize;
         else
             val = -1;
