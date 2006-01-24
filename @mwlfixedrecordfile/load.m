@@ -62,6 +62,10 @@ if ismember(get(frf, 'format'), {'binary'})
         error('Invalid index array (out of bounds)')
     end
     
+    if any( fix(i) ~= i )
+        error('Fractional indices not allowed')
+    end 
+    
     data = mwlio( fullfile(get(frf,'path'), get(frf, 'filename')), i, field_def(field_id,:), get(frf, 'headersize'), get(frf, 'recordsize'));
 
     %transpose arrays and construct names
@@ -77,6 +81,8 @@ else %ascii
     
     if (max(diff(i)))>1
         error('Can only load contiguous blocks from Ascii file')
+    elseif (any(fix(i)~=i) )
+        error('Fractional indices not allowed')
     else
         
         fid = fopen( fullfile( get(frf, 'path'), get(frf, 'filename') ), 'r' );

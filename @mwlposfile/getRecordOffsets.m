@@ -29,6 +29,10 @@ if (length(range)~=2)
     error('Range should be two element vector')
 end
 
+if any( fix(range) ~= range )
+    error('Fractional indices not allowed')
+end
+
 pf = setCurrentRecord(pf, range(1));
 
 n = loadrange(pf,{'nitems'}, range);

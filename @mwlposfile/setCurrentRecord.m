@@ -16,6 +16,10 @@ if recid > get(f, 'nrecords') || recid<0
     error('Invalid record index')
 end
 
+if any( fix(recid) ~= recid )
+    error('Fractional indices not allowed')
+end
+
 if recid == f.currentrecord
     offset = f.currentoffset;
     index = 0;

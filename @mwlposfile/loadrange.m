@@ -43,6 +43,10 @@ else
     range = double(range);
 end
 
+if any( fix(range) ~= range )
+    error('Fractional indices not allowed')
+end
+
 [dummy, id] = ismember( loadflds, name(fields));
 id( id==5 ) = 4; %because we are treating target x and target y fields as one pos field
 fieldmask = sum( bitset(0, unique(id( id~=0 )) ) );

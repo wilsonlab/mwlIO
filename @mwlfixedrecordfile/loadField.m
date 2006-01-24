@@ -45,6 +45,10 @@ else
     range = double(range);
 end
 
+if any( fix(range) ~= range )
+    error('Fractional indices not allowed')
+end
+
 
 fid = fopen( fullfile( get(frf, 'path'), get(frf, 'filename') ), 'r' );
 
