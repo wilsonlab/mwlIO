@@ -16,6 +16,10 @@ function [h, hsize] = readheader(f)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
+if nargin<1
+    error('Invalid file')
+end
+
 h = {};
 hsize = 0;
 
@@ -34,6 +38,10 @@ elseif ischar(f)
     close_at_end = true;
 else
     error('Invalid file')
+end
+
+if f<0
+    error('Can''t open file')
 end
 
 %store file position and go to beginning of file

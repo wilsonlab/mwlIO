@@ -19,7 +19,7 @@ if nargin==0
 elseif isa(varargin{1}, 'mwleegfile')
     ef = varargin{1};
 else
-    frf = mwlfixedrecordfile(varargin{:});
+    frf = mwlfixedrecordfile(varargin{1:(min(end,2))});
     
     if strcmp(frf.format, 'ascii')
         error('Ascii eeg files are not supported.')
@@ -60,15 +60,16 @@ else
         
     else
         
-        if nargin<3
-            ef.nsamples = 1808;
-            ef.nchannels = 8;
-        elseif nargin<4
-            ef.nsamples = 1808;
-            ef.nchannels = varargin{3};
+        if nargin<4 || isempty(varargin{4})
+            wf.nsamples = 1808;
+		else
+			wf.nsamples = varargin{4};
+		end
+
+		if nargin<3 || isempty(varargin{3})
+			wf.nchannels = 8;
         else
-            ef.nchannels = varargin{3};
-            ef.nsamples = varargin{4};
+            wf.nchannels = varargin{3};
         end
         
         if ~isscalar(ef.nsamples) || ~isscalar(ef.nchannels) || ~isnumeric(ef.nchannels) || ~isnumeric(ef.nsamples)

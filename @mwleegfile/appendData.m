@@ -48,7 +48,7 @@ elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'data'} 
         error('Invalid data matrix')
     end
     
-    data{2} = reshape( data.data', nchannels.*nsamples, nrecords )';
+    data.data = reshape( data.data', nchannels.*nsamples, nrecords )';
     
     ef.mwlfixedrecordfile = appendData( ef.mwlfixedrecordfile, data);
     
