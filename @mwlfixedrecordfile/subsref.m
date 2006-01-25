@@ -13,7 +13,7 @@ case '.'
     if strcmp(s.subs, 'nrecords')
         b = get(frf, 'nrecords');
     elseif strcmp(s.subs, 'recordsize')
-        b = rfb.recordsize;
+        b = frf.recordsize;
     else
         b = subsref(frf.mwlrecordfilebase, s);
     end
