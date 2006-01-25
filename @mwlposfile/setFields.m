@@ -12,7 +12,7 @@ if nargin>1
     warning('This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlField( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
+fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
 
 pf.mwlrecordfilebase = setFields(pf.mwlrecordfilebase, fields);
 

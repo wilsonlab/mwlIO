@@ -12,6 +12,6 @@ if nargin>1
     warning('This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlField( {'timestamp', 'xfront', 'xback', 'yfront', 'yback'}, {'long', 'short', 'short', 'short', 'short'}, 1);
+fields = mwlfield( {'timestamp', 'xfront', 'xback', 'yfront', 'yback'}, {'long', 'short', 'short', 'short', 'short'}, 1);
 
 pf.mwlfixedrecordfile = setFields(pf.mwlfixedrecordfile, fields);

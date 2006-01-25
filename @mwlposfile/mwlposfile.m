@@ -38,7 +38,7 @@ else
         end
         
         %check fields
-        fields = mwlField( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
+        fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
         if ~all( fields==rfb.fields )
             error('Invalid raw position file')
         end

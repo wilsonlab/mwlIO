@@ -12,6 +12,6 @@ if nargin>1
     warning('This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlField({'timestamp', 'waveform'}, {'long', 'short'}, [1 wf.nchannels*wf.nsamples]);
+fields = mwlfield({'timestamp', 'waveform'}, {'long', 'short'}, [1 wf.nchannels*wf.nsamples]);
 
 wf.mwlfixedrecordfile = setFields(wf.mwlfixedrecordfile, fields);
