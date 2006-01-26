@@ -58,7 +58,7 @@ if ismember(get(frf, 'format'), {'binary'})
         i = 0:nrecords-1;
     end
     
-    if any( i>=nrecords || i<0)
+    if any( i>=nrecords | i<0)
         error('Invalid index array (out of bounds)')
     end
     

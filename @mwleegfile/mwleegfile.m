@@ -61,15 +61,15 @@ else
     else
         
         if nargin<4 || isempty(varargin{4})
-            wf.nsamples = 1808;
+            ef.nsamples = 1808;
 		else
-			wf.nsamples = varargin{4};
+			ef.nsamples = varargin{4};
 		end
 
 		if nargin<3 || isempty(varargin{3})
-			wf.nchannels = 8;
+			ef.nchannels = 8;
         else
-            wf.nchannels = varargin{3};
+            ef.nchannels = varargin{3};
         end
         
         if ~isscalar(ef.nsamples) || ~isscalar(ef.nchannels) || ~isnumeric(ef.nchannels) || ~isnumeric(ef.nsamples)
