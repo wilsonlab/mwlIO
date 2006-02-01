@@ -106,12 +106,15 @@ else %ascii
     
         outdata = struct();
         ofs = 0;
+        
+        field_id = sort(field_id);
+        
         for f=1:numel(field_id)
             if length(fields(f))>1 && strcmp(type(fields(f)), 'char')
-                outdata.(load_fields{f}) = data{1 + ofs};
+                outdata.(name(fields(field_id(f)))) = data{1 + ofs};
                 ofs = ofs + 1;
             else
-                outdata.(load_fields{f}) = cell2mat( data( [1:length(fields(f))] + ofs ) );
+                outdata.(name(fields(field_id(f)))) = cell2mat( data( [1:length(fields(f))] + ofs ) );
                 ofs = ofs + length(fields(f));
             end
         end

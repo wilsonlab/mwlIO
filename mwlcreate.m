@@ -24,25 +24,25 @@ function f = mwlcreate(filename, filetype, varargin)
 %  Copyright 2005-2006 Fabian Kloosterman
 
 
-args = struct('Header', [], 'Data', [], 'Fields', {[]}, 'FileFormat', 'binary', 'NSamples', [], 'NChannels', []);
+args = struct('Header', [], 'Data', [], 'Fields', {[]}, 'FileFormat', 'binary', 'NSamples', [], 'NChannels', [], 'Mode', 'write');
 args = parseArgs(varargin, args);
 
 switch filetype
     case 'diode'
-        f = mwldiodefile(filename,'write', args.FileFormat);
+        f = mwldiodefile(filename, args.Mode, args.FileFormat);
     case 'eeg'
-        f = mwleegfile(filename,'write', args.NChannels, args.NSamples);
+        f = mwleegfile(filename, args.Mode, args.NChannels, args.NSamples);
     case 'event'
-        f = mwleventfile(filename, 'write', args.FileFormat);
+        f = mwleventfile(filename, args.Mode, args.FileFormat);
     case 'feature'
-        f = mwlfeaturefile(filename, 'write', args.FileFormat);
+        f = mwlfeaturefile(filename, args.Mode, args.FileFormat);
     case 'fixedrecord'
-        f = mwlfixedrecordfile(filename, 'write', args.FileFormat);
+        f = mwlfixedrecordfile(filename, args.Mode, args.FileFormat);
     case 'rawpos'
         %f = mwlposfile(filename, 'w');
         error 'Not implemented'
     case 'waveform'
-        f = mwlwaveformfile(filename, 'write', args.NChannels, args.NSamples);
+        f = mwlwaveformfile(filename, args.Mode, args.NChannels, args.NSamples);
     case 'cluster'
         %f = mwlfixedrecordfile(filename, 'w');
         error 'Not implemented'
