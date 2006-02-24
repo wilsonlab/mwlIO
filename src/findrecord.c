@@ -247,19 +247,19 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   range[0] = pvalue[0];
   range[n_values-1] = pvalue[n_values-1];
 
-  if (!mxIsDouble(prhs[2]))
-    mexErrMsgTxt("Third argument should be a matrix of field descriptions");
+  if (!mxIsCell(prhs[2]))
+    mexErrMsgTxt("Third argument should be a cell matrix of field descriptions");
 
-  pfield = mxGetPr(prhs[2]);
+  /*pfield = mxGetPr(prhs[2]);*/
 
   if (mxGetM(prhs[2])*mxGetN(prhs[2])!=3)
     mexErrMsgTxt("Error in field description");
 
-  byte_offset = (int) pfield[0];
-  field_type = (int) pfield[1];
-  num_elements = (int) pfield[2];
+  byte_offset = (int) mxGetScalar( mxGetCell( prhs[2], 0 ) );
+  field_type = (int) mxGetScalar( mxGetCell( prhs[2], 1 ) );
+  num_elements = (int) mxGetScalar( mxGetCell( prhs[2], 2 ) );
 
-  if (num_elements>1)
+  if ( (num_elements>1) || mxGetNumberOfElements( mxGetCell( prhs[2], 2 ) )>1 )
     mexErrMsgTxt("Only fields with one element supported");
 
   if (!mxIsDouble(prhs[3]) || mxGetM(prhs[3])!=1 || mxGetN(prhs[3])!=1)

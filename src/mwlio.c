@@ -33,7 +33,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   int n_fields;
   char *record_data;
   int j;
-  int *num_elements, *byte_offset, *field_type;
+  int *n_dim, *num_elements, *byte_offset, *field_type, *dims;
   int subs;
   char **pdatatemp = NULL;
 
@@ -51,8 +51,8 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 
   pid = mxGetPr(prhs[1]);
 
-  if (!mxIsDouble(prhs[2]))
-    mexErrMsgTxt("Third argument should be a matrix of field descriptions");
+  if (!mxIsCell(prhs[2]))
+    mexErrMsgTxt("Third argument should be a cell matrix of field descriptions");
 
   n_fields = mxGetM(prhs[2]);
   pfield = mxGetPr(prhs[2]);
@@ -67,18 +67,24 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   byte_offset = (int*) mxCalloc(n_fields, sizeof(int));
   field_type = (int*) mxCalloc(n_fields, sizeof(int));
   num_elements = (int*) mxCalloc(n_fields, sizeof(int));
-
+  n_dim = (int*) mxCalloc(n_fields, sizeof(int));
+  
   for (i=0; i<n_fields; i++) {
     id2d[0]=i;
     id2d[1] = 0;
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
-    byte_offset[i] = (int) pfield[subs];
+    byte_offset[i] = (int) mxGetScalar(mxGetCell(prhs[2], subs) );
     id2d[1] = 1;
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
-    field_type[i] = (int) pfield[subs];
+    field_type[i] = (int) mxGetScalar(mxGetCell(prhs[2], subs) );
     id2d[1] = 2;
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
-    num_elements[i] = (int) pfield[subs];
+    n_dim[i] = mxGetNumberOfElements(mxGetCell(prhs[2], subs));
+    ptemp = mxGetPr( mxGetCell(prhs[2], subs) );
+    num_elements[i] = 1;
+    for( j=0; j<n_dim[i];j++) {
+        num_elements[i] *= ptemp[j];
+    }
   }
 
   if (!mxIsDouble(prhs[3]) || mxGetM(prhs[3])!=1 || mxGetN(prhs[3])!=1)
@@ -117,10 +123,24 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 
   /* construct arrays for each field */
   for(i=0; i<n_fields; i++) {
+    /*create dims array*/
+    dims = (int*) mxCalloc(n_dim[i]+1, sizeof(int));
+    id2d[0]=i;
+    id2d[1] = 2;
+    subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
+    ptemp = mxGetPr( mxGetCell(prhs[2], subs) );    
     
-    mxSetCell(output_array, i, mxCreateNumericMatrix(num_elements[i], n_id, field_type[i], mxREAL));
+    for (j=0;j<n_dim[i];j++) {
+        dims[j] = (int) ptemp[j];
+    }
+    
+    dims[n_dim[i]] = n_id;
+    
+    /* mxSetCell(output_array, i, mxCreateNumericMatrix(num_elements[i], n_id, field_type[i], mxREAL)); */
+    mxSetCell(output_array, i, mxCreateNumericArray(n_dim[i]+1, dims, field_type[i], mxREAL));
     pdatatemp[i] = (char *) mxGetPr( mxGetCell(output_array, i) );
 
+    mxFree(dims);
   }
 
   /*loop though index vector and retrieve records */
@@ -176,6 +196,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   mxFree(byte_offset);
   mxFree(field_type);
   mxFree(num_elements);
+  mxFree(n_dim);
 
   fclose(fid);
 

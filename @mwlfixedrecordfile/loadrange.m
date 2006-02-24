@@ -20,12 +20,12 @@ function data = loadrange(frf, fields, range, rangefield)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<3
+if nargin<2
     help(mfilename)
     return
 end
 
-if ismember(frf.format, {'ascii'})
+if ismember(get(frf, 'format'), {'ascii'})
     error('This function not implemented for ascii files');
 end
 

@@ -54,12 +54,12 @@ else
         end
     end
     
-    if nargin>2 && isnumeric(varargin{3}) && all(varargin{3}>0)
-        if numel(varargin{3}) == 1
+    if nargin>2
+        if isnumeric(varargin{3}) && all(varargin{3}>0)
             [field.n] = deal( fix(varargin{3}) );
-        elseif numel(varargin{3}) == n
-            nn = num2cell( fix( varargin{3} ) );
-            [field(1:n).n] = deal( nn{:} );
+        elseif iscell(varargin{3}) && numel(varargin{3}) == n            
+            [field(1:n).n] = deal( varargin{3}{:} );
+            %TODO check number of elements!
         else
             error('Invalid field size')
         end

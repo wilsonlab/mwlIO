@@ -13,5 +13,5 @@ function retval = byteoffset( field )
 
 %  Copyright 2006-2006 Fabian Kloosterman
 
-retval = size( field );
+retval = bytesize( field );
 retval = cumsum( [0 retval(1:end-1)] );

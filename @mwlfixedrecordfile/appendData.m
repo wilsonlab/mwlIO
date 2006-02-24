@@ -32,7 +32,8 @@ if iscell(data)
     end    
     
     for f=1:nfields
-        if size(data{f}, 2) ~= length(fields(f))
+        sz = size( data{f} );
+        if (numel(sz)-1) ~= numel(size(fields(f))) || ~all( size( fields(f) ) == sz(2:end) ); %numel(data{f})./size(data{f},1) ~= length(fields(f))
             error 'Incorrect number of elements'
         end
         if f==1
@@ -58,7 +59,8 @@ elseif isstruct(data)
     
     %check the structure and convert if necessary
     for f=1:nfields
-        if size(data.(names{f}), 2) ~= length(fields(f))
+        sz = size( data.(names{f}) );
+        if (numel(sz)-1) ~= numel(size(fields(f))) || ~all( size( fields(f) ) == sz(2:end) ); %size(data.(names{f}), 2) ~= length(fields(f))
             error 'Incorrect number of elements'
         end
         if f==1
@@ -75,7 +77,7 @@ elseif isstruct(data)
     end
     
 elseif isnumeric(data) % for matrices there is no support for multiple element fields
-    if size(data,2)~=nfields
+    if ndims(data)>2 || size(data,2)~=nfields
         error 'Incorrect number of fields in data'
     end
     %create a cell array
@@ -123,7 +125,7 @@ else %ascii
                 tmp(1:nrows, [1:1]+fo) = mat2cell( data{f}, ones(nrows,1), length(fields(f)));
                 fo = fo + 1;
             else    
-                tmp(1:nrows, [1:length(fields(f))]+fo) = mat2cell( data{f}, ones(nrows,1), ones(1, length(fields(f))));
+                tmp(1:nrows, [1:length(fields(f))]+fo) = mat2cell( reshape( data{f}, nrows, length(fields(f)) ), ones(nrows,1), ones(1, length(fields(f))));
                 fo = fo + length(fields(f));
             end           
         end        

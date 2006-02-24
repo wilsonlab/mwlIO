@@ -1,4 +1,4 @@
-function data = load(ef, flds, i)
+function data = load(ef, varargin)
 %LOAD load eeg data
 %
 %  Syntax
@@ -15,7 +15,7 @@ function data = load(ef, flds, i)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-data = load(ef.mwlfixedrecordfile, flds, i);
+data = load(ef.mwlfixedrecordfile, varargin{:});
 
 if isfield(data, 'data')
     data.data = reshape(data.data', ef.nchannels, size(data.data, 1)*ef.nsamples)';

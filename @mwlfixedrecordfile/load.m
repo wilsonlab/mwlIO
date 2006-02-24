@@ -71,7 +71,8 @@ if ismember(get(frf, 'format'), {'binary'})
     %transpose arrays and construct names
 
     for f=1:numel(field_id)
-        data{f} = data{f}';
+        nd = ndims( data{f} );
+        data{f} = permute(data{f}, [nd 1:(nd-1)]);
     end
 
     %create structure
@@ -109,12 +110,14 @@ else %ascii
         
         field_id = sort(field_id);
         
+        nrows = numel( data{1} );
+        
         for f=1:numel(field_id)
             if length(fields(f))>1 && strcmp(type(fields(f)), 'char')
                 outdata.(name(fields(field_id(f)))) = data{1 + ofs};
                 ofs = ofs + 1;
             else
-                outdata.(name(fields(field_id(f)))) = cell2mat( data( [1:length(fields(f))] + ofs ) );
+                outdata.(name(fields(field_id(f)))) = reshape( cell2mat( data( [1:length(fields(f))] + ofs ) ), [ nrows size(fields(f))] ) ;
                 ofs = ofs + length(fields(f));
             end
         end

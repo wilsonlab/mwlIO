@@ -9,8 +9,8 @@ function retval = mex_fielddef( field )
 
 %  Copyright 2006-2006 Fabian Kloosterman
 
-b = byteoffset( field );
-m = mexcode( field  );
-n = [field.n];
+b = num2cell( byteoffset( field ) );
+m = num2cell( mexcode( field  ) );
+n = {field.n};
 
 retval = [ b(:) m(:) n(:) ];

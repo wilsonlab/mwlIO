@@ -12,5 +12,5 @@ frf.mwlrecordfilebase = setFields(frf.mwlrecordfilebase, fields);
 
 fields = get(frf, 'fields');
 
-frf.recordsize = sum( size(fields) );
+frf.recordsize = sum( bytesize(fields) );
 

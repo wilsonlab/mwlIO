@@ -13,4 +13,9 @@ function retval = length( field )
 
 %  Copyright 2006-2006 Fabian Kloosterman
 
-retval = [field.n];
+
+for k=1:numel(field)
+
+    retval(k) = prod( field(k).n );
+    
+end

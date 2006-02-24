@@ -1,4 +1,4 @@
-function data = load(wf, flds, i)
+function data = load(wf, varargin)
 %LOAD load waveform data
 %
 %  Syntax
@@ -14,7 +14,9 @@ function data = load(wf, flds, i)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-data = load(wf.mwlfixedrecordfile, flds, i);
+
+
+data = load(wf.mwlfixedrecordfile, varargin{:});
 
 if isfield(data, 'waveform')
     data.waveform = permute(reshape(data.waveform', wf.nchannels, wf.nsamples, size(data.waveform, 1)), [2 1 3]);

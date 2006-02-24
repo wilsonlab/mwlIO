@@ -18,10 +18,15 @@ n = numel(field);
 retval = '';
 
 for k = 1:n
-    if field(k).type==-1 || field(k).n==-1
+    if field(k).type==-1 || (isscalar(field(k).n) && field(k).n==-1)
         %skip
     else
-        retval = [retval sprintf( '%s,%d,%d,%d\t', field(k).name, field(k).type, mwltypemapping(field(k).type, 'code2size'), field(k).n)];
+        if numel(field(k).n) == 1
+            retval = [retval sprintf( '%s,%d,%d,%d\t', field(k).name, field(k).type, mwltypemapping(field(k).type, 'code2size'), field(k).n)];
+        else
+            n_str = [ '[' num2str(field(k).n) ']' ];
+            retval = [retval sprintf( '%s,%d,%d,%s\t', field(k).name, field(k).type, mwltypemapping(field(k).type, 'code2size'), n_str)];
+        end
     end
 end
 

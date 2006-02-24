@@ -25,13 +25,13 @@ nrecords = get(frf, 'nrecords');
 if isempty(loadfield) || ~ischar(loadfield)
     error('Please specify a valid field')
 else
-    fieldid = ismember( loadfield, name(fields));
+    [dummy, fieldid] = ismember( loadfield, name(fields));
     if fieldid==0
         error('Unknown field')
     end
 end
 
-isbinary = ismember( frf.format, 'binary');
+isbinary = ismember( get(frf, 'format'), 'binary');
 
 if nargin<3 || isempty(range)
     if isbinary
@@ -56,7 +56,7 @@ if fid == -1
     error('Cannot open file')
 end
 
-if ismember(frf.format, {'binary'})
+if ismember(get(frf, 'format'), {'binary'})
 
     if range(2)==-1
         range(2) = nrecords-1;
@@ -70,9 +70,12 @@ if ismember(frf.format, {'binary'})
     fseek(fid, get(frf, 'headersize') + offset + frf.recordsize * range(1), -1);
 
     %data = fread( fid, fields{field, 4}*(endid-startid+1), [num2str(fields{field, 4}) '*' mwltypemapping(fields{field,2}, 'str2mat')], frf.recordsize - fields{field, 3}*fields{field, 4});
-    data = fread( fid, length(fields(fieldid))*(diff(range)+1), [num2str(length(fields(fieldid))) '*' char(matcode(fields(fieldid)))], frf.recordsize - size(fields(fieldid)));
+    data = fread( fid, length(fields(fieldid))*(diff(range)+1), [num2str(length(fields(fieldid))) '*' char(matcode(fields(fieldid)))], frf.recordsize - bytesize(fields(fieldid)));
     
-    data = reshape(data, length(fields(fieldid)), diff(range)+1)';
+    %data = reshape(data, length(fields(fieldid)), diff(range)+1)';
+    data = reshape(data, [size(fields(fieldid)) diff(range)+1]);
+    nd = ndims( data );
+    data = permute( data, [nd 1:(nd-1)] );
     
 else %ascii file
     
@@ -92,7 +95,9 @@ else %ascii file
     end
     
     %transform data to matrix if necessary
+    nrows = numel(data{1});
     data = cell2mat(data);
+    data = reshape( data, [ nrows size(fields(fieldid))] );
     
 end
 

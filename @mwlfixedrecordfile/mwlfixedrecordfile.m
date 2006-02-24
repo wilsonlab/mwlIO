@@ -34,7 +34,7 @@ else
         
             frf.recordsize = 0;
             
-            frf.recordsize = sum( size(fields) );
+            frf.recordsize = sum( bytesize(fields) );
         
             %frf.nrecords = (get(rfb, 'filesize') - get(rfb, 'headersize') ) ./ frf.recordsize;
             

@@ -14,7 +14,7 @@ elseif numel(A) ~= numel(B)
     e = 0;
 else
     for k = 1:numel(A)
-        if strcmp(A(k).name, B(k).name) && A(k).type == B(k).type && A(k).n == B(k).n
+        if strcmp(A(k).name, B(k).name) && A(k).type == B(k).type && numel(A(k).n) == numel(B(k).n) && all( A(k).n == B(k).n )
             e(k) = 1;
         else
             e(k) = 0;

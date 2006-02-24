@@ -7,7 +7,7 @@ function fmtstr = formatstr(fields, skip, delimiter, fmttype)
 %
 %  Description
 %
-%    This method converts melfield objects to format strings that can be
+%    This method converts mwlfield objects to format strings that can be
 %    used by textscan and fprintf. The parameter skip is an optional vector
 %    indicating for each field whether is should be skipped (1) or not (0).
 %    Delimiter is an optional string used as a delimiter between field
@@ -59,7 +59,7 @@ for f=1:nfields
         error('Incorrect field type')
     end
 
-    if ~field_type(f)==1 %char
+    if field_type(f)~=1 %char
         fmt2='';
     
         for i = 1:length(fields(f))

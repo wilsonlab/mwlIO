@@ -29,7 +29,7 @@ if ~isempty(strfind(flds, ','))
     
     field_name = cell(nfields,1);
     field_type = zeros(nfields,1);
-    field_size = zeros(nfields,1);
+    field_size = cell(nfields,1);
         
     for f = 1:nfields
         %get field attributes
@@ -39,7 +39,7 @@ if ~isempty(strfind(flds, ','))
         else
             field_name{f} = attr{1};
             field_type(f) = str2num( attr{2} );
-            field_size(f) = str2num( attr{4} );
+            field_size{f} = str2num( attr{4} );
         end
         
     end

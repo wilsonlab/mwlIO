@@ -70,7 +70,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     else
       cell = mxGetFieldByNumber(prhs[1], 0, i);
 
-    ncol[i] = (int) mxGetN(cell);
+    ncol[i] = (int) ( mxGetNumberOfElements(cell) / mxGetM(cell) );
     data_type[i] = (int) mxGetClassID(cell);
     element_size[i] = (int) mxGetElementSize(cell);
     if (i>0) {
