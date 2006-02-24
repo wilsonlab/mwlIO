@@ -30,9 +30,9 @@ if nargin<3 || isempty(delimiter)
 end
 
 if nargin<4 || isempty(fmttype) || fmttype==0
-    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd'};
-else
     mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32'};
+else
+    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd'};
 end
 
 fmtstr = '';
