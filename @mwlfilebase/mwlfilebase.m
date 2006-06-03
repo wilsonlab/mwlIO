@@ -66,20 +66,8 @@ else
 
     % if file is opened in read mode
     if ismember(fb.mode, {'read', 'append'})
-        olddir = pwd;
 
-        [np, nf, ne, nv] = fileparts(filename);
-        if ~isempty(np)
-            cd(np);
-        end
-        if isempty(ne)
-            ne = '.'; %to make sure 'which' function works if there is no extension
-        end
-        filename = which([nf ne nv]);
-        
-        [fb.path, fb.filename, ext, versn] = fileparts(filename);
-        
-        cd(olddir);
+        [fb.path, fb.filename, ext, versn] = fileparts(fullpath(filename));
         
         fb.format = ''; %will be set later
         fb.filename = [fb.filename ext versn];
@@ -87,7 +75,7 @@ else
         fid = fopen(fullfile(fb.path, fb.filename), ['rb']);
     
         if fid == -1
-            error('Cannot open file')
+            error(['Cannot open file: ' fullfile(fb.path, fb.filename)])
         end
     
         [fb.header fb.headersize] = loadheader(fid);
