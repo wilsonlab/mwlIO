@@ -29,6 +29,10 @@ if iscell(data) && numel(data)==2 && isnumeric(data{2}) && ndims(data{2})<=3
     if nsamples~=f.nsamples || nchannels~=f.nchannels
         error('Invalid data matrix')
     end
+
+    if nrecords==0
+        return
+    end
     
     data{2} = reshape( permute( data{2}, [3 2 1] ), nrecords, nsamples.*nchannels );
     
@@ -41,7 +45,11 @@ elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'wavefor
     if nsamples~=f.nsamples || nchannels~=f.nchannels
         error('Invalid data matrix')
     end
-    
+
+    if nrecords==0
+        return
+    end
+
     data.waveform = reshape( permute( data.waveform, [3 2 1] ), nrecords, nsamples.*nchannels );
     
     f.mwlfixedrecordfile = appendData( f.mwlfixedrecordfile, data);
