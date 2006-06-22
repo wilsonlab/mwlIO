@@ -28,11 +28,11 @@ if iscell(data) && numel(data)==2 && isnumeric(data{2}) && ndims(data{2})<=2
     
     nrecords = nsamples ./ ef.nsamples;
     nsamples = ef.nsamples;
-    
+
     if nrecords==0
         return
     end
-
+    
     if ~isscalar(nrecords) || nchannels~=ef.nchannels
         error('Invalid data matrix')
     end

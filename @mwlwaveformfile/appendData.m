@@ -33,7 +33,8 @@ if iscell(data) && numel(data)==2 && isnumeric(data{2}) && ndims(data{2})<=3
     if nrecords==0
         return
     end
-    
+
+
     data{2} = reshape( permute( data{2}, [3 2 1] ), nrecords, nsamples.*nchannels );
     
     f.mwlfixedrecordfile = appendData( f.mwlfixedrecordfile, data);
@@ -49,6 +50,7 @@ elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'wavefor
     if nrecords==0
         return
     end
+    
 
     data.waveform = reshape( permute( data.waveform, [3 2 1] ), nrecords, nsamples.*nchannels );
     
