@@ -18,5 +18,8 @@ function data = load(ef, varargin)
 data = load(ef.mwlfixedrecordfile, varargin{:});
 
 if isfield(data, 'data')
-    data.data = reshape(data.data', ef.nchannels, size(data.data, 1)*ef.nsamples)';
+    %data.data = reshape(data.data', ef.nchannels, size(data.data, 1)*ef.nsamples)';
+    %data.data = permute( reshape( data.data, ef.nchannels, ef.nsamples, size(data.data, 2) ), [2 1 3]);
+    data.data = reshape( data.data, ef.nchannels, ef.nsamples, size(data.data, 2) );
+    %data.data = reshape( data.data, size(data.data,1), ef.nsamples, ef.nchannels );
 end

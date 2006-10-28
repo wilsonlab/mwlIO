@@ -15,6 +15,7 @@ if nargin==0
     h = class(h, 'header');
 elseif isa(varargin{1}, 'header')
     h = varargin{1};
-else
-    error 'header constructor takes no arguments'
+elseif isa(varargin{1}, 'subheader')
+    h.subheaders = varargin{1};
+    h = class(h, 'header');
 end

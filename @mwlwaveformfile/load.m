@@ -19,5 +19,8 @@ function data = load(wf, varargin)
 data = load(wf.mwlfixedrecordfile, varargin{:});
 
 if isfield(data, 'waveform')
-    data.waveform = permute(reshape(data.waveform', wf.nchannels, wf.nsamples, size(data.waveform, 1)), [2 1 3]);
+    %data.waveform = permute(reshape(data.waveform', wf.nchannels, wf.nsamples, size(data.waveform, 1)), [2 1 3]);
+    %data.waveform = permute( reshape( data.waveform, wf.nchannels, wf.nsamples, size(data.waveform, 2) ), [2 1 3]);
+    data.waveform = reshape( data.waveform, wf.nchannels, wf.nsamples, size(data.waveform, 2) );
+    %data.data = reshape( data.waveform, size(data.waveform,1), wf.nsamples, wf.nchannels );
 end

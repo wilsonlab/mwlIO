@@ -56,8 +56,10 @@ if isa(args.Header, 'header')
 end
 
 %set fields
-if (strcmp(filetype, 'feature') | strcmp(filetype, 'fixedrecord') ) && ~isempty(args.Fields)
-    f = setFields(f, args.Fields);
+if (strcmp(filetype, 'feature') | strcmp(filetype, 'fixedrecord') )
+    if ~isempty(args.Fields)
+        f = setFields(f, args.Fields);
+    end
 else
     f=setFields(f);
 end

@@ -359,6 +359,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   mxFree(rangestart);
   mxFree(rangeend);
 
+
   fclose(fid);
   plhs[0] = output_array;
 }

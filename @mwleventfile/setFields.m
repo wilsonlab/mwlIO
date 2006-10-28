@@ -12,6 +12,6 @@ if nargin>1
     warning('This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlfield({'timestamp', 'string'}, {'ulong', 'char'}, [1 ef.string_size]);
+fields = mwlfield({'timestamp', 'string'}, {'ulong', 'char'}, {1 ef.string_size});
 
 ef.mwlfixedrecordfile = setFields(ef.mwlfixedrecordfile, fields);

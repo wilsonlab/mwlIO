@@ -33,7 +33,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   int n_fields;
   char *record_data;
   int j;
-  int *n_dim, *num_elements, *byte_offset, *field_type, *dims;
+  int *n_dim, *num_elements, *num_bytes, *byte_offset, *field_type, *dims;
   int subs;
   char **pdatatemp = NULL;
 
@@ -67,6 +67,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   byte_offset = (int*) mxCalloc(n_fields, sizeof(int));
   field_type = (int*) mxCalloc(n_fields, sizeof(int));
   num_elements = (int*) mxCalloc(n_fields, sizeof(int));
+  num_bytes = (int*) mxCalloc(n_fields, sizeof(int));
   n_dim = (int*) mxCalloc(n_fields, sizeof(int));
   
   for (i=0; i<n_fields; i++) {
@@ -85,6 +86,36 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     for( j=0; j<n_dim[i];j++) {
         num_elements[i] *= ptemp[j];
     }
+      switch (field_type[i]) {
+	
+      case mxCHAR_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(char);
+	break;
+      case mxDOUBLE_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(double);
+	break;
+      case mxSINGLE_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(float);
+	break;
+      case mxINT8_CLASS:
+         num_bytes[i] = num_elements[i] * sizeof(signed char); 
+	break;
+      case mxUINT8_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(unsigned char);
+	break;
+      case mxINT16_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(short);
+	break;
+      case mxUINT16_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(unsigned short);
+	break;
+      case mxINT32_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(long);
+	break;
+      case mxUINT32_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(unsigned long);
+	break;
+      }    
   }
 
   if (!mxIsDouble(prhs[3]) || mxGetM(prhs[3])!=1 || mxGetN(prhs[3])!=1)
@@ -130,11 +161,16 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
     ptemp = mxGetPr( mxGetCell(prhs[2], subs) );    
     
-    for (j=0;j<n_dim[i];j++) {
-        dims[j] = (int) ptemp[j];
-    }
+    /*if ( (n_dim[i]==1) && ptemp[0]==1 ) {*/
+    /*    dims[0] = n_id;*/
+    /*    dims[1] = 1;     */   
+    /*} else {*/
+        for (j=0;j<n_dim[i];j++) {
+            dims[j] = (int) ptemp[j];
+        }
     
-    dims[n_dim[i]] = n_id;
+        dims[n_dim[i]] = n_id;
+    /*}*/
     
     /* mxSetCell(output_array, i, mxCreateNumericMatrix(num_elements[i], n_id, field_type[i], mxREAL)); */
     mxSetCell(output_array, i, mxCreateNumericArray(n_dim[i]+1, dims, field_type[i], mxREAL));
@@ -155,38 +191,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     /* unpack data */
     for (j=0; j<n_fields; j++) {
 
-      switch (field_type[j]) {
-	
-      case mxCHAR_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(char)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(char)*num_elements[j]);
-	break;
-      case mxDOUBLE_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(double)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(double)*num_elements[j]);
-	break;
-      case mxSINGLE_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(float)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(float)*num_elements[j]);
-	break;
-      case mxINT8_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(signed char)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(signed char)*num_elements[j]);
-	break;
-      case mxUINT8_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(unsigned char)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(unsigned char)*num_elements[j]);
-	break;
-      case mxINT16_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(short)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(short)*num_elements[j]);
-	break;
-      case mxUINT16_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(unsigned short)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(unsigned short)*num_elements[j]);
-	break;
-      case mxINT32_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(long)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(long)*num_elements[j]);
-	break;
-      case mxUINT32_CLASS:
-	memcpy(&(pdatatemp[j][i*sizeof(unsigned long)*num_elements[j]]), &(record_data[byte_offset[j]]), sizeof(unsigned long)*num_elements[j]);
-	break;
-      }
-
-
+	memcpy(&(pdatatemp[j][i*num_bytes[j]]), &(record_data[byte_offset[j]]), num_bytes[j]);
 
     }
 
@@ -197,6 +202,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   mxFree(field_type);
   mxFree(num_elements);
   mxFree(n_dim);
+  mxFree(pdatatemp);
 
   fclose(fid);
 

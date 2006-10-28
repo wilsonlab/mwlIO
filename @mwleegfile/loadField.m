@@ -20,5 +20,6 @@ end
 data = loadField(ef.mwlfixedrecordfile, field, varargin{:});
 
 if strcmp(field, 'data')
-    data = permute(reshape(data', ef.nchannels, size(data, 1)*ef.nsamples), [2 1]);
+    data.data = reshape( data.data, ef.nchannels, ef.nsamples, size(data.data, 2) );
+    %data = permute(reshape(data', ef.nchannels, size(data, 1)*ef.nsamples), [2 1]);
 end

@@ -20,6 +20,7 @@ end
 data = loadField(wf.mwlfixedrecordfile, field, varargin{:});
 
 if strcmp(field, 'waveform')
-    data = permute(reshape(data, size(data, 1), wf.nchannels, wf.nsamples), [3 2 1]);
+    %data = permute(reshape(data, size(data, 1), wf.nchannels, wf.nsamples), [3 2 1]);
+    data.waveform = reshape( data.waveform, wf.nchannels, wf.nsamples, size(data.waveform, 2) );
 end
 

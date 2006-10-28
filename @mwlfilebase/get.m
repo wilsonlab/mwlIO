@@ -23,7 +23,7 @@ if ~isempty(id)
     val = fb.(flds{id});
 elseif strcmp( 'filesize', propName )
     if ismember( fb.mode, {'read', 'append'} )
-        fid = fopen(fullfile(fb.path, fb.filename), ['rb']);
+        fid = fopen(fullfile(fb.path, fb.filename), 'rb');
         fseek(fid, 0, 'eof');
         val = ftell(fid);
         fclose(fid);
@@ -31,6 +31,11 @@ elseif strcmp( 'filesize', propName )
         val = 0;
     end
 else
+  try
+    val = getParam(fb.header, propName);
+    val = val{1};
+  catch
     error('No such property.')
+  end
 end
     

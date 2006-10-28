@@ -21,10 +21,10 @@ fields = get(frf, 'fields');
 nfields = numel(fields);
 
 if nargin<2 || isempty(load_fields) || ismember( {'all'}, load_fields )
-    load_fields = name(fields);
+    load_fields = cellstr(name(fields));
 end
 
-field_names = name(fields);
+field_names = cellstr(name(fields));
 [dummy, field_id] = ismember( load_fields,field_names );
 
 field_id = field_id( field_id~=0 );
@@ -75,10 +75,21 @@ if ismember(get(frf, 'format'), {'binary'})
 
     %transpose arrays and construct names
 
-    for f=1:numel(field_id)
-        nd = ndims( data{f} );
-        data{f} = permute(data{f}, [nd 1:(nd-1)]);
-    end
+     for f=1:numel(field_id)
+%         nd = ndims( data{f} );
+%         %permute only if nrecords>1, i.e. when nd>numel(size( fields(field_id) ) )
+%         if nd>numel( size( fields( field_id ) ) )
+%             data{f} = permute(data{f}, [nd 1:(nd-1)]);
+%         end
+        %if size(data{f},1)==1
+            %data{f} = shiftdim(data{f}, ndims(data{f})-1);
+        %end
+        %data{f} = squeeze( data{f} );
+        if strcmp(type(fields(f)), 'char') && length(fields(f))>1
+            data{f} = cellstr( char(data{f})' )';
+        end
+            
+     end
 
     %create structure
 
@@ -105,9 +116,10 @@ else %ascii
         %fseek to header offset
         fseek(fid, get(frf, 'headersize'), -1);    
         if i==-1
-            data = textscan(fid, fmt);
+            data = textscan(fid, fmt, 'whitespace', '\t');
         else
-            data = textscan(fid, fmt, length(i), 'headerLines', i(1));
+            data = textscan(fid, fmt, length(i), 'headerLines', i(1), ...
+                            'whitespace', '\t');
         end
     
         outdata = struct();
@@ -118,12 +130,12 @@ else %ascii
         nrows = numel( data{1} );
         
         for f=1:numel(field_id)
-            if length(fields(f))>1 && strcmp(type(fields(f)), 'char')
-                outdata.(name(fields(field_id(f)))) = data{1 + ofs};
+            if length(fields(field_id(f)))>1 && strcmp(type(fields(field_id(f))), 'char')
+                outdata.(name(fields(field_id(f)))) = data{1 + ofs}';
                 ofs = ofs + 1;
             else
-                outdata.(name(fields(field_id(f)))) = reshape( cell2mat( data( [1:length(fields(f))] + ofs ) ), [ nrows size(fields(f))] ) ;
-                ofs = ofs + length(fields(f));
+                outdata.(name(fields(field_id(f)))) = shiftdim( reshape( cell2mat( data( [1:length(fields(field_id(f)))] + ofs ) ), [ nrows size(fields(field_id(f)))] ), 1) ;
+                ofs = ofs + length(fields(field_id(f)));
             end
         end
             

@@ -70,9 +70,15 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     else
       cell = mxGetFieldByNumber(prhs[1], 0, i);
 
-    ncol[i] = (int) ( mxGetNumberOfElements(cell) / mxGetM(cell) );
+    ncol[i] = (int) ( mxGetNumberOfElements(cell) / nrows );
     data_type[i] = (int) mxGetClassID(cell);
-    element_size[i] = (int) mxGetElementSize(cell);
+    if (data_type[i]==mxCHAR_CLASS) {
+        element_size[i] = 1;
+    }
+    else {
+        element_size[i] = (int) mxGetElementSize(cell);
+    }
+
     if (i>0) {
       col_offset[i] = col_offset[i-1] + ncol[i-1]*element_size[i-1];
     }
@@ -80,6 +86,23 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     /*mexPrintf("%d - ncol: %d, element_size: %d, col_offset: %d, matrix_width: %d\n", i, ncol[i], element_size[i], col_offset[i], matrix_width);*/
   }
 
+
+/*   /\* create temporary matrix with data *\/ */
+/*   tmp = (char*) calloc(nrows, matrix_width); */
+/*   /\*mexPrintf("ncells: %d, matrix_width: %d\n", ncells, matrix_width);*\/ */
+/*   for(i=0; i<ncells; i++) { */
+/*     if (inputtype==1) /\* cell *\/ */
+/*       cell = mxGetCell(prhs[1], i); */
+/*     else */
+/*       cell = mxGetFieldByNumber(prhs[1], 0, i); */
+
+/*     celldata = (char*) mxGetPr(cell); */
+/*     for(j=0;j<ncol[i];j++) { */
+/*       for(k=0;k<nrows;k++) { */
+/* 	memcpy(&tmp[k*matrix_width + col_offset[i] + j*element_size[i]], &celldata[(j*nrows+k)*element_size[i]], element_size[i]); */
+/*       } */
+/*     } */
+/*   } */
 
   /* create temporary matrix with data */
   tmp = (char*) calloc(nrows, matrix_width);
@@ -91,11 +114,11 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
       cell = mxGetFieldByNumber(prhs[1], 0, i);
 
     celldata = (char*) mxGetPr(cell);
-    for(j=0;j<ncol[i];j++) {
-      for(k=0;k<nrows;k++) {
-	memcpy(&tmp[k*matrix_width + col_offset[i] + j*element_size[i]], &celldata[(j*nrows+k)*element_size[i]], element_size[i]);
-      }
+
+    for (k=0;k<nrows;k++) {
+      memcpy(&tmp[k*matrix_width + col_offset[i]], &celldata[k*ncol[i]*element_size[i]], ncol[i]*element_size[i]);
     }
+
   }
 
   /* write to file */

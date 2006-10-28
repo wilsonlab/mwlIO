@@ -25,7 +25,7 @@ nrecords = get(frf, 'nrecords');
 if isempty(loadfield) || ~ischar(loadfield)
     error('Please specify a valid field')
 else
-    [dummy, fieldid] = ismember( loadfield, name(fields));
+    [dummy, fieldid] = ismember( cellstr(loadfield), name(fields));
     if fieldid==0
         error('Unknown field')
     end
@@ -75,7 +75,7 @@ if ismember(get(frf, 'format'), {'binary'})
     %data = reshape(data, length(fields(fieldid)), diff(range)+1)';
     data = reshape(data, [size(fields(fieldid)) diff(range)+1]);
     nd = ndims( data );
-    data = permute( data, [nd 1:(nd-1)] );
+    %data = permute( data, [nd 1:(nd-1)] );
     
 else %ascii file
     
@@ -97,7 +97,8 @@ else %ascii file
     %transform data to matrix if necessary
     nrows = numel(data{1});
     data = cell2mat(data);
-    data = reshape( data, [ nrows size(fields(fieldid))] );
+    nd = numel( size(fields(fieldid)) );
+    data = permute( reshape( data, [ nrows size(fields(fieldid))] ), [[1:nd]+1 1]);
     
 end
 
