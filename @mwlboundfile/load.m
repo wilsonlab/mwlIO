@@ -55,7 +55,9 @@ while ( ~feof(fid) )
     
 end
 
-if cid>0
-    cb = cb(cid);
+if cid>0 && cid<=numel(cb)
+  cb = cb(cid);
+elseif cid>numel(cb)
+  cb = struct('nbounds', {}, 'bounds', {});
 end
     
