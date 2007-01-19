@@ -1,11 +1,11 @@
 % @MWLEVENTFILE
 %
 % Open / create
-%   mwleventfile - constructor
+%   mwleventfile - mwleventfile constructor
 %
 % Reading
 %   load         - load event strings
-%   loadField    - load data from single field
+%   loadField    - load single field from event file
 %
 % Writing
 %   closeHeader  - write header to disk and reopen file in append mode
@@ -13,4 +13,4 @@
 %
 % Misc
 %   display      - display object information
-%   get          - get oject properties
+%   get          - get mwleventfile properties

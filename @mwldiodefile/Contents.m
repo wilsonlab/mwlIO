@@ -1,11 +1,11 @@
 % @MWLDIODEFILE
 %
 % Open / create
-%   mwldiodefile - constructor
+%   mwldiodefile - mwldiodefile constructor
 %
 % Writing
 %   closeHeader  - write header to disk and reopen file in append mode
 %   setFields    - create fields for new record file
 %
 % Misc
-%   display      - display object information
+%   display      - display mwldiodefile object information

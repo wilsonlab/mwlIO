@@ -1,7 +1,7 @@
 % @SUBHEADER
 %
 % Creation
-%   subheader      - constructor
+%   subheader      - subheader constructor
 %
 % Data access
 %   addComment     - add comment to subheader
@@ -17,4 +17,4 @@
 % Misc
 %   display        - show information about subheader
 %   headerType     - return the mwl-type of the subheader
-%   len            - return number of parameters in subheader
+%   len            - return number of subheaders

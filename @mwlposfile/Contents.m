@@ -1,10 +1,10 @@
 % @MWLPOSFILE
 %
 % Open / create
-%   mwlposfile       - constructor
+%   mwlposfile       - mwlposfile constructor
 %
 % Reading
-%   getRecordOffsets - retrieve byte offsets for a range of position records
+%   getRecordOffsets - retrieve record byte offsets
 %   loadrange        - load data from mwl pos file
 %   setCurrentRecord - move file pointer to record
 %

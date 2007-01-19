@@ -1,7 +1,7 @@
 % @HEADER
 %
 % Creation
-%   header       - constructor
+%   header       - header constructor
 %
 % Data access
 %   appendHeader - append subheader to header
@@ -11,7 +11,7 @@
 %   dumpHeader   - dump header contents as string
 %
 % Misc
-%   display      - show information about header
+%   display      - disply object information
 %   len          - return number of subheaders
 %   subsasgn     - subscripted assignment
 %   subsref      - subscripted indexing

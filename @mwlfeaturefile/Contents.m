@@ -1,7 +1,7 @@
 % @MWLFEATUREFILE
 %
 % Open / create
-%   mwlfeaturefile - constructor
+%   mwlfeaturefile - mwlfeaturefile constructor
 %
 % Writing
 %   closeHeader    - write header to disk and reopen file in append mode

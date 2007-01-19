@@ -1,7 +1,7 @@
 Summary: Fabian's Matlab MWL IO Toolbox
 Name: mwlIO
-Version: 0.2
-Release: 3
+Version: 0.3
+Release: 1
 License: GPL
 Group: MWL
 Prefix: /opt/matlabR14

@@ -5,7 +5,7 @@
 %
 % Reading
 %   load            - load waveform data
-%   loadField       - load data from single field
+%   loadField       - load single field from waveform file
 %
 % Writing
 %   closeHeader     - write header to disk and reopen file in append mode
@@ -14,3 +14,4 @@
 % Misc
 %   display         - display object information
 %   get             - get oject properties
+%   appendData      - APPENDDATA append new waveform data to file

@@ -1,11 +1,11 @@
 % MWLIO
 %
 % Opening/reading Files
-%   loadheader        - read and parse header from file
-%   mwlopen           - open a mwl-type file
+%   loadheader        - read and parse header from mwl file
+%   mwlopen           - open a mwl file
 %
 % Creating Files
-%   mwlcreate         - create a new mwl-type file
+%   mwlcreate         - create a new mwl file
 %
 % Utilities
 %   ad_filter_convert - convert ad filter setting
@@ -13,4 +13,5 @@
 %   newheader         - create new subheader
 %
 % Misc
-%   makesources       - 
+%   makesources       - compile mex files
+%   test_mwlio        - test for mwlIO toolbox

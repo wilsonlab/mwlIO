@@ -1,7 +1,7 @@
 % @MWLBOUNDFILE
 %
 % Open / create
-%   mwlboundfile - constructor
+%   mwlboundfile - mwlboundfile constructor
 %
 % Reading
 %   load         - load cluster boundaries
@@ -10,7 +10,7 @@
 %   closeHeader  - write header to disk and reopen file in append mode
 %
 % Misc
-%   display      - display object information
-%   get          - get oject properties
+%   display      - display mwlboundfile object information
+%   get          - get mwlboundfile properties
 %   set          - set object properties and return the updated object
-%   subsref      - subscripted indexing
+%   subsref      - subscripted indexing for mwlboundfile objects
