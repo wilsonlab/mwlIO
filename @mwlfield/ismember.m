@@ -1,22 +1,22 @@
 function [tf, loc] = ismember( A, B )
-%ISMEMBER TRUE if set member
+%ISMEMBER true if set member
 %
-%  Syntax
+%  b=ISMEMBER(f1,f2) returns whether field names of object f2 are
+%  members of the field names of object f1.
 %
-%      [tf [, loc]] = ismember( A, B )
+%  b=ISMEMBER(name,f) for a string or a cell array of strings, returns if
+%  they are member of the field names of object f.
 %
-%  Description
+%  b=ISMEMBER(f,name) for a string or a cell array of strings, returns if
+%  the field names of object f are members of name.
 %
-%    this function checks if the field names in A are member of the set
-%    defined by B. Arguments can be either strings, cell arrays of strings
-%    or mwlfield objects. The index array loc contains the highest absolute
-%    index in B for each element in A which is a member of B and 0 if there
-%    is no such index.
+%  [b,loc]=ISMEMBER(A,B) returns the index array loc which contains the
+%  highest absolute index in B for each element in A which is member of B
+%  and 0 if there is no such index.
 %
-%  Examples
-%
-%      field = mwlfield( {'test', 'dummy'} );
-%      ismember( field, {'dummy', 'test2', 'test3'} )  %will return: 
+%  Example
+%    field = mwlfield( {'test', 'dummy'} );
+%    ismember( field, {'dummy', 'test2', 'test3'} )  %will return: [0 1]
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

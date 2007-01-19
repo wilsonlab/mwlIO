@@ -1,16 +1,11 @@
 function display(fb, c)
 %DISPLAY display object information
 %
-%  Syntax
+%  DISPLAY(f) displays mwleegfile object information
 %
-%      display(h [,hidetitle])
+%  DISPLAY(f, hidetitle) hides the title. This is used by inherited
+%  classes, so that they can show their own title.
 %
-%  Description
-%
-%    This method will display object information. An optional title will
-%    be displayed if hidetitle = 0 (default)
-%
-
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
@@ -19,7 +14,7 @@ if nargin<2 || ~isscalar(c)
 end
 
 if ~(c)
-    disp(['-- EEG FILE OBJECT --'])
+    disp('-- EEG FILE OBJECT --')
 end
 
 display(fb.mwlfixedrecordfile, 1)

@@ -1,9 +1,12 @@
 function makesources(target)
-% MAKESOURCES
+%MAKESOURCES compile mex files
 %
-% Usage: makesources(target)
-% 
-% target: name of the target to be compiled into a mex file
+%  MAKESOURCES compiles all source file
+%
+%  MAKESOURCES(target) compiles target source files only. Target can be
+%  either a string or a cell array of strings to specifiy multiple
+%  targets. 
+%
 
 
 if nargin<1 || isempty(target)
@@ -15,20 +18,15 @@ if ~iscell(target)
 end
 
 if ~iscellstr(target)
-     error('Target must be a string or a cell array of strings')
+     error('makesources:invalidTarget', 'Target must be a string or a cell array of strings')
 end
 
 target = lower(target);
 
-%example  
-%if (ismember('p2mat', target) | ismember('all', target))
-%  mex -Iinclude src/p2mat.c src/mwlIOLib.c src/mwlParseFilterParams.c
-%end
-
 cfiles = {'findrecord', 'mwlio', 'mwlwrite', 'poscountrecords', 'posfindrecord', 'posfindtimerange', 'posloadrecordrange'};
 
 for i=1:length(cfiles)
-     if (ismember(cfiles{i}, target) | ismember('all', target))
+     if (ismember(cfiles{i}, target) || ismember('all', target))
          eval(['mex -Iinclude src/' cfiles{i} '.c'])
      end
 end  

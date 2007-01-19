@@ -1,22 +1,20 @@
 function ft = getFileType(fb)
-%GETFILETYPE return file type based on first subheader
+%GETFILETYPE return file type based
 %
-%  Syntax
+%  filetype=GETFILETYPE(f) returns the file type as determined from the
+%  information in the first subheader.
 %
-%      filetype = getFileType( f )
+%  Example
+%    f = mwlfilebase('test.dat');
+%    t = getFileType(f);
 %
-%  Description
-%
-%    This method returns the file type of mwlfilebase object f as determined
-%    from the first subheader.
-%
-%  See also HEADER
+%  See also HEADER/HEADERTYPE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ismember(fb.mode, {'write', 'overwrite'})
-    error('File is in write mode')
+    error('mwlfilebase:getHeaderType:invalidMode', 'File is in write mode')
 end
 
 ft = headerType(fb.header(1));

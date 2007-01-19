@@ -1,14 +1,19 @@
 function display(fb, c)
-%DISPLAY display object information
+%DISPLAY display mwlfilebase object information
 %
-%  Syntax
+%  DISPLAY(f) displays mwlfilebase object information
 %
-%      display(h [,hidetitle])
+%  DISPLAY(f, hidetitle) hides the title. This is used by inherited
+%  classes, so that they can show their own title.
 %
-%  Description
+%  Example
+%    f = mwlfilebase( 'test.dat' );
+%    %call display explicitly...
+%    display(f);
+%    %...or implicitly
+%    f
 %
-%    This method will display object information. An optional title will
-%    be displayed if hidetitle = 0 (default)
+%  See also MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -18,7 +23,7 @@ if nargin<2 || ~isscalar(c)
 end
 
 if ~(c)
-    disp(['-- FILE OBJECT --'])
+    disp('-- FILE OBJECT --')
 end
 
 fieldnames = {'file name', 'file path', 'file mode', 'file type', 'file size', 'header size'};

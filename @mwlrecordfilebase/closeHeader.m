@@ -1,19 +1,21 @@
 function rfb = closeHeader(rfb)
 %CLOSEHEADER write header to disk and reopen file in append mode
 %
-%  Syntax
+%  f=CLOSEHEADER(f) closes the header for further modifications, writes
+%  the header to disk and reopens the file in append mode.
 %
-%      f = closeHeader( f )
+%  See also HEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
 
 if nargout~=1
-    warning('It is safer to provide an output argument. Aborted.')
-    return;
+  warning('mwlrecordfilebase:closeHeader:noOutput', ...
+          'It is safer to provide an output argument. Aborted.')
+  return;
 end
-
+  
 fldstr = print( rfb.fields );
 
 hdr = get(rfb, 'header');

@@ -1,18 +1,18 @@
 function fmtstr = formatstr(fields, skip, delimiter, fmttype)
 %FORMATSTR convert fields to format string for use with textscan and fprintf
 %
-%  Syntax
+%  str=FORMATSTR(f) returns a format string that can be used to read data
+%  using textscan function.
 %
-%      format_string = formatstr( field, skip, delimiter, type )
+%  str=FORMATSTR(f, skip) indicates which fields should be skipped. Skip
+%  should be a vector with 0 for reach field to be skipped and 1
+%  otherwise.
 %
-%  Description
+%  str=FORMATSTR(f, skip, delimiter) specifies an optional delimiter to
+%  be used between field format strings (default ='').
 %
-%    This method converts mwlfield objects to format strings that can be
-%    used by textscan and fprintf. The parameter skip is an optional vector
-%    indicating for each field whether is should be skipped (1) or not (0).
-%    Delimiter is an optional string used as a delimiter between field
-%    format strings. The parameter type is used to select the type of format
-%    string (0 for textscan compatible, 1 for fprintf compatible)
+%  str=FORMATSTR(f, skip, delimiter, formattype) indicates whether the
+%  target is textscan (0) or fprintf (1).
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -22,7 +22,7 @@ nfields = numel(fields);
 if nargin<2 || isempty(skip)
     skip = zeros(nfields,1);
 elseif ~isnumeric(skip) || numel(skip) ~= nfields
-    error('Invalid skip vector')
+    error('mwlfield:formatstr:invalidArgument', 'Invalid skip vector')
 end
 
 if nargin<3 || isempty(delimiter)
@@ -56,7 +56,7 @@ for f=1:nfields
     elseif field_type(f)>=2 && field_type(f)<=8
         fmt = [fmt mapping{field_type(f)}];
     else
-        error('Incorrect field type')
+        error('mwlfield:formatstr:invalidType', 'Incorrect field type')
     end
 
     if field_type(f)~=1 %char

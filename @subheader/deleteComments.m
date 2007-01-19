@@ -1,9 +1,7 @@
 function sh = deleteComments(sh)
 %DELETECOMMENTS remove all comments from subheader
 %
-%  Syntax
-%
-%      h = deleteCOmments( h )
+%  sh=DELETECOMMENTS(sh) delete all comments from subheader
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

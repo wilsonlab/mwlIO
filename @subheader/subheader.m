@@ -1,11 +1,12 @@
 function sh = subheader(varargin)
-%SUBHEADER constructor
+%SUBHEADER subheader constructor
 %
-%  Syntax
+%  sh=SUBHEADER default constructor, creates a new empty subheader
+%  object.
 %
-%      h = subheader()     default constructor
-%      h = subheader( h )  copy constructor
+%  sh=SUBHEADER(sh) copy constructor
 %
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
@@ -16,7 +17,8 @@ if nargin==0
 elseif isa(varargin{1}, 'subheader')
     sh = varargin{1};
 else
-    error 'subheader constructor takes no arguments'
+    error('subheader:subheader:invalidArguments', ...
+          'subheader constructor takes no arguments')
 end
 
 

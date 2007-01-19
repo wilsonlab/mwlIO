@@ -1,16 +1,21 @@
 function data = load(ef, varargin)
 %LOAD load eeg data
 %
-%  Syntax
+%  data=LOAD(f) load all records from mwl eeg file. The returned data is
+%  a structure with 'timestamp' and 'data' fields.
 %
-%      data = load( f, load_fields [, indices] )
+%  data=LOAD(f, fields) load only the fields specified. The fields
+%  argument can be a string or a cell array of strings. If this argument
+%  contains 'all', then all fields are loaded. Valid fields for a mwl
+%  eeg file are: 'timestamp' and 'data'.
 %
-%  Description
+%  data=LOAD(f, fields, indices) load only the records listed in the
+%  indices vector. The first record has index 0. Random acess is
+%  supported.
 %
-%    This method allows you to load data from multiple fields, as specified
-%    by the cell array load_fields. The parameter indices is an optional
-%    vector of record indices. In eeg files each record contains a full
-%    buffer of eeg data. Random access is possible.
+%  Example
+%    f = mwleegfile('test.eeg');
+%    data = load(f, {'timestamp'}, [0:10]);
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -18,8 +23,5 @@ function data = load(ef, varargin)
 data = load(ef.mwlfixedrecordfile, varargin{:});
 
 if isfield(data, 'data')
-    %data.data = reshape(data.data', ef.nchannels, size(data.data, 1)*ef.nsamples)';
-    %data.data = permute( reshape( data.data, ef.nchannels, ef.nsamples, size(data.data, 2) ), [2 1 3]);
     data.data = reshape( data.data, ef.nchannels, ef.nsamples, size(data.data, 2) );
-    %data.data = reshape( data.data, size(data.data,1), ef.nsamples, ef.nchannels );
 end

@@ -1,14 +1,12 @@
 function retval = elementsize( field )
-%ELEMENTSIZE return the field type size
+%ELEMENTSIZE return the size of a field element
 %
-%  Syntax
+%  elsz=ELEMENTSIZE(f) returns the size of an element in bytes for all
+%  fields in the object.
 %
-%      sz = elementsize( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 'char', 1 );
-%      elementsize( field )  % will return: 1
+%  Example
+%    field = mwlfield( 'test', 'char', 1 );
+%    elementsize( field )  % will return: 1
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

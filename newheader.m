@@ -1,26 +1,20 @@
 function h = newheader(varargin)
 %NEWHEADER create new subheader
 %
-%  Syntax
+%  h=NEWHEADER( param_struct ) creates an new subheader object with
+%  parameter names and values specified as a structure.
 %
-%    h = newheader( parameter_struct )
-%    h = newheader( param1, value1, param2, value2, ... )
+%  h=NEWHEADER( param1, value1, ...) creates a new subheader object with
+%  parameter names and values as specified in the arguments.
 %
-%  Description
+%  Note: If you want to add comments as well, use the subheader class
+%  methods instead.
 %
-%    newheader is a convenience function that creates a new subheader object
-%    with parameters and corresponding values specified in a structure or as
-%    parameter/value argument pairs. If you want to add comments as well,
-%    use the subheader class methods instead.
+%  Example
+%    h = newheader( struct('First', 1, 'Second', 'test') );
+%    h = newheader( 'First', 1, 'Second', 'test' );
 %
-%   Examples
-%
-%      s = struct('Name', 'Test', 'Version', 1);
-%      h = subheader( s );
-%
-%      h = subheader( 'Name', 'Test', 'Version', 1);
-%
-%  See also SUBHEADER, HEADER
+%  See also HEADER, SUBHEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

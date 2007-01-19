@@ -1,9 +1,14 @@
 function f = closeHeader(f)
 %CLOSEHEADER write header to disk and reopen file in append mode
 %
-%  Syntax
+%  f=CLOSEHEADER(f) closes the header for further modifications, writes
+%  the header to disk and reopens the file in append mode.
 %
-%      f = closeHeader( f )
+%  Example
+%    f = mwlfixedrecordfile('test.dat', 'write')
+%    f = closeHeader(f);
+%
+%  See also HEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

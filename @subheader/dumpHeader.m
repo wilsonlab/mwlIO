@@ -1,9 +1,8 @@
 function val = dumpHeader(sh)
 %DUMPHEADER dump subheader contents as string
 %
-%  Syntax
-%
-%      s = dumpHeader( h )
+%  str=DUMPHEADER(h) dumps subheader contents as a string that can be
+%  serialized to disk.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

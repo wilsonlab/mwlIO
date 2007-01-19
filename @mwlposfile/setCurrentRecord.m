@@ -1,23 +1,29 @@
 function f = setCurrentRecord(f, recid)
 %SETCURRENTRECORD move file pointer to record
 %
-%  Syntax
-%
-%      f = setCurrentRecord( f, record_id)
+%  f=SETCURRENTRECORD(f, record) sets the file cursor to the requested
+%  record.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
+if nargin<2
+  help(mfilename)
+  return
+end
+
 if ismember(get(f, 'mode'), {'write', 'overwrite'})
-    error('Cannot set current record in write mode')
+    error('mwlposfile:setCurrentRecord:invalidMode', 'Cannot set current record in write mode')
 end
 
 if recid > get(f, 'nrecords') || recid<0
-    error('Invalid record index')
+    error('mwlposfile:setCurrentRecord:invalidRecord', ...
+          'Invalid record index')
 end
 
 if any( fix(recid) ~= recid )
-    error('Fractional indices not allowed')
+    error('mwlposfile:setCurrentRecord:invalidRecord', ...
+          'Fractional indices not allowed')
 end
 
 if recid == f.currentrecord

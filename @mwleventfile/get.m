@@ -1,15 +1,13 @@
 function val = get(ef, propName)
-%GET get oject properties
+%GET get mwleventfile properties
 %
-%   Syntax
-%   value = get(f, property)
+%  val=GET(f, property) returns the value of the specified mwleventfile
+%  object property. Valid properties are (in addition to those inherited
+%  from its base classes):
+%  string_size - number of characters in an event string
 %
-%   Valid properties for mwleegfile objects are (in addition to
-%   those inherited from mwlfixedrecordfile): 'string_size'
+%   See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
 %
-%   Examples
-%
-%   See also MWLFIXEDRECORDFILE
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

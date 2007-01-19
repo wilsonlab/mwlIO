@@ -1,9 +1,12 @@
 function e = eq( A, B )
 %EQ equality test for mwlfield objects
 %
-%  Syntax
+%  b=EQ(f1,f2) test whether two mwlfield objects are identical.
 %
-%      A == B
+%  Example
+%    f1 = mwlfield( 'test', 'short', 1 );
+%    f2 = mwlfield( 'test', 'short', 2 );
+%    f1 == f2 %returns 0
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

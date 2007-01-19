@@ -1,15 +1,21 @@
 function data = load(wf, varargin)
 %LOAD load waveform data
 %
-%  Syntax
+%  data=LOAD(f) load all records from mwl waveform file. The returned
+%  data is a structure with 'timestamp' and 'waveform' fields.
 %
-%      data = load( f, load_fields [, indices] )
+%  data=LOAD(f, fields) load only the fields specified. The fields
+%  argument can be a string or a cell array of strings. If this argument
+%  contains 'all', then all fields are loaded. Valid fields for an mwl
+%  waveform file are: 'timestamp' and 'waveform'.
 %
-%  Description
+%  data=LOAD(f, fields, indices) load only the records listed in the
+%  indices matrix. The first record has index 0. Random acess is
+%  supported.
 %
-%    This method allows you to load data from multiple fields, as specified
-%    by the cell array load_fields. The parameter indices is an optional
-%    vector of record indices. Random access is possible.
+%  Example
+%    f = mwlwaveformfile('test.tt');
+%    data = load(f, {'timestamp'}, [0:10]);
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -19,8 +25,5 @@ function data = load(wf, varargin)
 data = load(wf.mwlfixedrecordfile, varargin{:});
 
 if isfield(data, 'waveform')
-    %data.waveform = permute(reshape(data.waveform', wf.nchannels, wf.nsamples, size(data.waveform, 1)), [2 1 3]);
-    %data.waveform = permute( reshape( data.waveform, wf.nchannels, wf.nsamples, size(data.waveform, 2) ), [2 1 3]);
     data.waveform = reshape( data.waveform, wf.nchannels, wf.nsamples, size(data.waveform, 2) );
-    %data.data = reshape( data.waveform, size(data.waveform,1), wf.nsamples, wf.nchannels );
 end

@@ -1,9 +1,8 @@
 function retval = mex_fielddef( field )
-%MEX_FIELDDEF return a field definition cell array for use in mex files
+%MEX_FIELDDEF mex type definitions
 %
-%  Syntax
-%
-%      m = mex_fielddef( field )
+%  fielddef=MEX_FIELDDEF(f) returns the mex type definitions for each
+%  field in the mwlfield object.
 %
 
 

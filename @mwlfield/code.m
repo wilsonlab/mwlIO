@@ -1,14 +1,11 @@
 function retval = code( field )
 %CODE return the field type code
 %
-%  Syntax
+%  c=CODE(f) returns the data type codes of all fields in the object.
 %
-%      c = code( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 'char', 1 );
-%      code( field )  % will return: 1
+%  Example
+%    field = mwlfield( 'test', 'char', 1 );
+%    code( field )  % will return: 1
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

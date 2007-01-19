@@ -1,20 +1,15 @@
 function [lp, hp] = ad_filter_convert(FilterSetting)
 %AD_FILTER_CONVERT convert ad filter setting
 %
-%  Syntax
+%  [low,high]=AD_FILTER_CONVERT(f) returns the low cut-off and high
+%  cut-off frequencies encoded in the value f. This value is typically
+%  retrieved from mwl file type headers and specifies the filter settings
+%  of a Neuralynx amplifier.
 %
-%      [lp, hp] = ad_filter_convert( filter )
-%
-%  Description
-%
-%    this function will convert a filter value as used by the nearalynx
-%    amplifiers (and as found in mwl file type headers) to low-pass and
-%    high-pass cut off frequencies.
-%
-%  Examples
-%
-%      filter_setting = 136;
-%      [low_pass, high_pass] = ad_filter_convert( filter_setting )
+%  Example
+%    filter_stting = 136;
+%    [low, high] = ad_filter_convert( filter_setting );
+%    %returns low = 300, high = 6000
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -34,7 +29,7 @@ BIT7 = 128;
 BIT8 = 256;
 BIT9 = 512;
 
-HDAMP_LOWCUT_TENTHHZ = 0;
+HDAMP_LOWCUT_TENTHHZ = 0; %#ok
 HDAMP_LOWCUT_1HZ = BIT0;
 HDAMP_LOWCUT_10HZ = BIT1;
 HDAMP_LOWCUT_100HZ = BIT2;

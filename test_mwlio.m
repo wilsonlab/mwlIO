@@ -1,13 +1,22 @@
 function test_mwlio()
+%TEST_MWLIO test for mwlIO toolbox
+%
+%  TEST_MWLIO creates a temporary fixed record file and writes artificial
+%  data to it. Then reopens the file and reads the data and uses this
+%  data to write it again to disk. This test use the following functions:
+%  header, newheader, mwlfield, mwlcreate, mwlopen, load, loadfield.
+%
 
-filename = tempname
+%  Copyright 2005-2006 Fabian Kloosterman
+
+filename = tempname;
 
 %create new header
 hdr = header( newheader( 'TestDate', datestr(now) ) );
 
 %create data
-data.scalar = [1:100];
-data.vector = [1 2 3]' * [1:100];
+data.scalar = 1:100;
+data.vector = [1 2 3]' * (1:100);
 fcn = @(x,y, xc, yc, alpha, scale) cos( ( (x-xc).*cos(pi/3+alpha) + (y-yc).*sin(pi/3+alpha) )./scale ) + cos( ( (x-xc).*cos(alpha) + (y-yc).*sin(alpha) )./scale ) + cos( ( (x-xc).*cos(-pi/3+alpha) + (y-yc).*sin(-pi/3+alpha) )./scale );
 x = repmat( linspace(-4*pi, 4*pi, 20 ), 20, 1 );
 
@@ -20,10 +29,11 @@ for k=1:100
 end
 
 %create fields
-flds = mwlfield( {'scalar', 'vector', 'matrix'}, {'short', 'short', 'double'}, {[1], [3], [20 20]} );
+flds = mwlfield( {'scalar', 'vector', 'matrix'}, {'short', 'short', 'double'}, {1, 3, [20 20]} );
 
 %create mwlfixedrecordfile
-f = mwlcreate( filename, 'fixedrecord', 'Fields', flds, 'Header', hdr, 'Mode', 'overwrite', 'Data', data);
+f = mwlcreate( filename, 'fixedrecord', 'Fields', flds, 'Header', hdr, ...
+               'Mode', 'overwrite', 'Data', data); %#ok
 
 clear f;
 
@@ -31,12 +41,13 @@ clear f;
 f = mwlopen( filename );
 
 %read data
-newdata = load( f )
-newdata = loadField(f, 'matrix');
+newdata = load( f ); %#ok
+newdata = loadField(f, 'matrix'); %#ok
 
 
 %create mwlfixedrecordfile (ascii)
-f = mwlcreate( filename, 'fixedrecord', 'Fields', flds, 'Header', hdr, 'Mode', 'overwrite', 'Data', data, 'FileFormat', 'ascii');
+f = mwlcreate( filename, 'fixedrecord', 'Fields', flds, 'Header', hdr, ...
+               'Mode', 'overwrite', 'Data', data, 'FileFormat', 'ascii'); %#ok
 
 clear f;
 
@@ -44,7 +55,7 @@ clear f;
 f = mwlopen( filename );
 
 %read data
-newdata = load( f )
-newdata = loadField(f, 'matrix');
+newdata = load( f ); %#ok
+newdata = loadField(f, 'matrix'); %#ok
 
 delete(filename);

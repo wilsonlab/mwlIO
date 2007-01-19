@@ -1,21 +1,35 @@
 function fb = mwlfilebase(varargin)
-%MWLFILEBASE constructor
+%MWLFILEBASE mwlfilebase constructor
 %
-%  Syntax
+%  f=MWLFILEBASE default constructor, creates a new empty mwlfilebase
+%  object.
 %
-%      f = mwfilebase()       default constructor
-%      f = mwlfilebase( f )   copy constructor
-%      f = mwlfilebase( filename [, mode, format] )
+%  f=MWLFILEBASE(f) copy constructor
 %
-%  Description
+%  f=MWLFILEBASE(filename) opens the specified mwl file in read mode.
 %
-%    If a file name is supplied to the constructor it will open the file and
-%    read the header. By default the file is opened in 'read' mode and the
-%    format determined from the file header. Opening the file in 'append'
-%    mode will allow data to be appended to the file. Creating a new file is
-%    done by setting mode to 'write' or 'overwrite'. In the latter case if
-%    the file already exists, it will be overwritten. The format parameter
-%    can be set to 'binary' or 'ascii' for new files.
+%  f=MWLFILEBASE(filename, mode) opens the mwl file in the specified
+%  mode. Valid modes are:
+%  read - File is opened in read mode and no new data can be written to
+%  this file.
+%  append - Data can read from the file and appended to the end.
+%  write - A new file is created. It is an error to try to create an
+%  already existing file.
+%  overwrite - A new file is created. If the file already exist it will
+%  be overwritten.
+%
+%  f=MWLFILEBASE(filename, mode, format) sets the format of a new file to
+%  either 'ascii' or 'binary' (default). The format argument is only used
+%  if mode is either 'write or 'overwrite'.
+%
+%  Example
+%    %open existing mwl file
+%    f = mwlfilebase('test.dat');
+%
+%    %create a new file
+%    f = mwlfilebase('test.dat', 'write');
+%
+%  See also MWLFILEBASE/GET, MWLFILEBASE/SET
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -24,7 +38,7 @@ if nargin==0
     fb.mode = '';       % read, append, write or overwrite
     fb.filename = '';   % name of the file + extension
     fb.path = '';       % path to the file
-    fb.header = header();   % header object
+    fb.header = header();   % header obj
     fb.headersize = 0;      % size of the header
     %fb.filesize = 0;        % size of the file
     fb.format = 'binary';   % binary or ascii file
@@ -32,18 +46,18 @@ if nargin==0
 elseif isa(varargin{1}, 'mwlfilebase')
     fb = varargin{1};
 elseif nargin>3
-    error('Too many arguments')
+    error('mwlfilebae:mwlfilebase:invalidArguments', 'Too many arguments')
 else
     % check input parameters
     if ~ischar( varargin{1})
-        error('Invalid file name')
+        error('mwlfilebae:mwlfilebase:invalidArguments','Invalid file name')
     else
         filename = varargin{1};
     end
     if nargin>1
         mode = varargin{2};
         if ~ismember(mode, {'read', 'append', 'write', 'overwrite'})
-            error('Invalid mode parameter');
+            error('mwlfilebae:mwlfilebase:invalidArguments','Invalid mode parameter');
         end
     else
         mode = 'read';
@@ -51,7 +65,7 @@ else
     if nargin>2 && ismember( mode, {'write', 'overwrite'} )
         isbin = varargin{3};
         if ~ismember(isbin, {'binary', 'ascii'})
-            error('Invalid format parameter')
+            error('mwlfilebae:mwlfilebase:invalidArguments','Invalid format parameter')
         end
     else
         isbin = 'binary';
@@ -72,17 +86,17 @@ else
         fb.format = ''; %will be set later
         fb.filename = [fb.filename ext versn];
     
-        fid = fopen(fullfile(fb.path, fb.filename), ['rb']);
+        fid = fopen(fullfile(fb.path, fb.filename), 'rb');
     
         if fid == -1
-            error(['Cannot open file: ' fullfile(fb.path, fb.filename)])
+            error('mwlfilebae:mwlfilebase:invalidFile',['Cannot open file: ' fullfile(fb.path, fb.filename)])
         end
     
         [fb.header fb.headersize] = loadheader(fid);
         
         if fb.headersize == 0
             fclose(fid);
-            error('No valid header in file')
+            error('mwlfilebae:mwlfilebase:invalidFile','No valid header in file')
         end
 
         fileformat = getParam(fb.header, 'File type');
@@ -99,13 +113,13 @@ else
                     
     else % if file is opened in write mode
         if exist(filename, 'file') && ismember(fb.mode, {'write'})
-            error('Error creating new file: file already exists')
+            error('mwlfilebae:mwlfilebase:invalidFile','Error creating new file: file already exists')
         end
         
         fid = fopen(filename, 'w');
         
         if fid == -1
-            error('Cannot create file')
+            error('mwlfilebae:mwlfilebase:invalidFile','Cannot create file')
         end
         
         [fb.path, fb.filename, ext, versn] = fileparts(filename);

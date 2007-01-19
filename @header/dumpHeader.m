@@ -1,11 +1,9 @@
 function val = dumpHeader(h)
 %DUMPHEADER dump header contents as string
 %
-%  Syntax
+%  str=DUMPHEADER(h) dumps header contents as a string that can be
+%  serialized to disk.
 %
-%      s = dumpHeader( h )
-%
-
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
@@ -18,7 +16,7 @@ end
 val = sprintf('%%%%BEGINHEADER\n');
 
 for sh=1:length(h.subheaders)
-    val = [val dumpHeader(h.subheaders(sh))];
+  val = [val dumpHeader(h.subheaders(sh))];
 end
 
 val = [val sprintf('%%%%ENDHEADER\n')];

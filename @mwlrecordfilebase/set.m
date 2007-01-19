@@ -1,15 +1,11 @@
 function rfb = set(rfb,varargin)
 %SET set object properties and return the updated object
 %
-%  Syntax
-%
-%      f = set( f, property1, value1, property2, value2, ...)
-%
-%  Description
-%
-%    Valid properties that can be set for mwlrecordfilebase objects which
-%    are in 'write' or 'overwrite' mode (in addition to those inherited from
-%    mwlfilebase): 'fields'
+%  f=SET(f, prop1, val1, ...) sets the properties of a mwlrecordfilebase
+%  object and returns the updated object. Properties can only be set for
+%  files opened in 'write' or 'overwrite' mode. The following properties
+%  can be set (in addition to those inherited from its base classes):
+%  fields - record field descriptions (mwlfield object)
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

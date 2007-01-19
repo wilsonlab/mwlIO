@@ -1,16 +1,22 @@
 function bf = mwlboundfile(varargin)
-%MWLBOUNDFILE constructor
+%MWLBOUNDFILE mwlboundfile constructor
 %
-%   Syntax
-%   f = mwlboundfile()      default constructor
-%   f = mwlboundfile( f )   copy constructor
-%   f = mwlboundfile( filename [, mode])
+%  f=MWLBOUNDFILE default constructor, creates a new empty mwlboundfile
+%  object.
 %
-%   Boundary files are always ascii.
+%  f=MWLBOUNDFILE(f) copy constructor
 %
-%   Examples
+%  f=MWLBOUNDFILE(filename) open specified mwl boundary file in read
+%  mode.
 %
-%   See also MWLFILEBASE
+%  f=MWLBOUNDFILE(filename, mode) opens the file in the specified mode
+%
+%  Note: the format of mwl bound files is always ascii.
+%
+%  Example
+%    f = mwlboundfile('test.dat');
+%
+%  See also MWLOPEN, MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -31,11 +37,11 @@ else
             
 
     if ~strcmp( getFileType(base), 'clbound')
-        error('Not a cluster bounds file')
+        error('mwlboundfile:mwlboundfile:invalidFile', 'Not a cluster bounds file')
     end
     
     if ismember(base.format, {'binary'})
-        error('Bounds file are always ascii!')
+        error('mwlboundfile:mwlboundfile:invalidFormat', 'Bounds file are always ascii!')
     end
     
     bf = class(struct(), 'mwlboundfile', base);

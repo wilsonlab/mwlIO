@@ -1,10 +1,10 @@
 function b = subsref(rfb,s)
 %SUBSREF subscripted indexing
 %
-%  Syntax
+%  val=SUBSREF(f, subs) allows access to mwlrecordfilebase object
+%  properties using the object.property syntax.
 %
-%      f.property
-%
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

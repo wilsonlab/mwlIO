@@ -1,17 +1,17 @@
 function data = load(frf, load_fields, i)
-%LOAD load multiple fields from fixed record file
+%LOAD load data
 %
-%  Syntax
+%  data=LOAD(f) load all records from a mwl fixed record file. The
+%  returned data is a structure with all fields present in the file.
 %
-%      data = load( f, load_fields [, indices] )
+%  data=LOAD(f, fields) load only the fields specified. The fields
+%  argument can be a string or a cell array of strings. If this argument
+%  contains 'all', then all fields are loaded.
 %
-%  Description
-%
-%    This method allows you to load data from multiple fields, as specified
-%    by the cell array load_fields. The parameter indices is an optional
-%    vector of record indices. For binary files random access is supported;
-%    for ascii files only a contiguous block of indices id supported. By
-%    default the whole file is loaded.
+%  data=LOAD(f, fields, indices) load only the records listed in the
+%  indices vector. The first record has index 0. Random access is
+%  supported for binary files. Only block access is supported for ascii
+%  files.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -25,13 +25,13 @@ if nargin<2 || isempty(load_fields) || ismember( {'all'}, load_fields )
 end
 
 field_names = cellstr(name(fields));
-[dummy, field_id] = ismember( load_fields,field_names );
+[dummy, field_id] = ismember( load_fields,field_names ); %#ok
 
 field_id = field_id( field_id~=0 );
 load_fields = field_names( field_id );
 
 if isempty(load_fields)
-     data = []
+     data = [];
      return
 end
     
@@ -47,7 +47,7 @@ if ~isa(i, 'double')
     try
         i = double(i);
     catch
-        error('Invalid index array')
+        error('mwlfixedrecordfile:load:invalidIndex', 'Invalid index array')
     end
 end
 
@@ -64,11 +64,11 @@ if ismember(get(frf, 'format'), {'binary'})
     end
     
     if any( i>=nrecords | i<0)
-        error('Invalid index array (out of bounds)')
+        error('mwlfixedrecordfile:load:invalidIndex', 'Invalid index array (out of bounds)')
     end
     
     if any( fix(i) ~= i )
-        error('Fractional indices not allowed')
+        error('mwlfixedrecordfile:load:invalidIndex', 'Fractional indices not allowed')
     end 
     
     data = mwlio( fullfile(get(frf,'path'), get(frf, 'filename')), i, field_def(field_id,:), get(frf, 'headersize'), get(frf, 'recordsize'));
@@ -76,15 +76,7 @@ if ismember(get(frf, 'format'), {'binary'})
     %transpose arrays and construct names
 
      for f=1:numel(field_id)
-%         nd = ndims( data{f} );
-%         %permute only if nrecords>1, i.e. when nd>numel(size( fields(field_id) ) )
-%         if nd>numel( size( fields( field_id ) ) )
-%             data{f} = permute(data{f}, [nd 1:(nd-1)]);
-%         end
-        %if size(data{f},1)==1
-            %data{f} = shiftdim(data{f}, ndims(data{f})-1);
-        %end
-        %data{f} = squeeze( data{f} );
+       
         if strcmp(type(fields(f)), 'char') && length(fields(f))>1
             data{f} = cellstr( char(data{f})' )';
         end
@@ -97,15 +89,15 @@ if ismember(get(frf, 'format'), {'binary'})
 else %ascii
     
     if (max(diff(i)))>1
-        error('Can only load contiguous blocks from Ascii file')
+        error('mwlfixedrecordfile:load:invalidIndex', 'Can only load contiguous blocks from Ascii file')
     elseif (any(fix(i)~=i) )
-        error('Fractional indices not allowed')
+        error('mwlfixedrecordfile:load:invalidIndex', 'Fractional indices not allowed')
     else
         
         fid = fopen( fullfile( get(frf, 'path'), get(frf, 'filename') ), 'r' );
 
         if fid == -1
-            error('Cannot open file')
+            error('mwlfixedrecordfile:load:invalidFile','Cannot open file')
         end
         
         skip = ones(nfields,1);
@@ -134,7 +126,8 @@ else %ascii
                 outdata.(name(fields(field_id(f)))) = data{1 + ofs}';
                 ofs = ofs + 1;
             else
-                outdata.(name(fields(field_id(f)))) = shiftdim( reshape( cell2mat( data( [1:length(fields(field_id(f)))] + ofs ) ), [ nrows size(fields(field_id(f)))] ), 1) ;
+                outdata.(name(fields(field_id(f)))) = shiftdim( reshape( ...
+                    cell2mat( data( ( 1:length(fields(field_id(f))) ) + ofs ) ), [ nrows size(fields(field_id(f)))] ), 1) ;
                 ofs = ofs + length(fields(field_id(f)));
             end
         end

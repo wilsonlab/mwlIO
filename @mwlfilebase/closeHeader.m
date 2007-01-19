@@ -1,9 +1,16 @@
 function fb = closeHeader(fb)
 %CLOSEHEADER write header to disk and reopen file in append mode
 %
-%  Syntax
+%  f=CLOSEHEADER(f) closes the header for further modifications, writes
+%  the header to disk and reopens the file in append mode.
 %
-%      f = closeHeader( f )
+%  Example
+%    f=mwlfilebase('test.dat', 'write');
+%    h = header( newheader( 'MyParameter', 1) );
+%    f.header = h;
+%    f=closeHeader(f);
+%
+%  See also HEADER, MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -37,7 +44,7 @@ fb = set(fb, 'header', hdr);
 fid = fopen(fullfile(fb), 'w');
 
 if fid<1
-    error('Cannot open file for writing')
+    error('mwlfilebase:closeHeader:FileError', 'Cannot open file for writing')
 end
 
 fwrite(fid, dumpHeader(fb.header));

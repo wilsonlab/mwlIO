@@ -1,11 +1,17 @@
 function pf = mwlposfile(varargin)
-%MWLPOSFILE constructor
+%MWLPOSFILE mwlposfile constructor
 %
-%  Syntax
+%  f=MWLPOSFILE default constructor, creates a new empty mwlposfile
+%  object.
 %
-%      f = mwlposfile()      default constructor
-%      f = mwlposfile( f )   copy constructor
-%      f = mwlposfile( filename [, mode, format] )
+%  f=MWLPOSFILE(f) copy constructor
+%
+%  f=MWLPOSFILE(filename) opens the specified mwl pos file in read mode.
+%
+%  f=MWLPOSFILE(filename, mode) opens the file in the specified mode
+%  ('read', 'write', 'append', 'overwrite').
+%
+%  Note: Only binary mwl pos files are supported
 %
 %  See also MWLRECORDFILEBASE
 %
@@ -22,7 +28,7 @@ else
     rfb = mwlrecordfilebase(varargin{:});
     
     if ~ismember( rfb.format, {'binary'} )
-        error('Ascii pos files are not supported.')
+        error('mwlposfile:mwlposfile:invalidFormat', 'Ascii pos files are not supported.')
     end
     
      pf.nrecords = 0;
@@ -34,13 +40,15 @@ else
         
         %rawpos file?
         if ~strcmp( getFileType(rfb), 'rawpos')
-            error('Not a raw position file')
+            error('mwlposfile:mwlposfile:invalidFile', ...
+                  'Invalid raw position file')
         end
         
         %check fields
         fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
         if ~all( fields==rfb.fields )
-            error('Invalid raw position file')
+            error('mwlposfile:mwlposfile:invalidFile', ...
+                  'Invalid raw position file')
         end
      
         pf.nrecords = posfindrecord( fullfile( get(rfb, 'path'), get(rfb, 'filename')), get(rfb, 'headersize'), Inf );

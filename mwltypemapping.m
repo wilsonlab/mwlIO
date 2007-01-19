@@ -1,23 +1,33 @@
 function retval = mwltypemapping(mwltype, mapping)
 %MWLTYPEMAPPING type conversions
 %
-%  Syntax
+%  type_out=MWLTYPEMAPPING(type_in,mapping) maps type_in to
+%  type_out according to a mapping. Valid values for mapping are:
+%  'code2str', 'str2code', 'code2size', 'str2size', 'str2mat',
+%  'str2mex'.
 %
-%      new_type = mwltypemapping(type, mapping)
+%  List of type codes:
+%  code - numeric type code as used in mwl files
+%  str - string type code as used mwl files
+%  size - size of type
+%  mat - string type code as used matlab
+%  mex - numeric type code as used in mex files
 %
-%  Description
+%  Table of all mappings:
+%  | code |  str   | size |  mat    | mex |
+%  ----------------------------------------
+%  |  1   | char   |  1   |  uint8  |  9  |
+%  |  2   | short  |  2   |  int16  | 10  |
+%  |  3   | int    |  4   |  int32  | 12  |
+%  |  4   | float  |  4   |  single |  7  |
+%  |  5   | double |  8   |  double |  6  |
+%  |  6   | func   | -1   |         |  0  |
+%  |  7   | ffunc  | -1   |         |  0  |
+%  |  8   | ulong  |  4   |  uint32 | 13  |
+%  ----------------------------------------
 %
-%    This function will convert one type code to another type code. The
-%    conversion is done according to the mapping parameter, which can be one
-%    of: 'code2str', 'str2code', 'code2size', 'str2size', 'str2mat',
-%    'str2mex'
-%
-%    List of type codes:
-%      code = numeric type-code as used in mwl files
-%      str = string type-code as used in mwl files
-%      size = size of type
-%      mat = string type code as used in matlab
-%      mex = numeric type-code as used in mex files
+%  Example
+%    mwltypemapping('short', 'str2code') %returns 2
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

@@ -1,9 +1,16 @@
 function f = mwlopen(filename)
-%MWLOPEN open a mwl-type file
+%MWLOPEN open a mwl file
 %
-%  Syntax
+%  f=MWLOPEN(filename) returns a mwl file object. This function tries to
+%  determine the mwl file type from the header and returns an object of
+%  the appropriate class.
 %
-%      f = mwlopen(filename)
+%  Example
+%    f = mwlopen( 'test.dat' );
+%
+%  See also MWLCREATE, MWLDIODEFILE, MWLEEGFILE, MWLEVENTFILE,
+%  MWLFEATUREFILE, MWLFIXEDRECORDFILE, MWLPOSFILE, MWLWAVEFORMFILE,
+%  MWLBOUNDFILE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -31,5 +38,5 @@ switch filetype
     case 'clbound'
         f = mwlboundfile(filename);
     otherwise
-        error('Unsupported filetype')
+        error('mwlopen:invalidFile', 'Unsupported file type')
 end

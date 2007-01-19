@@ -1,13 +1,14 @@
 function b = subsref(bf,s)
-%SUBSREF subscripted indexing
+%SUBSREF subscripted indexing for mwlboundfile objects
 %
-%   Syntax
-%   f.property
+%  val=SUBSREF(f, subs) allows acces to mwlboundfile object properties
+%  using the object.property syntax.
 %
-%   Examples
+%  Example
+%    f = mwlboundfile( 'test.dat' );
+%    filesize = f.filesize;
 %
-%   See also MWLFILEBASE
-%
+%  See also: MWLBOUNDFILE/GET
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

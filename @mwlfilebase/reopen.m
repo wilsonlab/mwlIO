@@ -1,19 +1,25 @@
-function f = reopen(fb)
+function f = reopen(fb) %#ok
 %REOPEN reopen file
 %
-%  Syntax
+%  f=REOPEN(f) rereads the header of the mwl file and returns a new
+%  mwlfilebase object. This function is used internally to reopen a file
+%  in append mode after the header has been closed.
 %
-%      f = reopen( f )
+%  Example
+%    f = mwlfilebase('test.dat', 'write');
+%    f = reopen(f);
+%
+%  See also CLOSEHEADER, MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ismember(fb.mode, {'write', 'overwrite'})
-    error(['File is in ' fb.mode ' mode. Cannot reopen.'])
+    error('mwlfilebase:reopen:invalidMode', ['File is in ' fb.mode ' mode. Cannot reopen.'])
 end
 
 if nargout<1
-    warning('Please supply output variable. File not reopened.')
+    warning('mwlfilebase:reopen:noOuput', 'Please supply output variable. File not reopened.')
     return  
 end
 

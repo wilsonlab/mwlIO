@@ -1,13 +1,18 @@
 function [h, hsize] = loadheader(f)
-%LOADHEADER read and parse header from file
+%LOADHEADER read and parse header from mwl file
 %
-%  Syntax
+%  header=LOADHEADER(file) opens the file, reads the header and returns it as
+%  a header object. File can be either a file name or a file
+%  identifier. If the file is not a mwl file type then an empty header
+%  object will be returned.
 %
-%      [header, headersize] = loadheader( file )
+%  [header, headersize]=LOADHEADER returns the size of the header in the
+%  file as well.
 %
-%    This function will read the header from file and return a header
-%    object. The parameter file can be either a file name or file identifier
-%    returned by fopen.
+%  Example
+%    [hdr, hsz] = loadheader( 'data.dat' );
+%
+%  See also HEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

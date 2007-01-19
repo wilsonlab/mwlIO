@@ -1,11 +1,18 @@
 function rfb = mwlrecordfilebase(varargin)
-%MWLRECORDFILEBASE constructor
+%MWLRECORDFILEBASE mwlrecordfilebase constructor
 %
-%  Syntax
+%  f=MWLRECORDFILEBASE default constructor, creates a new empty
+%  mwlrecordfilebase object.
 %
-%      f = mwlrecordfilebase()      default constructor
-%      f = mwlrecordfilebase( f )   copy constructor
-%      f = mwlrecordfilebase( filename [, mode, format] )
+%  f=MWLRECORDFILEBASE(f) copy constructor
+%
+%  f=MWLRECORDFILEBASE(filename) opens the specified file in read mode.
+%
+%  f=MWLRECORDFILEBASE(filename, mode) opens file in specified mode
+%  ('read', 'write', 'append', 'overwrite').
+%
+%  f=MWLRECORDFILEBASE(filename, mode, format) specifies file format
+%  ('ascii', 'binary').
 %
 %  See also MWLFILEBASE
 %
@@ -33,7 +40,7 @@ else
             end
         end
         if isempty(flds)
-            error('No Fields parameter in header')
+            error('mwlrecordfilebase:mwlrecordfilebase:noFields', 'No Fields parameter in header')
         end
        
         rfb.fields = processFields(flds);

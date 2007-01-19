@@ -1,14 +1,10 @@
 function display(sh, c)
 %DISPLAY show information about subheader
 %
-%  Syntax
+%  DISPLAY(f) displays subheader object information
 %
-%      display(h [,hidetitle])
-%
-%  Description
-%
-%    This method will display the subheader contents. An optional title will
-%    be displayed if hidetitle = 0 (default)
+%  DISPLAY(f, hidetitle) hides the title. This is used by inherited
+%  classes, so that they can show their own title.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -18,7 +14,7 @@ if nargin<2 || ~isscalar(c)
 end
 
 if ~(c)
-    disp(['-- SUBHEADER OBJECT --'])
+    disp('-- SUBHEADER OBJECT --')
 end
 
 np = size(sh.parms, 1);

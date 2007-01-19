@@ -1,18 +1,17 @@
 function val = get(pf, propName)
 %GET get oject properties
 %
-%  Syntax
+%  val=GET(f, property) returns the value of the specified mwlposfile
+%  object property. Valid properties are (in addition to those inherited
+%  from its base classes):
+%  nrecords - number of records in file
+%  currentrecord - current record (where file cursor is)
+%  currentoffset - offset of current record in file
+%  currenttimestamp - timestamp of current record
 %
-%      value = get(f, property)
+%  See also MWLRECORDFILEBASE, MWLFILEBASE
 %
-%  Description
-%
-%    Valid properties for mwlposfilebase objects are (in addition to
-%    those inherited from mwlrecordfilebase): 'currentrecord',
-%    'currentoffset', 'currenttimestamp', 'nrecords'
-%
-%  See also MWLRECORDFILEBASE
-%
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

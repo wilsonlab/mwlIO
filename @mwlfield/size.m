@@ -1,14 +1,12 @@
 function retval = size( field )
-%SIZE return the total field size in bytes
+%SIZE field dimensions
 %
-%  Syntax
+%  sz=SIZE(f) returns the dimensions of all fields in the mwlfield
+%  object.
 %
-%      sz = size( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 'short', 2 );
-%      size( field )  % will return: 2
+%  Example
+%    field = mwlfield( 'test', 'short', 2 );
+%    size( field )  % will return: 2
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

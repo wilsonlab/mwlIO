@@ -1,14 +1,11 @@
 function retval = type( field )
-%TYPE return the field type
+%TYPE field type
 %
-%  Syntax
+%  t=TYPE(f) returns the data types of all fields in the mwlfield object.
 %
-%      n = type( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 8, 1 );
-%      type( field )  % will return: 'ulong'
+%  Example
+%    field = mwlfield( 'test', 8, 1 );
+%    type( field )  % will return: 'ulong'
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

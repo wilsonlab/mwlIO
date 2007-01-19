@@ -1,14 +1,11 @@
 function retval = bytesize( field )
 %BYTESIZE return the total field size in bytes
 %
-%  Syntax
+%  sz=BYTESIZE(f) returns the size in bytes of all fields in the object
 %
-%      sz = bytesize( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 'short', 2 );
-%      bytesize( field )  % will return: 4
+%  Example
+%    field = mwlfield( 'test', 'short', 2 );
+%    bytesize( field )  % will return: 4
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

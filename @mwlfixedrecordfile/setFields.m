@@ -1,12 +1,16 @@
 function frf = setFields(frf, fields)
 %SETFIELDS create fields for new fixed record file
 %
-%  Syntax
-%
-%      f = setFields( f, fields )
+%  f=SETFIELDS(f, fields) sets the fields for a mwl fixed record
+%  file. The fields arguments should be a valid mwlfield object.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
+
+if nargin<2
+  help(mfilename)
+  return
+end
 
 frf.mwlrecordfilebase = setFields(frf.mwlrecordfilebase, fields);
 

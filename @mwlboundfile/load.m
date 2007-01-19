@@ -1,12 +1,27 @@
 function cb = load(bf, cid)
 %LOAD load cluster boundaries
 %
-%   Syntax
-%   bounds = load( f [, clusterid] )
+%  bounds=LOAD(f) load all cluster boundary data. The function returns
+%  a structure array with the following fields:
+%  nbounds - the number of boundaries for a given cluster
+%  bounds - a structure array with boundary information
+%  The length of the structure array is determined by the maximum cluster
+%  number found in the file. Thus if the file contains boundary data for
+%  clusters 1,2 and 5, then the returned structure array has five
+%  elements. The third and fourth elements are empty structures.
 %
-%   Examples
+%  A boundary information structure has the following fields:
+%  projections - the IDs of the projections that this boundary was
+%  defined in
+%  projection_names - the names of the projections
+%  vertices - a matrix of boundary vertices
 %
-%   See also 
+%  bounds=LOAD(f, cluster) loads the boundary information for the
+%  specified cluster only.
+%
+%  Example
+%    f = mwlboundfile('test.dat');
+%    b = load(f);
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -14,7 +29,7 @@ function cb = load(bf, cid)
 fid = fopen( fullfile(bf), 'r');
 
 if fid == -1
-    error('Cannot open file')
+    error('mwlboundfile:load:invalidFile', 'Cannot open file')
 end
 
 if nargin<2
@@ -32,7 +47,7 @@ while ( ~feof(fid) )
     
     if ~isempty(deblank(lin))
         
-        cluster_id = str2num(lin);
+        cluster_id = str2num(lin); %#ok
         
         if length(cb)<1
             cb(cluster_id).bounds = struct('projections', {}, 'projection_names', {}, 'vertices', {});

@@ -1,26 +1,31 @@
 function val = getParam(sh, parm)
 %GETPARAM get value of subheader parameter
 %
-%  Syntax
-%
-%      val = getParam( h, param )
+%  val=GETPARAM(h, param) returns value of a subheader parameter.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
+if nargin<2
+  help(mfilename)
+  return
+end
+
 if ~ischar(parm) || strcmp(parm, '')
-    error('Parameter name should be non-empty string')
+  error('subheader:getParam:invalidParameter', ...
+        'Parameter name should be non-empty string')
 end
 
 id = find( strcmp(sh.parms(:,1), parm) );
 
 if (length(id)>1)
-    error('Internal error: same parameter present multiple times')
+  error('subheader:getParam:Error', ...
+        'Internal error: same parameter present multiple times')
 end
 
 if isempty(id)
-    val = [];
+  val = [];
 else
-    val = sh.parms{id,2};
+  val = sh.parms{id,2};
 end
 

@@ -1,9 +1,14 @@
 function filename = fullfile(f)
 %FULLFILE return full path to file
 %
-%  Syntax
+%  filename=FULLFILE(f) return the full path to the mwl file represented
+%  by the mwlfilebase object.
 %
-%      filename = fullfile( f )
+%  Example
+%    f = mwlfilebase('test.dat')
+%    name = fullfile( f );
+%
+%  See also MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

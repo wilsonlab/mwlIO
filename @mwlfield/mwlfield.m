@@ -1,22 +1,26 @@
 function field = mwlfield(varargin)
-%MWLFIELD constructor
+%MWLFIELD mwlfield constructor
 %
-%  Syntax
+%  f=MWLFIELD default constructor, creates new empty mwlfield object.
 %
-%      field = mwlfield()        default constructor
-%      field = mwlfield( field ) copy constructor
-%      field = mwlfield( name, type [, n] )
+%  f=MWLFIELD(f) copy constructor
 %
-%  Description
+%  f=MWLFIELD(name) creates a new mwlfield object with a set of fields
+%  with the specified names. Names can be specified as a string or a cell
+%  array of strings.
 %
-%    Create a new mwlfield object of specified type and name and number of
-%    elements n. If n is not specified it defaults to 1. Supported types
-%    are: 'char', 'short', 'int', 'float', 'double', 'func', 'ffunc',
-%    'ulong'. Or their numeric equivalents 1, 2, 3, ..., 8.
+%  f=MWLFIELD(name, type) specifies the data type of the fields. The type
+%  can be specified as either a string, a cell array of strings or a type
+%  code (default = 'short').
 %
-%  Examples
+%  f=MWLFIELD(name, type, size) specifies the dimensions of each
+%  field. Dimensions can be specified as a vector or as a cell array of
+%  vectors (default = 1).
 %
-%      field = mwlfield( 'pos_x', 'short', 2 )
+%  Example
+%    f = mwlfield( {'test', 'test2'}, {'short', 'double'}, {2, [2 4 6]} );
+%
+%  See also MWLTYPEMAPPING
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman
@@ -35,23 +39,25 @@ else
         n = numel(arg_name);
         [field(1:n).name] = deal( arg_name{:} );
     else
-        error('Invalid field names')
+        error('mwlfield:mwlfield:invalidNames', 'Invalid field names')
     end    
     
     if nargin>1
-        arg_type = varargin{2};
-        if ischar(arg_type)
-            arg_type = num2cell( mwltypemapping(arg_type, 'str2code') );
-            [field(1:n).type] = deal( arg_type{:} );
-        elseif iscellstr(arg_type) && numel(arg_type)==n
-            arg_type = num2cell( mwltypemapping(arg_type, 'str2code') );
-            [field(1:n).type] = deal( arg_type{:} );
-        elseif isnumeric(arg_type) && ~any( arg_type<1 ) && ~any( arg_type>8 ) && ( numel(arg_type)==1 || numel(arg_type)==n )
-            arg_type = num2cell( fix( arg_type ) );
-            [field(1:n).type] = deal( arg_type{:} );
-        else
-            error('Invalid mwl type code')
-        end
+      arg_type = varargin{2};
+      if ischar(arg_type)
+        arg_type = num2cell( mwltypemapping(arg_type, 'str2code') );
+        [field(1:n).type] = deal( arg_type{:} );
+      elseif iscellstr(arg_type) && numel(arg_type)==n
+        arg_type = num2cell( mwltypemapping(arg_type, 'str2code') );
+        [field(1:n).type] = deal( arg_type{:} );
+      elseif isnumeric(arg_type) && ~any( arg_type<1 ) && ~any( arg_type>8 ) && ( numel(arg_type)==1 || numel(arg_type)==n )
+        arg_type = num2cell( fix( arg_type ) );
+        [field(1:n).type] = deal( arg_type{:} );
+      else
+        error('mwlfield:mwlfield:invalidType', 'Invalid data type')
+      end
+    else
+      [field.type] = deal(2); %short
     end
     
     if nargin>2
@@ -61,7 +67,7 @@ else
             [field(1:n).n] = deal( varargin{3}{:} );
             %TODO check number of elements!
         else
-            error('Invalid field size')
+            error('mwlfield:mwlfield:invalidType', 'Invalid field size')
         end
     else
         [field.n] = deal(1);

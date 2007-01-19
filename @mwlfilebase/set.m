@@ -1,20 +1,24 @@
 function fb = set(fb,varargin)
 %SET set object properties and return the updated object
 %
-%  Syntax
+%  f=SET(f,prop1,val1,...) sets properties of a mwlfilebase
+%  object and returns the updated object. Properties can only be set for
+%  files opened in 'write' or 'overwrite' mode. The following properties
+%  can be set:
+%  header - a valid header object
+%  format - 'ascii' or 'binary'
 %
-%      f = set( f, property1, value1, property2, value2, ...)
+%  Example
+%    f = mwlfilebase( 'test.dat', 'write' );
+%    f = set(f, 'format', 'ascii');
 %
-%  Description
-%
-%    Valid properties that can be set for mwlfilebase objects which are in
-%    'write' or 'overwrite' mode: 'header', 'format'
+%  See also MWLFILEBASE/GET, HEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ismember( fb.mode, {'read', 'append'} )
-    error(['File is in ' fb.mode ' mode'])
+    error('mwlfilebase:set:invalidMode', ['File is in ' fb.mode ' mode'])
 end
     
 
@@ -26,17 +30,17 @@ while length(propertyArgIn) >= 2,
     switch prop
     case 'header'
         if ~isa(val, 'header')
-            error('Invalid header')
+            error('mwlfilebase:set:invalidValue', 'Invalid header')
         else
             fb.header = val;
         end
     case 'binary'
         if ~ismember(val, {'binary', 'ascii'})
-            error('Invalid format')
+            error('mwlfilebase:set:invalidValue', 'Invalid format')
         else
             fb.format = val;
         end            
     otherwise
-        error('Cannot set this property')
+        error('mwlfilebase:set:invalidProperty', 'Cannot set this property')
     end
 end

@@ -1,10 +1,12 @@
 function h = header(varargin)
-%HEADER constructor
+%HEADER header constructor
 %
-%  Syntax
+%  h=HEADER default constructor, creates a new empty header object.
 %
-%      h = header()      default constructor
-%      h = header( h )   copy constructor
+%  h=HEADER(h) copy constructor
+%
+%  h=HEADER(subhdr) creates a new header and initializes it with a
+%  subheader.
 %
 
 

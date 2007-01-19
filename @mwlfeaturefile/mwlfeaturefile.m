@@ -1,13 +1,24 @@
 function ff = mwlfeaturefile(varargin)
-%MWLFEATUREFILE constructor
+%MWLFEATUREFILE mwlfeaturefile constructor
 %
-%  Syntax
+%  f=MWLFEATUREFILE default constructor, creates a new empty
+%  mwlfeaturefile object.
 %
-%      f = mwlfeaturefile()      default constructor
-%      f = mwlfeaturefile( f )   copy constructor
-%      f = mwlfeaturefile( filename [, mode [, format] )
+%  f=MWLFEATUREFILE(f) copy constructor
 %
-%  See also MWLFIXEDRECORDFILE
+%  f=MWLFEATUREFILE(filename) opens the specified mwl feature file in
+%  read mode.
+%
+%  f=MWLFEATUREFILE(filename, mode) opens the mwl feature file in the
+%  specified mode ('read', 'write', 'append', 'overwrite').
+%
+%  f=MWLFEATUREFILE(filename, mode, format) specifies the file format
+%  ('ascii' or 'binary').
+%
+%  Example
+%    f = mwlfeaturefile('data.pxyabw');
+%
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -25,7 +36,7 @@ else
         
         %feature file?
         if ~strcmp( getFileType(frf), 'feature')
-            error('Not a feature file')
+            error('mwlfeaturefile:mwlfeaturefile:invalidFile', 'Invalid feature file')
         end
         
     end

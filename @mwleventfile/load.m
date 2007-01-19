@@ -1,15 +1,21 @@
 function data = load(ef, flds, i)
 %LOAD load event strings
 %
-%  Syntax
+%  data=LOAD(f) load all event strings from mwl event file. The returned
+%  data is a structure with 'timestamp' and 'string' fields.
 %
-%      data = load( f, load_fields [, indices] )
+%  data=LOAD(f, fields) load only the fields specified. The fields
+%  argument can be a string or a cell array of strings. If this argument
+%  contains 'all', then all fields are loaded. Valid fields for an mwl
+%  event file are: 'timestamp' and 'string'.
 %
-%  Description
+%  data=LOAD(f, fields, indices) load only the records listed in the
+%  indices matrix. The first record has index 0. Random acess is
+%  supported for binary files only.
 %
-%    This method allows you to load data from multiple fields, as specified
-%    by the cell array load_fields. The parameter indices is an optional
-%    vector of record indices.
+%  Example
+%    f = mwleventfile( 'events.dat' );
+%    data = load(f, {'string'}, [0:5] );
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

@@ -1,14 +1,12 @@
-function data = loadField(ef, field, varargin)
-%LOADFIELD load data from single field
+function data = loadField(ef, varargin)
+%LOADFIELD load single field from eeg file
 %
-%  Syntax
+%  data=LOADFIELD(f, field) returns the data in the specified field from
+%  all records in the file.
 %
-%      data = loadField( f, field [, range] )
-%
-%  Description
-%
-%    This method loads data from a single field. Optionally a record range
-%    can be specified.
+%  data=LOADFIELD(f, field, record_range) loads only the records in the
+%  specified range. Record_range should be a two element vector with the
+%  start and end record indices of the range.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -17,9 +15,8 @@ if nargin<2
     help(mfilename)
 end
 
-data = loadField(ef.mwlfixedrecordfile, field, varargin{:});
+data = loadField(ef.mwlfixedrecordfile, varargin{:});
 
-if strcmp(field, 'data')
-    data.data = reshape( data.data, ef.nchannels, ef.nsamples, size(data.data, 2) );
-    %data = permute(reshape(data', ef.nchannels, size(data, 1)*ef.nsamples), [2 1]);
+if strcmp(varargin{1}, 'data')
+    data = reshape( data, ef.nchannels, ef.nsamples, size(data.data, 2) );
 end

@@ -1,14 +1,12 @@
-function data = loadField(ef, field, varargin)
-%LOADFIELD load data from single field
+function data = loadField(ef, varargin)
+%LOADFIELD load single field from event file
 %
-%  Syntax
+%  data=LOADFIELD(f, field) returns the data in the specified field from
+%  all records in the file.
 %
-%      data = loadField( f, field [, range] )
-%
-%  Description
-%
-%    This method loads data from a single field. Optionally a record range
-%    can be specified.
+%  data=LOADFIELD(f, field, record_range) loads only the records in the
+%  specified range. Record_range should be a two element vector with the
+%  start and end record indices of the range.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -17,9 +15,9 @@ if nargin<2
     help(mfilename)
 end
 
-data = loadField(ef.mwlfixedrecordfile, field, varargin{:});
+data = loadField(ef.mwlfixedrecordfile, varargin{:});
 
-if strcmp(field, 'string')
+if strcmp(varargin{1}, 'string')
     tmp = char(data.string);
     data.string = {};
     for i =1:size(tmp,1)

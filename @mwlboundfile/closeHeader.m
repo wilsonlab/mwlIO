@@ -1,18 +1,20 @@
 function bf = closeHeader(bf)
 %CLOSEHEADER write header to disk and reopen file in append mode
 %
-%   Syntax
-%   f = closeHeader( f )
+%  f=CLOSEHEADER(f) closes the header for further modifications, writes
+%  the header to disk and reopens the file in append mode.
 %
-%   Examples
+%  Example
+%    f = mwlboundfile('test.dat', 'write')
+%    f = closeHeader(f);
 %
-%   See also 
+%  See also HEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if nargout~=1
-    warning('It is safer to provide an output argument. Aborted.')
+    warning('mwlboundfile:closeHeader:invalidOutput', 'It is safer to provide an output argument. Aborted.')
     return;
 end
 

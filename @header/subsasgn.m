@@ -1,21 +1,14 @@
 function h = subsasgn(h,s,b)
 %SUBSASGN subscripted assignment
 %
-%  Syntax
+%  h=SUBSASGN(h, subs, val) subscripted assignment to add (or replace)
+%  subheaders to a header object.
 %
-%      header( n ) = subheader
-%
-%  Description
-%
-%    This method will allow subscripted assignment to add subheaders to
-%    a header
-%
-%  Examples
-%
-%      sh = subheader();
-%      sh = setParam( sh, 'Test', 1)
-%      h = header();
-%      h(1) = sh;
+%  Example
+%    sh = subheader();
+%    sh = setParam( sh, 'Test', 1)
+%    h = header();
+%    h(1) = sh;
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -32,5 +25,5 @@ case '()'
         h.subheaders(ind) = b;
     end
 otherwise
-   error('Specify value for x as p(x)')
+   error('header:subsasgn:invalidAssignment', 'Invalid assignment')
 end

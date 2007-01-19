@@ -1,16 +1,16 @@
 function b = subsref(h,s)
 %SUBSREF subscripted indexing
 %
-%  Syntax
+%  val=SUBSREF(h, subs) allow subscripted indexing to retrieve subheaders
+%  from a header.
 %
-%      header( n )
+%  Example
+%    hdr = header();
+%    sh = subheader();
+%    sh = setParam(sh, 'test', 1);
+%    hdr(1) = sh;
+%    sh = hdr(1);
 %
-%  Description
-%
-%    This method will allow subscripted indexing to retrieve subheaders in a
-%    header
-%
-
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
@@ -19,6 +19,6 @@ case '()'
     ind = s.subs{:};
     b = h.subheaders(ind);
 otherwise
-   error('Specify value for x as p(x)')
+   error('header:subsref:invalidIndexing', 'Invalid indexing')
 end
 

@@ -1,16 +1,13 @@
 function val = get(wf, propName)
 %GET get oject properties
 %
-%  Syntax
+%  val=GET(f, property) returns the value of the specified mwlwaveformfile
+%  object property. Valid properties are (in addition to those inherited
+%  from its base classes):
+%  nsamples - number of samples / channel in a waveform
+%  nchannels - number of data channels
 %
-%      value = get(f, property)
-%
-%  Description
-%
-%    Valid properties for mwlwaveformfile objects are (in addition to
-%    those inherited from mwlfixedrecordfile): 'nsamples', 'nchannels'
-%
-%  See also MWLFIXEDRECORDFILE
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman

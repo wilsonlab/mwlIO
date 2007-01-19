@@ -1,16 +1,10 @@
 function display(bf, c)
-%DISPLAY display object information
+%DISPLAY display mwlboundfile object information
 %
-%   Syntax
-%   display(h [,hidetitle])
+%  DISPLAY(f) displays mwlboundfile object information
 %
-%   This method will display object information. An optional title will
-%   be displayed if hidetitle = 0 (default)
-%
-%   Example
-%
-%   See also 
-%
+%  DISPLAY(f, hidetitle) hides the title. This is used by inherited
+%  classes, so that they can show their own title.
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
@@ -19,7 +13,7 @@ if nargin<2 || ~isscalar(c)
 end
 
 if ~(c)
-    disp(['-- BOUNDS FILE OBJECT --'])
+    disp('-- BOUNDS FILE OBJECT --')
 end
 
 display(get(bf, 'mwlfilebase'), 1)

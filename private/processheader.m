@@ -1,21 +1,22 @@
 function retval = processheader(h)
-%PROCESSHEADER parse header
+%PROCESSHEADER parse mwl file header
 %
-%   Syntax
-%   subheaders = processheader( header )
+%  subheaders=PROCESSHEADER(h) takes a header from a mwl file as a cell
+%  array of strings and parses it. The function returns an array of
+%  subheader objects with all parameters and comments found in the
+%  header.
 %
-%   The parameter header is a cell array of strings which will be parsed
-%   and converted into an array of subheader objects.
+%  Example
+%    h = readheader( 'test.dat' );
+%    sh = processheader( h );
 %
-%   Examples
-%
-%   See also 
+%  See also READHEADER, LOADHEADER
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
 if ~iscell(h)
-    error('Expecting cell array of strings')
+    error('processheader:invalidArguments', 'Expecting cell array of strings')
 end
 
 rexp = '(?<param>[A-Za-z]([A-Za-z0-9 [\]_.])*):( |\t)+(?<value>[A-Za-z0-9 \-_:;/,.\t()[\]]+)';

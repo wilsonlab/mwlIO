@@ -1,14 +1,11 @@
 function val = get(frf, propName)
-%GET get oject properties
+%GET get mwlfixedrecordfile properties
 %
-%  Syntax
-%
-%      value = get(f, property)
-%
-%  Description
-%
-%    Valid properties for mwlfixedrecordfile objects are (in addition to
-%    those inherited from mwlrecordfilebase): 'recordsize', 'nrecords'
+%  val=GET(f, property) returns the value of the specified mwlfixedrecordfile
+%  object property. Valid properties are (in addition to those inherited
+%  from its base classes):
+%  recordsize - size in bytes of a record
+%  nrecords - number of records in the file
 %
 %  See also MWLFILEBASE
 %

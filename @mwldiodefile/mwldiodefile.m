@@ -1,13 +1,23 @@
 function pf = mwldiodefile(varargin)
-%MWLDIODEFILE constructor
+%MWLDIODEFILE mwldiodefile constructor
 %
-%  Syntax
+%  f=MWLDIODEFILE default constructor, creates a new empty mwldiodefile
+%  object.
 %
-%      f = mwldiodefile()      default constructor
-%      f = mwldiodefile( f )   copy constructor
-%      f = mwldiodefile( filename [, mode, format] )
+%  f=MWLBOUNDFILE(f) copy constructor
 %
-%  See also MWLFIXEDRECORDFILE
+%  f=MWLDIODEFILE(filename) open specified mwl diode file in read mode.
+%
+%  f=MWLDIODEFILE(filename, mode) opens the file in the specified mode
+%  ('read', 'write', 'append', 'overwrite').
+%
+%  f=MWLDIODEFILE(filename, mode, format) specifies the file format
+%  ('ascii' or 'binary').
+%
+%  Example
+%    f = mwldiodefile('data.p');
+%
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -25,7 +35,7 @@ else
         
         %diode pos file?
         if ~strcmp( getFileType(frf), 'diode')
-            error('Not a diode position file')
+            error('mwldiodefile:mwldiodefile:invalidFile', 'Not a diode position file')
         end
         
     end

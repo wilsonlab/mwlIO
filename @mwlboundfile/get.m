@@ -1,15 +1,16 @@
 function val = get(bf, propName)
-%GET get oject properties
+%GET get mwlboundfile properties
 %
-%   Syntax
-%   value = get(f, property)
+%  val=GET(f, property) returns the value of the specified mwlboundfile
+%  object property. Valid properties are the same as the base class
+%  mwlfilebase.
 %
-%   Valid properties for mwlboundfile objects are (in addition to
-%   those inherited from mwlfilebase): none
+%  Example
+%    f = mwlboundfile('test.dat')
+%    h = get(f,'header');
 %
-%   Examples
+%  See also MWLFILEBASE
 %
-%   See also MWLFILEBASE
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

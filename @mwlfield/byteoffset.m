@@ -1,14 +1,12 @@
 function retval = byteoffset( field )
-%BYTEOFFSET byte offsets for field
+%BYTEOFFSET byte offsets for fields
 %
-%  Syntax
+%  offset=BYTEOFFSET(f) returns the offset in bytes of all fields in the
+%  object.
 %
-%      b = byteoffset( field )
-%
-%  Examples
-%
-%      field = mwlfield( {'test', 'dummy'} );
-%      b = byteoffset( field );  %will return:  
+%  Example
+%    field = mwlfield( {'test', 'dummy'}, {'short', 'short'}, 1 );
+%    b = byteoffset( field );  %will return: [0 2]
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

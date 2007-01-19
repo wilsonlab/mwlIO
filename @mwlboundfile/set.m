@@ -1,15 +1,17 @@
 function bf = set(bf,varargin)
 %SET set object properties and return the updated object
 %
-%   Syntax
-%   f = set( f, property1, value1, property2, value2, ...)
+%  f=SET(f,prop1,val1,...) sets properties of a mwlboundfile object and
+%  returns the updated object. See MWLFILEBASE/SET for more information
+%  and a list of valid porperties.
 %
-%   Valid properties that can be set for mwlboundfile objects (in addition
-%   to those inherited from mwlfilebase): none
+%  Example
+%    f = mwlboundfile( 'test.dat', 'write');
+%    h = header( newheader('Date', now) );
+%    f = set(f, 'header', h);
 %
-%   Examples
+%  See also MWLFILEBASE/SET
 %
-%   See also 
 
 %  Copyright 2005-2006 Fabian Kloosterman
 

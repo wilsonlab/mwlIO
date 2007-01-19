@@ -1,16 +1,11 @@
 function i = findRecords(f, field, bounds)
 %FINDRECORDS find records
 %
-%  Syntax
+%  idx=FINDRECORDS(f, field, range) returns all indices of the records
+%  where the value of the specified fields is within the specified
+%  range. This only works for scalar fields.
 %
-%      i = findRecords( f, filter_field, range)
-%
-%  Description
-%
-%    This method finds all records that meet the condition that the value of
-%    the field filter_field is within the range specified. The method
-%    returns a vector of record indices.
-%
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
@@ -28,6 +23,6 @@ if isnumeric(bounds)
     
     i = find( data>=bounds(1) & data<=bounds(2) );
 else
-    error('Invalid bounds')
+    error('mwlfixedrecordfile:findRecords:invalidRange', 'Invalid range')
 end
 

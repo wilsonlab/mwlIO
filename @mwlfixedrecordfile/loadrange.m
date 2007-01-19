@@ -1,6 +1,7 @@
-function data = loadrange(frf, fields, range, rangefield)
+function data = loadrange(frf, varargin)
 %LOADRANGE load data from mwl fixed record file
 %
+%  data=LOADRANGE(f, 
 %  Syntax
 %
 %      data = loadrange( f [, fields [, range, range_field]] )
@@ -20,33 +21,34 @@ function data = loadrange(frf, fields, range, rangefield)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<2
-    help(mfilename)
-    return
-end
 
 if ismember(get(frf, 'format'), {'ascii'})
-    error('This function not implemented for ascii files');
+    error('mwlfixedrecordfile:loadrange:invalidFormat', ...
+          'This function not implemented for ascii files');
 end
 
-if nargin<3 || isempty(range)
+if nargin<2 || isempty(varargin{1})
+  varargin{1} = 'all';
+end
+
+if nargin<3 || isempty(varargin{2})
     range = [0 get(frf,'nrecords')-1 ];
-elseif ~isnumeric(range) || numel(range)~=2
-    error('Invalid range')
+elseif ~isnumeric(varargin{2}) || numel(varargin{2})~=2
+    error('mwlfixedrecordfile:loadrange:invalidRange', 'Invalid range')
 else
     range = double(range);
 end
 
-if nargin<4 || isempty(rangefield)
+if nargin<4 || isempty(varargin{3})
     %range = record indices
-    data = load(frf, fields, range(1):range(2));
+    data = load(frf, varargin{1}, range(1):range(2));
 else
     %range = in field units
     flds = get(frf, 'fields');
-    [dummy, fieldid] = ismember( rangefield, name(flds) );
+    [dummy, fieldid] = ismember( rangefield, name(flds) ); %#ok
     
     if isempty(fieldid) || fieldid==0
-        error('Invalid range field')
+        error('mwlfixedrecordfile:loadrange:invalidRange', 'Invalid range field')
     end
     
     fielddef = mex_fielddef( flds );

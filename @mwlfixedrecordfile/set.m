@@ -1,26 +1,14 @@
 function frf = set(frf,varargin)
 %SET set object properties and return the updated object
 %
-%  Syntax
-%
-%      f = set( f, property1, value1, property2, value2, ...)
-%
-%  Description
-%
-%    Valid properties that can be set for mwlfixedrecordfile objects which
-%    are in 'write' or 'overwrite' mode (in addition to those inherited from
-%    mwlfilebase): none
-%
+%  f=SET(f,prop1,val1,...) sets properties of a mwlfixedrecordfile
+%  object and returns the updated object. Properties can only be set for
+%  files opened in 'write' or 'overwrite' mode. The following properties
+%  can be set (in addition to those inherited from base classes): none
+%  
+
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-propertyArgIn = varargin;
-while length(propertyArgIn) >= 2,
-    prop = propertyArgIn{1};
-    val = propertyArgIn{2};
-    propertyArgIn = propertyArgIn(3:end);
-    switch prop
-        otherwise
-            frf.mwlrecordfilebase = set(frf.mwlrecordfilebase, prop, val);
-    end
-end
+frf.mwlrecordfilebase = set(frf.mwlrecordfilebase, varargin{:});
+

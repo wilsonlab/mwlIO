@@ -1,15 +1,18 @@
 function h = appendHeader(h, sh)
 %APPENDHEADER append subheader to header
 %
-%  Syntax
-%
-%      h = appendHeader(h, subheader)
+%  h=APPENDHEADER(h, subhdr) append subheader object to header object.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
+if nargin<2
+  help(mfilename)
+  return
+end
+
 if ~isa(sh, 'subheader')
-    error('Can only append subheaders')
+    error('header:appendHeader:invalidArgument', 'Invalid subheader')
 end
 
 if isempty(h.subheaders)

@@ -1,14 +1,12 @@
 function retval = mexcode( field )
-%MEXCODE return the field type converted to mex type
+%MEXCODE mex data type code
 %
-%  Syntax
+%  c=MEXCODE(f) returns the mex data type code for all fields in the
+%  mwlfield object.
 %
-%      m = mexcode( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 'char', 1 );
-%      mexcode( field )  % will return: 9
+%  Example
+%    field = mwlfield( 'test', 'char', 1 );
+%    mexcode( field )  % will return: 9
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

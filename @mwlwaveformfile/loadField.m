@@ -1,14 +1,12 @@
-function data = loadField(wf, field, varargin)
-%LOADFIELD load data from single field
+function data = loadField(wf, varargin)
+%LOADFIELD load single field from waveform file
 %
-%  Syntax
+%  data=LOADFIELD(f, field) returns the data in the specified field from
+%  all records in the file.
 %
-%      data = loadField( f, field [, range] )
-%
-%  Description
-%
-%    This method loads data from a single field. Optionally a record range
-%    can be specified.
+%  data=LOADFIELD(f, field, record_range) loads only the records in the
+%  specified range. Record_range should be a two element vector with the
+%  start and end record indices of the range.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -17,10 +15,8 @@ if nargin<2
     help(mfilename)
 end
 
-data = loadField(wf.mwlfixedrecordfile, field, varargin{:});
+data = loadField(wf.mwlfixedrecordfile, varargin{:});
 
-if strcmp(field, 'waveform')
-    %data = permute(reshape(data, size(data, 1), wf.nchannels, wf.nsamples), [3 2 1]);
+if strcmp(varargin{1}, 'waveform')
     data.waveform = reshape( data.waveform, wf.nchannels, wf.nsamples, size(data.waveform, 2) );
 end
-

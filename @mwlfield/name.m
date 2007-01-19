@@ -1,14 +1,11 @@
 function retval = name( field )
-%NAME return the field name
+%NAME field names
 %
-%  Syntax
+%  n=NAME(f) returns the names of all fields in the mwlfield object.
 %
-%      n = name( field )
-%
-%  Examples
-%
-%      field = mwlfield( 'test', 8, 1 );
-%      name( field )  % will return: 'test'
+%  Example
+%    field = mwlfield( 'test', 8, 1 );
+%    name( field )  % will return: 'test'
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

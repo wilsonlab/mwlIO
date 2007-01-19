@@ -1,9 +1,7 @@
 function display( field )
-%DISPLAY show field information
+%DISPLAY show mwlfield object information
 %
-%  Syntax
-%
-%      display( field )
+%  DISPLAY(f) displays mwlfield object information
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman

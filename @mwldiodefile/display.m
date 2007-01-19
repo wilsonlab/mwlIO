@@ -1,14 +1,10 @@
 function display(fb, c)
-%DISPLAY display object information
+%DISPLAY display mwldiodefile object information
 %
-%  Syntax
+%  DISPLAY(f) displays mwldiodefile object information
 %
-%      display(h [,hidetitle])
-%
-%  Description
-%
-%    This method will display object information. An optional title will
-%    be displayed if hidetitle = 0 (default)
+%  DISPLAY(f, hidetitle) hides the title. This is used by inherited
+%  classes, so that they can show their own title.
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -18,7 +14,7 @@ if nargin<2 || ~isscalar(c)
 end
 
 if ~(c)
-    disp(['-- DIODE FILE OBJECT --'])
+    disp('-- DIODE FILE OBJECT --')
 end
 
 display(fb.mwlfixedrecordfile, 1)

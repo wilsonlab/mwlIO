@@ -1,17 +1,11 @@
 function f = appendData(f, data)
-%APPENDDATA append new waveform data
+%APPENDDATA append new waveform data to file
 %
-%  Syntax
-%
-%      f = appendData( f, data )
-%
-%  Description
-%
-%    This method appends waveform data to file f. The parameter data can be
-%    any of the following: a structure with 'timestamp' and 'waveform'
-%    fields or a two element cell array with timestamp vector and waveform
-%    matrix. Timestamps should be a simple vector. Waveform data should be
-%    a 3-dimensional matrix of size nsamples x nchannels x nrecords.
+%  f=APPENDDATA(f, data) append data to mwl waveform file. Data can be either
+%  a structure with 'timestamp' and 'waveform' fields, or a two-element cell
+%  array with timestamp and waveform records. Timestamps should be provided
+%  as a simple vector; waveform should be a 3-dimensional matrix of size
+%  nsamples x nchannels x nrecords.
 %
 
 %  Copyright 2006-2006 Fabian Kloosterman
@@ -27,7 +21,7 @@ if iscell(data) && numel(data)==2 && isnumeric(data{2}) && ndims(data{2})<=3
     [nsamples, nchannels, nrecords] = size(data{2});
       
     if nsamples~=f.nsamples || nchannels~=f.nchannels
-        error('Invalid data matrix')
+        error('mwlwaveformfile:appendData:invalidData', 'Invalid data matrix')
     end
 
     if nrecords==0
@@ -44,7 +38,7 @@ elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'wavefor
     [nsamples, nchannels, nrecords] = size(data.waveform);
     
     if nsamples~=f.nsamples || nchannels~=f.nchannels
-        error('Invalid data matrix')
+        error('mwlwaveformfile:appendData:invalidData', 'Invalid data matrix')
     end
 
     if nrecords==0
@@ -58,6 +52,6 @@ elseif isstruct(data) && all( ismember( fieldnames(data), {'timestamp', 'wavefor
     
 else
     
-    error('Invalid data')
+    error('mwlwaveformfile:appendData:invalidData', 'Invalid data')
     
 end

@@ -1,11 +1,22 @@
 function frf = mwlfixedrecordfile(varargin)
-%MWLFIXEDRECORDFILE constructor
+%MWLFIXEDRECORDFILE mwlfixedrecordfile constructor
 %
-%  Syntax
+%  f=MWLFIXEDRECORDFILE default constructor, creates a new empty
+%  mwlfixedrecordfile.
 %
-%      f = mwlfixedrecordfile()      default constructor
-%      f = mwlfixedrecordfile( f )   copy constructor
-%      f = mwlfixedrecordfile( filename [, mode, format] )
+%  f=MWLFIXEDRECORDFILE copy constructor
+%
+%  f=MWLFIXEDRECORDFILE(filename) opens the specified mwl file in read
+%  mode.
+%
+%  f=MWLFIXEDRECORDFILE(filename, mode) opens the file in the specified
+%  mode ('read', 'write', 'append', 'overwrite').
+%
+%  f=MWLFIXEDRECORDFILE(filename, mode, format) specifies the file format
+%  ('ascii' or 'binary').
+%
+%  Example
+%    f = mwlfixedrecordfile('test.dat');
 %
 %  See also MWLRECORDFILEBASE
 %
@@ -14,7 +25,6 @@ function frf = mwlfixedrecordfile(varargin)
 
 if nargin==0
     frf.recordsize = -1;
-    %frf.nrecords = -1;
     rfb = mwlrecordfilebase();
     frf = class(frf, 'mwlfixedrecordfile', rfb);
    
@@ -24,7 +34,6 @@ else
     
     rfb = mwlrecordfilebase(varargin{:});
     frf.recordsize = -1;
-    %frf.nrecords = -1;
     
     if ismember(rfb.mode, {'read', 'append'})
         
@@ -36,8 +45,6 @@ else
             
             frf.recordsize = sum( bytesize(fields) );
         
-            %frf.nrecords = (get(rfb, 'filesize') - get(rfb, 'headersize') ) ./ frf.recordsize;
-            
         end
         
     end
