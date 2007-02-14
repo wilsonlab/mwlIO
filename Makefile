@@ -26,13 +26,15 @@ MWLARCH=i386
 #mwl-wilson-software
 RPM_VER=$(shell sed -e '/^Version: */!d; s///;q' $(RPM_NAME).spec)
 RPM_REL=$(shell sed -e '/^Release: */!d; s///;q' $(RPM_NAME).spec)
-
+RELDATE=$(shell date +%d-%b-%Y)
 
 mex: build
 	cd $(BUILD_DIR)/$(RPM_NAME) ; \
 	sed -i -e "/Program version/s/'local'/'$(RPM_VER)-$(RPM_REL)'/g" \@mwlfilebase/closeHeader.m ; \
 	matlabR14 -nosplash -nodisplay -r "makesources,generate_help('.','$(RPM_NAME)'),quit" ; \
-	sed -i -e "s/VERSIONNUMBER/$(RPM_VER)-$(RPM_REL)/g" doc/$(RPM_NAME)_product_page.html
+	sed -i -e "s/VERSIONNUMBER/$(RPM_VER)-$(RPM_REL)/g" doc/$(RPM_NAME)_product_page.html ; \
+	sed -i -e "s/VERSIONNUMBER/$(RPM_VER).$(RPM_REL)/g" Contents.m ; \
+	sed -i -e "s/RELEASEDATE/$(RELDATE)/g" Contents.m
 
 tar: mex
 	cd $(BUILD_DIR) ; \

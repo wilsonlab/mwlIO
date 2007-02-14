@@ -1,4 +1,5 @@
-% MWLIO
+% mwlIO Toolbox
+% Version VERSIONNUMBER RELEASEDATE
 %
 % Opening/reading Files
 %   loadheader        - read and parse header from mwl file
