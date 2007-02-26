@@ -45,7 +45,7 @@ if nargin<4 || isempty(varargin{3})
 else
     %range = in field units
     flds = get(frf, 'fields');
-    [dummy, fieldid] = ismember( rangefield, name(flds) ); %#ok
+    [dummy, fieldid] = ismember( varargin{3}, name(flds) ); %#ok
     
     if isempty(fieldid) || fieldid==0
         error('mwlfixedrecordfile:loadrange:invalidRange', 'Invalid range field')
