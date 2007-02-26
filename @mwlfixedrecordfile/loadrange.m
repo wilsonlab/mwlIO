@@ -55,5 +55,5 @@ else
     
     idrange = findrecord( fullfile( get(frf, 'path'), get(frf, 'filename') ), irange, fielddef(fieldid,:), get(frf, 'headersize'), get(frf, 'recordsize') );
     
-    data = load(frf, fields, idrange(1):idrange(2));
+    data = load(frf, varargin{1}, idrange(1):idrange(2));
 end
