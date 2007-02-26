@@ -1,4 +1,4 @@
-function data = loadrange(frf, loadflds, range, rangefield)
+function data = loadrange(frf, loadflds, irange, rangefield)
 %LOADRANGE load data from mwl pos file
 %
 %  data=LOADRANGE(f) load all records from a mwl pos file. The returned
@@ -37,15 +37,15 @@ if ismember( 'all', loadflds )
     loadflds = name(fields);
 end
 
-if nargin<3 || isempty(range)
-    range = [frf.currentrecord frf.nrecords-1 ];
-elseif ~isnumeric(range) || numel(range)~=2
+if nargin<3 || isempty(irange)
+    irange = [frf.currentrecord frf.nrecords-1 ];
+elseif ~isnumeric(irange) || numel(irange)~=2
     error('mwlposfile:loadrange:invalidRange', 'Invalid range')
 else
-    range = double(range);
+    irange = double(irange);
 end
 
-if any( fix(range) ~= range )
+if any( fix(irange) ~= irange )
     error('mwlposfile:loadrange:invalidRange', 'Fractional indices not allowed')
 end
 
@@ -59,14 +59,14 @@ end
 
 if nargin<4 || isempty(rangefield)
     %range = record indices
-    frf = setCurrentRecord(frf, range(1));
-    data = posloadrecordrange( fullfile(frf), frf.currentoffset, range(2)-range(1)+1, fieldmask);
+    frf = setCurrentRecord(frf, irange(1));
+    data = posloadrecordrange( fullfile(frf), frf.currentoffset, irange(2)-irange(1)+1, fieldmask);
 else
   if ~strcmp( rangefield, 'timestamp' )
     error('mwlposfile:loadrange:invalidRangeField', 'Filtering only supported for timestamp field')
   end
     
-  idrange = posfindtimerange(fullfile( frf ), get(frf, 'headersize'), range);
+  idrange = posfindtimerange(fullfile( frf ), get(frf, 'headersize'), irange);
   frf = setCurrentRecord(frf, idrange(1));
   data = posloadrecordrange(fullfile( frf ), frf.currentoffset, idrange(2)-idrange(1)+1, fieldmask);
 

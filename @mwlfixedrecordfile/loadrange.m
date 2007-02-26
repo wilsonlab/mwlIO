@@ -32,16 +32,16 @@ if nargin<2 || isempty(varargin{1})
 end
 
 if nargin<3 || isempty(varargin{2})
-    range = [0 get(frf,'nrecords')-1 ];
+    irange = [0 get(frf,'nrecords')-1 ];
 elseif ~isnumeric(varargin{2}) || numel(varargin{2})~=2
     error('mwlfixedrecordfile:loadrange:invalidRange', 'Invalid range')
 else
-    range = double(range);
+    irange = double(varargin{2});
 end
 
 if nargin<4 || isempty(varargin{3})
     %range = record indices
-    data = load(frf, varargin{1}, range(1):range(2));
+    data = load(frf, varargin{1}, irange(1):irange(2));
 else
     %range = in field units
     flds = get(frf, 'fields');
@@ -53,7 +53,7 @@ else
     
     fielddef = mex_fielddef( flds );
     
-    idrange = findrecord( fullfile( get(frf, 'path'), get(frf, 'filename') ), range, fielddef(fieldid,:), get(frf, 'headersize'), get(frf, 'recordsize') );
+    idrange = findrecord( fullfile( get(frf, 'path'), get(frf, 'filename') ), irange, fielddef(fieldid,:), get(frf, 'headersize'), get(frf, 'recordsize') );
     
     data = load(frf, fields, idrange(1):idrange(2));
 end

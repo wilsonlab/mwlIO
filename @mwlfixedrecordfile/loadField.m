@@ -1,4 +1,4 @@
-function data = loadField(frf, loadfield, range)
+function data = loadField(frf, loadfield, irange)
 %LOADFIELD load single field from fixed record file
 %
 %  data=loadField(f, field) returns the data in the specified field from
@@ -31,19 +31,19 @@ end
 
 isbinary = ismember( get(frf, 'format'), 'binary');
 
-if nargin<3 || isempty(range)
+if nargin<3 || isempty(irange)
     if isbinary
-        range = [0 nrecords-1 ];
+        irange = [0 nrecords-1 ];
     else
-        range = [0 -1];
+        irange = [0 -1];
     end
-elseif ~isnumeric(range) || numel(range)~=2
+elseif ~isnumeric(irange) || numel(irange)~=2
     error('mwlfixedrecordfile:loadField:invalidRange','Invalid range')
 else
-    range = double(range);
+    irange = double(irange);
 end
 
-if any( fix(range) ~= range )
+if any( fix(irange) ~= irange )
     error('mwlfixedrecordfile:loadField:invalidRange','Fractional indices not allowed')
 end
 
@@ -56,20 +56,20 @@ end
 
 if ismember(get(frf, 'format'), {'binary'})
 
-    if range(2)==-1
-        range(2) = nrecords-1;
-    elseif range(1)>range(2) || range(1)<0 || range(2)>nrecords
-        error('Invalid range')
+    if irange(2)==-1
+        irange(2) = nrecords-1;
+    elseif irange(1)>irange(2) || irange(1)<0 || irange(2)>nrecords
+        error('mwlfixedrecordfile:loadField:invalidRange', 'Invalid range')
     end
     
     offset = byteoffset( fields );
     offset = offset( fieldid );
 
-    fseek(fid, get(frf, 'headersize') + offset + frf.recordsize * range(1), -1);
+    fseek(fid, get(frf, 'headersize') + offset + frf.recordsize * irange(1), -1);
 
-    data = fread( fid, length(fields(fieldid))*(diff(range)+1), [num2str(length(fields(fieldid))) '*' char(matcode(fields(fieldid)))], frf.recordsize - bytesize(fields(fieldid)));
+    data = fread( fid, length(fields(fieldid))*(diff(irange)+1), [num2str(length(fields(fieldid))) '*' char(matcode(fields(fieldid)))], frf.recordsize - bytesize(fields(fieldid)));
     
-    data = reshape(data, [size(fields(fieldid)) diff(range)+1]);
+    data = reshape(data, [size(fields(fieldid)) diff(irange)+1]);
     
 else %ascii file
     
@@ -80,10 +80,10 @@ else %ascii file
     %fseek to header offset
     fseek(fid, get(frf, 'headersize'), -1);
     %do a textscan for (endid-startid+1) lines
-    if range(2)==-1
-        data = textscan(fid, fmt, 'headerLines', range(1));
-    elseif range(1)<=range(2) && range(1)>=0
-        data = textscan(fid, fmt, diff(range)+1, 'headerLines', range(1));
+    if irange(2)==-1
+        data = textscan(fid, fmt, 'headerLines', irange(1));
+    elseif irange(1)<=irange(2) && irange(1)>=0
+        data = textscan(fid, fmt, diff(irange)+1, 'headerLines', irange(1));
     else
         error('mwlfixedrecordfile:loadField:invalidRange', 'Invalid range')
     end

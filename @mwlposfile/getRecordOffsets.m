@@ -1,4 +1,4 @@
-function offsets = getRecordOffsets(pf, range)
+function offsets = getRecordOffsets(pf, irange)
 %GETRECORDOFFSETS retrieve record byte offsets
 %
 %  offsets=GETRECORDOFFSETS(f) returns offsets in bytes of all records in the
@@ -15,25 +15,25 @@ function offsets = getRecordOffsets(pf, range)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-if nargin<2 || isempty(range)
-    range = [0 pf.nrecords-1];
+if nargin<2 || isempty(irange)
+    irange = [0 pf.nrecords-1];
 end
 
 try
-    range = double(range);
+    irange = double(irange);
 catch
     error('mwlposfile:getRecordOffsets:invalidRange', 'Invalid range argument')
 end
 
-if (length(range)~=2)
+if (length(irange)~=2)
     error('mwlposfile:getRecordOffsets:invalidRange', 'Range should be two element vector')
 end
 
-if any( fix(range) ~= range )
+if any( fix(irange) ~= irange )
     error('mwlposfile:getRecordOffsets:invalidRange', 'Fractional indices not allowed')
 end
 
-pf = setCurrentRecord(pf, range(1));
+pf = setCurrentRecord(pf, irange(1));
 
-n = loadrange(pf,{'nitems'}, range);
+n = loadrange(pf,{'nitems'}, irange);
 offsets = cumsum([0 ; double(n.nitems(1:end-1)) *3 + 6]) + get(pf, 'headersize');
