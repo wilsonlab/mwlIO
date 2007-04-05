@@ -11,14 +11,14 @@ function b = subsref(frf,s)
 switch s(1).type
  case '.'
   fields = get(frf, 'fields');
-  if any( strcmp(s(1).subs, name(fields) ) ) %load data
+  if ~isempty(fields) && any( strcmp(s(1).subs, name(fields) ) ) %load data
     if numel(s)==1
       b = load( frf, s(1).subs );
     elseif strcmp( s(2).type, '()' )
       b = load( frf, s(1).subs, s(2).subs{:});
     end
     b = b.(s(1).subs);
-  elseif any( strcmp( strrep( s(1).subs, '_', ' '), name(fields) ) )
+  elseif ~isempty(fields) && any( strcmp( strrep( s(1).subs, '_', ' '), name(fields) ) )
     %if field name contains spaces (which are replaced by underscores)
     if numel(s)==1
       b = load( frf, strrep( s(1).subs, '_',  ' ') );
