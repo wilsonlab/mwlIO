@@ -13,17 +13,26 @@ function h = subsasgn(h,s,b)
 
 %  Copyright 2005-2006 Fabian Kloosterman
 
-switch s.type
+switch s(1).type
 case '()'
-    ind = s.subs{:};
-    if ~isa(b, 'subheader')
-        error('Not a subheader')
-    end
-    if isempty(h.subheaders)
-        h.subheaders = b;
-    else
-        h.subheaders(ind) = b;
-    end
-otherwise
-   error('header:subsasgn:invalidAssignment', 'Invalid assignment')
+ ind = s(1).subs{:};
+ if numel(s)>1
+   switch s(2).type
+    case '.'
+     h.subheaders(ind) = setParam(h.subheaders(ind),s(2).subs,b);
+    otherwise
+     error('header:subsasgn:invalidIndexing', 'Invalid indexing')
+   end
+ else
+   if ~isa(b, 'subheader')
+     error('header:subsasgn:invalidAssignment', 'Not a subheader')
+   end
+   if isempty(h.subheaders)
+     h.subheaders = b;
+   else
+     h.subheaders(ind) = b;
+   end
+ end
+ otherwise
+  error('header:subsasgn:invalidAssignment', 'Invalid assignment')
 end
