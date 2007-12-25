@@ -9,7 +9,7 @@ function t = headerType(sh)
 %  parameter but there is a 'adversion' parameters it is assumed that
 %  subheader is from a raw ad data file. Possible header types returned
 %  by this method: 'event', 'eeg', 'rawpos', 'waveform', 'diode',
-%  'feature', 'cr', 'cluster', 'clbound', 'ad', 'unknown'
+%  'feature', 'cluster', 'clbound', 'ad', 'unknown'
 %
 
 %  Copyright 2005-2006 Fabian Kloosterman
@@ -51,7 +51,7 @@ if parm_id
   elseif findstr(program, 'spikeparms')
     t = 'feature';
   elseif findstr(program, 'crextract')
-    t = 'cr';
+    t = 'feature';
   elseif findstr(lower(program), 'xclust')
     if any( strcmp(sh.parms(:,1), 'Cluster') )
       t = 'cluster';
