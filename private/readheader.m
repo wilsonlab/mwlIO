@@ -14,7 +14,7 @@ function [h, hsize] = readheader(f)
 %  See also LOADHEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<1
     error('Invalid file')
@@ -48,13 +48,14 @@ end
 fpos = ftell(f);
 fseek(f, 0, 'bof');
 
-l = fgetl(f);
+%l = fgetl(f); %would take a long time if no text header is present
+l = fread(f, [1 numel(magic_start)], 'char=>char');
 if ~ischar(l) || ~strcmp(l, magic_start)
     %no recognizable header
     return
 end
 
-hsize = length(l)+1; %+1 for the new line
+hsize = numel(magic_start);
 
 while 1
   l = fgetl(f);
