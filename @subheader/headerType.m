@@ -12,7 +12,7 @@ function t = headerType(sh)
 %  'feature', 'cluster', 'clbound', 'ad', 'unknown'
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 %File Format field?

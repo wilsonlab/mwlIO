@@ -4,7 +4,7 @@ function sh = deleteParam(sh, parm)
 %  sh=DELETEPARAM(sh, param) remove a parameter from a subheader.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<2
   help(mfilename)

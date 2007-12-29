@@ -1,5 +1,5 @@
 function display(h, c)
-%DISPLAY disply object information
+%DISPLAY display object information
 %
 %  DISPLAY(f) displays header object information
 %
@@ -7,7 +7,7 @@ function display(h, c)
 %  classes, so that they can show their own title.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<2 || ~isscalar(c)
   c = 0;

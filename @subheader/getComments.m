@@ -7,7 +7,7 @@ function [result, i] = getComments(sh)
 %  numbers) of the comments.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 i = find( strcmp(sh.parms(:,1), '') );
 

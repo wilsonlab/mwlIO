@@ -4,6 +4,6 @@ function l = len(h)
 %  L=LEN(h) returns number of subheaders in header
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 l = length(h.subheaders);

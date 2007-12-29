@@ -5,7 +5,7 @@ function l = len(sh)
 %
 
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 l = length(sh.parms);

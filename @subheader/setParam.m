@@ -5,11 +5,11 @@ function sh = setParam(sh, parm, val)
 %  subheader. If the parameter does not exist it will be created.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<3
   help(mfilename)
-  retunr
+  return
 end
 
 if ~ischar(parm) || strcmp(parm, '')
@@ -18,7 +18,9 @@ if ~ischar(parm) || strcmp(parm, '')
 end
 
 if isempty(val)
-  error('subheader:setParam:invalidValue', 'Value cannot be empty')
+  %error('subheader:setParam:invalidValue', 'Value cannot be empty')
+  sh = deleteParam( sh, parm );
+  return
 end
 
 id = find( strcmp(sh.parms(:,1), parm) );
@@ -29,16 +31,7 @@ if (length(id)>1)
 end
 
 %convert parameter
-if ischar(val)
-  %fine
-elseif isnumeric(val)
-  val = num2str(val, 8);
-elseif iscell(val)
-  val = char(val);
-else
-  error('subheader:setParam:invalidValue', ...
-        'Conversion of value to string is not possible')
-end
+val = checkvalue(val);
 
 if isempty(id)
   %no such parameter yet, append

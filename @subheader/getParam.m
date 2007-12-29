@@ -4,7 +4,7 @@ function val = getParam(sh, parm)
 %  val=GETPARAM(h, param) returns value of a subheader parameter.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<2
   help(mfilename)

@@ -4,7 +4,7 @@ function sh = deleteComments(sh)
 %  sh=DELETECOMMENTS(sh) delete all comments from subheader
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 i = find( strcmp(sh.parms(:,1), '') );
 
