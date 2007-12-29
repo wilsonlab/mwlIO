@@ -7,13 +7,13 @@ function bf = set(bf,varargin)
 %
 %  Example
 %    f = mwlboundfile( 'test.dat', 'write');
-%    h = header( newheader('Date', now) );
+%    h = header('Date', now);
 %    f = set(f, 'header', h);
 %
 %  See also MWLFILEBASE/SET
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 propertyArgIn = varargin;
 while length(propertyArgIn) >= 2,

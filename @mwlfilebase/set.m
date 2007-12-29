@@ -15,7 +15,7 @@ function fb = set(fb,varargin)
 %  See also MWLFILEBASE/GET, HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if ismember( fb.mode, {'read', 'append'} )
     error('mwlfilebase:set:invalidMode', ['File is in ' fb.mode ' mode'])

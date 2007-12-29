@@ -11,20 +11,12 @@ function wf = closeHeader(wf)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 hdr = get(wf, 'header');
 
-if len(header) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
-sh = setParam(sh, 'File Format', 'waveform');
-sh = setParam(sh, 'nelect_chan', wf.nchannels);
-
-hdr(1) = sh;
+hdr('File Format') = 'waveform';
+hdr('nchannels') = wf.nchannels;
 
 wf = set(wf, 'header', hdr);
 

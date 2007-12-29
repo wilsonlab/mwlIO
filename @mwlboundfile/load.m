@@ -24,7 +24,7 @@ function cb = load(bf, cid)
 %    b = load(f);
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 fid = fopen( fullfile(bf), 'r');
 

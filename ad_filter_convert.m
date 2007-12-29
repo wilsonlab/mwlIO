@@ -12,7 +12,7 @@ function [lp, hp] = ad_filter_convert(FilterSetting)
 %    %returns low = 300, high = 6000
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 lp = -1;

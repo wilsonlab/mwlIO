@@ -11,7 +11,6 @@
 % Utilities
 %   ad_filter_convert - convert ad filter setting
 %   mwltypemapping    - type conversions
-%   newheader         - create new subheader
 %
 % Misc
 %   makesources       - compile mex files

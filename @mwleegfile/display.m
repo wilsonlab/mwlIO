@@ -7,7 +7,7 @@ function display(fb, c)
 %  classes, so that they can show their own title.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<2 || ~isscalar(c)
     c = 0;

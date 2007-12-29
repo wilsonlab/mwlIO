@@ -8,7 +8,7 @@ function retval = name( field )
 %    name( field )  % will return: 'test'
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 retval = {field.name};
 

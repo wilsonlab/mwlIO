@@ -11,10 +11,10 @@ function ft = getFileType(fb)
 %  See also HEADER/HEADERTYPE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if ismember(fb.mode, {'write', 'overwrite'})
     error('mwlfilebase:getHeaderType:invalidMode', 'File is in write mode')
 end
 
-ft = headerType(fb.header(1));
+ft = headerType(fb.header);

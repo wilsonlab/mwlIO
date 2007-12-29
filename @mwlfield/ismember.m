@@ -19,7 +19,7 @@ function [tf, loc] = ismember( A, B )
 %    ismember( field, {'dummy', 'test2', 'test3'} )  %will return: [0 1]
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 if isa(A, 'mwlfield')
     A = {A.name};

@@ -10,7 +10,7 @@ function val = get(ef, propName)
 %  See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 try
     val = ef.(propName);

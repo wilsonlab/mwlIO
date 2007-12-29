@@ -19,7 +19,7 @@ function bf = mwlboundfile(varargin)
 %  See also MWLOPEN, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     bf = struct();

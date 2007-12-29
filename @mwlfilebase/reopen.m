@@ -12,7 +12,7 @@ function f = reopen(fb) %#ok
 %  See also CLOSEHEADER, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if ismember(fb.mode, {'write', 'overwrite'})
     error('mwlfilebase:reopen:invalidMode', ['File is in ' fb.mode ' mode. Cannot reopen.'])

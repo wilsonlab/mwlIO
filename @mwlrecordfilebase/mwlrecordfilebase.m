@@ -17,10 +17,11 @@ function rfb = mwlrecordfilebase(varargin)
 %  See also MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     rfb.fields = [];
+    rfb.fields_interpretation = [];
     bf = mwlfilebase();
     rfb = class(rfb, 'mwlrecordfilebase', bf);
    
@@ -31,14 +32,8 @@ else
     bf = mwlfilebase(varargin{:});
     
     if ismember(bf.mode, {'read', 'append'})
-        flds = [];
         hdr = bf.header;
-        for h = 1:len(hdr)  
-            flds = getParam(hdr(h), 'Fields');
-            if ~isempty(flds)
-                break
-            end
-        end
+        flds = hdr('Fields');
         if isempty(flds)
             error('mwlrecordfilebase:mwlrecordfilebase:noFields', 'No Fields parameter in header')
         end
@@ -47,6 +42,8 @@ else
     else
         rfb.fields = [];        
     end
+    
+    rfb.fields_interpretation = [];
     
     rfb = class(rfb, 'mwlrecordfilebase', bf);
 end

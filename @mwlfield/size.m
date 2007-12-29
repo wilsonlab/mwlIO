@@ -9,7 +9,7 @@ function retval = size( field )
 %    size( field )  % will return: 2
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 if numel(field)==1
     retval = field.n;

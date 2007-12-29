@@ -13,7 +13,7 @@ function retval = processheader(h)
 %  See also READHEADER, LOADHEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if ~iscell(h)
     error('processheader:invalidArguments', 'Expecting cell array of strings')

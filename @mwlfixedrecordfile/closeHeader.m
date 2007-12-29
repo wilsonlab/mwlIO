@@ -11,22 +11,14 @@ function f = closeHeader(f)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 hdr = get(f, 'header');
 
-if len(hdr) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
-fileformat = getParam( sh, 'File Format' );
+fileformat = hdr('File Format');
 if isempty(fileformat)
-    sh = setParam(sh, 'File Format', 'fixedrecord');
+  hdr('File Format') = 'fixedrecord';
 end
-
-hdr(1) = sh;
 
 f = set(f, 'header', hdr);
 

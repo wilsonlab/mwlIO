@@ -15,7 +15,7 @@ function fmtstr = formatstr(fields, skip, delimiter, fmttype)
 %  target is textscan (0) or fprintf (1).
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 nfields = numel(fields);
 
@@ -30,9 +30,10 @@ if nargin<3 || isempty(delimiter)
 end
 
 if nargin<4 || isempty(fmttype) || fmttype==0
-    mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32'};
+  %mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32'};
+  mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32', 'd8', 's'};    
 else
-    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd'};
+    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd', 'd', 's'};
 end
 
 fmtstr = '';
@@ -47,19 +48,19 @@ for f=1:nfields
         fmt = '%';
     end
     
-    if field_type(f)==1 %char
-        if length(fields(f))>1 %treat as string
-            fmt = [fmt 's'];
-        else
-            fmt = [fmt mapping{field_type(f)}];
-        end
-    elseif field_type(f)>=2 && field_type(f)<=8
+    %if field_type(f)==1 %char
+    %    if length(fields(f))>1 %treat as string
+    %        fmt = [fmt 's'];
+    %    else
+    %        fmt = [fmt mapping{field_type(f)}];
+    %    end
+    if field_type(f)>=1 && field_type(f)<=10
         fmt = [fmt mapping{field_type(f)}];
     else
         error('mwlfield:formatstr:invalidType', 'Incorrect field type')
     end
 
-    if field_type(f)~=1 %char
+    if field_type(f)~=10 %string
         fmt2='';
     
         for i = 1:length(fields(f))
@@ -68,7 +69,12 @@ for f=1:nfields
     
         fmtstr = [fmtstr fmt2];
     else
-        fmtstr = [fmtstr fmt delimiter];
+      fmt2='';
+      sz = size(fields(f));
+      for i=1:prod(sz(2:end))
+        fmt2 = [fmt2 fmt delimiter];
+      end
+      fmtstr = [fmtstr fmt2];
     end
     
 end

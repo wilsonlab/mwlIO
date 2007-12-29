@@ -27,7 +27,7 @@ function val = get(fb, propName)
 %  See also HEADER, MWLFILEBASE/SET, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 flds = {'mode', 'filename', 'path', 'header', 'headersize', 'format'};
@@ -47,8 +47,7 @@ elseif strcmp( 'filesize', propName )
     end
 else
   try
-    val = getParam(fb.header, propName);
-    val = val{1};
+    val = fb.header(propName);
   catch
     error('mwlfilebase:get:invalidProperty', 'No such property.')
   end

@@ -8,7 +8,7 @@ function rfb = set(rfb,varargin)
 %  fields - record field descriptions (mwlfield object)
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 propertyArgIn = varargin;
 while length(propertyArgIn) >= 2,

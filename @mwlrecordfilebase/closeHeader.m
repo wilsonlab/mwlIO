@@ -7,7 +7,7 @@ function rfb = closeHeader(rfb)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 if nargout~=1
@@ -20,15 +20,7 @@ fldstr = print( rfb.fields );
 
 hdr = get(rfb, 'header');
 
-if len(hdr) == 0
-    sh = subheader();
-else
-    sh = hdr(1);
-end
-
-sh = setParam(sh, 'Fields', fldstr);
-
-hdr(1) = sh;
+hdr('Fields') = fldstr;
 
 rfb = set(rfb, 'header', hdr);
 

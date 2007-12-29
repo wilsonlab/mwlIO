@@ -6,10 +6,10 @@ function val = get(ef, propName)
 %  from its base classes):
 %  string_size - number of characters in an event string
 %
-%   See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
+%   See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 try
     val = ef.(propName);

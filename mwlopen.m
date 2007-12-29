@@ -13,7 +13,7 @@ function f = mwlopen(filename)
 %  MWLBOUNDFILE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 f = mwlfilebase(filename);
 filetype = getFileType(f);

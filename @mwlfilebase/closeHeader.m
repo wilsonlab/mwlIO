@@ -6,14 +6,14 @@ function fb = closeHeader(fb)
 %
 %  Example
 %    f=mwlfilebase('test.dat', 'write');
-%    h = header( newheader( 'MyParameter', 1) );
+%    h = header( 'MyParameter', 1);
 %    f.header = h;
 %    f=closeHeader(f);
 %
 %  See also HEADER, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 if ismember(fb.mode, {'read', 'append'})
@@ -22,22 +22,14 @@ end
 
 hdr = get(fb, 'header');
 
-if len(hdr) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
 if ismember(fb.format, 'binary')
-    sh = setParam(sh, 'File type', 'Binary');
+  hdr('File type') = 'Binary';
 else
-    sh = setParam(sh, 'File type', 'Ascii');
+  hdr('File type') = 'Ascii';
 end
 
-sh = setParam(sh, 'Program', 'Matlab mwlIO toolbox');  
-sh = setParam(sh, 'Program version', 'local');  
-
-hdr(1) = sh;
+hdr('Program') = 'Matlab mwlIO toolbox';  
+hdr('Program version') = 'local';  
 
 fb = set(fb, 'header', hdr);
 

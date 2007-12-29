@@ -7,7 +7,7 @@ function display(fb, c)
 %  classes, so that they can show their own title.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 if nargin<2 || ~isscalar(c)
@@ -21,3 +21,8 @@ end
 display(get(fb, 'mwlfilebase'), 1)
 
 display(fb.fields)
+
+if ~isempty(fb.fields_interpretation)
+  disp('-- Interpretation of fields: --')
+  display(fb.fields_interpretation)
+end

@@ -7,7 +7,7 @@ function i = findRecords(f, field, bounds)
 %
 
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 if nargin<3

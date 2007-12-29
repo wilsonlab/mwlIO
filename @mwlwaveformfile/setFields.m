@@ -10,7 +10,7 @@ function wf = setFields(wf)
 %   | waveform   | short      | nchan*nsamples |
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin>1
     warning('mwlwaveformfile:mwleaveformfile:invalidFIelds', ...
@@ -20,3 +20,6 @@ end
 fields = mwlfield({'timestamp', 'waveform'}, {'long', 'short'}, {1 wf.nchannels*wf.nsamples});
 
 wf.mwlfixedrecordfile = setFields(wf.mwlfixedrecordfile, fields);
+
+fields(2).n = [wf.nchannels wf.nsamples];
+wf = setFieldsInterp(wf,fields); 

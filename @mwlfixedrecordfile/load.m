@@ -14,10 +14,14 @@ function data = load(frf, load_fields, i)
 %  files.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
-fields = get(frf, 'fields');
+fields = get(frf, 'fields_interpretation');
+if isempty(fields)
+  fields = get(frf,'fields');
+end
+
 nfields = numel(fields);
 
 if nargin<2 || isempty(load_fields) || ismember( {'all'}, load_fields )
@@ -77,10 +81,20 @@ if ismember(get(frf, 'format'), {'binary'})
 
      for f=1:numel(field_id)
        
-        if strcmp(type(fields(f)), 'char') && length(fields(f))>1
-            data{f} = cellstr( char(data{f})' )';
+        %if strcmp(type(fields(f)), 'char') && length(fields(f))>1
+        %    data{f} = cellstr( char(data{f})' )';
+        %end
+        if strcmp(type(fields(f)),'string')
+          sz = size( fields(f) );
+          nr = size( data{f}, ndims(data{f}) );
+          data{f} = deblank( mat2cell( char(data{f}(:,:))', ones(1,nr*prod(sz(2:end))), sz(1) ));
+          if numel(sz)>1
+            data{f} = reshape(data{f}, [sz(2:end) nr] );
+          else
+            data{f} = data{f}';
+          end
         end
-            
+        
      end
 
     %create structure
@@ -122,9 +136,12 @@ else %ascii
         nrows = numel( data{1} );
         
         for f=1:numel(field_id)
-            if length(fields(field_id(f)))>1 && strcmp(type(fields(field_id(f))), 'char')
+            if strcmp(type(fields(field_id(f))), 'string')
                 outdata.(name(fields(field_id(f)))) = data{1 + ofs}';
-                ofs = ofs + 1;
+                sz = size(fields(f));
+                outdata.(name(fields(field_id(f)))) = shiftdim( reshape( ...
+                    cat( 2, data{(1:prod(sz(2:end)))+ofs} ), [nrows sz(2:end)]), 1 );
+                ofs = ofs + prod(sz(2:end));
             else
                 outdata.(name(fields(field_id(f)))) = shiftdim( reshape( ...
                     cell2mat( data( ( 1:length(fields(field_id(f))) ) + ofs ) ), [ nrows size(fields(field_id(f)))] ), 1) ;

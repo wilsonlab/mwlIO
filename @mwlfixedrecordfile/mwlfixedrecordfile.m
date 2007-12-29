@@ -21,7 +21,7 @@ function frf = mwlfixedrecordfile(varargin)
 %  See also MWLRECORDFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     frf.recordsize = -1;

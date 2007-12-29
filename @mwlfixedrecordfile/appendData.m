@@ -11,7 +11,7 @@ function frf = appendData(frf, data)
 %  it is treated as a string. For such a field one can pass in a cell
 %  array of strings.
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 %can only append data in append mode
 
@@ -23,7 +23,11 @@ if ~strcmp( get(frf, 'mode'), 'append' )
     error('mwlfixedrecordfile:appendData:invalidMode', 'Cannot append data if not in append mode')
 end
 
-fields = get(frf, 'fields');
+fields = get(frf,'fields_interpretation');
+if isempty(fields)
+  fields = get(frf, 'fields');
+end
+
 nfields = numel(fields);
 
 names = name(fields);
@@ -61,37 +65,49 @@ end
 for f =1:nfields
 
     %check data type and convert
-    if strcmp(type(fields(f)),'char') && length(fields(f))>1
+    if strcmp(type(fields(f)),'string')
         if ismember( get(frf,'format'), {'binary'}) %binary file        
-            if ischar(data{f})
-                data{f} = uint8(data{f});
-                if size(data{f},2) < length(fields(f))
-                    data{f}(:,(size(data{f},2)+1):length(fields(f))) = 0;
-                elseif size(data{f},2) > length(fields(f))
-                    data{f} = data{f}(:,1:length(fields(f)));
+            %if ischar(data{f})
+            %    data{f} = uint8(data{f});
+            %    if size(data{f},2) < length(fields(f))
+            %        data{f}(:,(size(data{f},2)+1):length(fields(f))) = 0;
+            %    elseif size(data{f},2) > length(fields(f))
+            %        data{f} = data{f}(:,1:length(fields(f)));
+            %    end
+            if iscellstr(data{f}) %size should be:
+                                  %[size(fields(f))(2:end) x nrecords]
+                %maxlen = length(fields(f));
+                %tmp=zeros(numel(data{f}), maxlen, 'uint8');
+                %for r=1:numel(data{f})
+                %    tmp(r, 1:numel(data{f}{r})) = uint8(data{f}{r});
+                %end
+                %data{f}=tmp;
+                
+                sz = size(fields(f));
+                data{f} = uint8( char(data{f}{:}) )';
+                if size(data{f},1)<sz(1)
+                  data{f}(sz(1),1) = 0;
+                elseif size(data{f},1)>sz(1)
+                  data{f} = data{f}(1:sz(1),:);
                 end
-            elseif iscellstr(data{f})
-                maxlen = length(fields(f));
-                tmp=zeros(numel(data{f}), maxlen, 'uint8');
-                for r=1:numel(data{f})
-                    tmp(r, 1:numel(data{f}{r})) = uint8(data{f}{r});
-                end
-                data{f}=tmp;
             else
                 error('mwlfixedrecordfile:appendData:invalidData', ['Invalid data for field ' num2str(f)])
             end
-            data{f} = data{f}';
-            nrows_field = size(data{f}, 2);
+            %data{f} = data{f}';
+            %nrows_field = size(data{f}, 2);
+            nrows_field=size(data{f},2)./prod(sz(2:end));
         else %ascii
-            if ischar(data{f})
+            %if ischar(data{f})
                 %convert to cellstr
-                data{f} = cellstr(data{f});
-            elseif iscellstr(data{f})
+            %    data{f} = cellstr(data{f});
+            if iscellstr(data{f})
                 %pass
             else
                 error('mwlfixedrecordfile:appendData:invalidData', ['Invalid data for field ' num2str(f)])
             end
-            nrows_field = numel( data{f} );
+            %nrows_field = numel( data{f} );
+            sz = size(fields(f));
+            nrows_field=numel(data{f})./prod(sz(2:end));
         end
     else
         datatype = matcode(fields(f));
@@ -108,10 +124,12 @@ for f =1:nfields
     if nrows_field<0
         %number of records in input data;
         nrows_field = numel(data{f}) ./ length(fields(f)); 
-        if rem(nrows_field,1)~=0
-            error('mwlfixedrecordfile:appendData:invalidData', 'Incorrect number of elements')
-        end    
     end
+
+    if rem(nrows_field,1)~=0
+      error('mwlfixedrecordfile:appendData:invalidData', 'Incorrect number of elements')
+    end    
+    
     
     if f==1
         nrows = nrows_field;
@@ -130,9 +148,12 @@ else %ascii file
     fo = 0;
     tmp = {};
     for f = 1:nfields
-        if strcmp(type(fields(f)),'char') && length(fields(f))>1
-            tmp(1+fo,1:nrows) = data{f}(:)';
-            fo = fo + 1;
+        if strcmp(type(fields(f)),'string')
+            sz = size(fields(f));
+            %tmp(1+fo,1:nrows) = data{f}(:)';
+            ntmp = prod(sz(2:end));
+            tmp((1:ntmp)+fo,1:nrows) = reshape( data{f}, ntmp, nrows );
+            fo = fo + ntmp;
         else    
             tmp((1:length(fields(f)))+fo,1:nrows) = mat2cell( reshape( data{f}, length(fields(f)), nrows ), ones(1, length(fields(f))), ones(nrows,1));
             fo = fo + length(fields(f));

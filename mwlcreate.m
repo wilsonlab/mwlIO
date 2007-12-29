@@ -35,7 +35,7 @@ function f = mwlcreate(filename, filetype, varargin)
 %  MWLFEATUREFILE, MWLFIXEDRECORDFILE, MWLWAVEFORMFILE, HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 args = struct('Header', [], 'Data', [], 'Fields', {[]}, 'FileFormat', 'binary', 'NSamples', [], 'NChannels', [], 'Mode', 'write');

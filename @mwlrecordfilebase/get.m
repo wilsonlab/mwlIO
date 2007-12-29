@@ -9,7 +9,7 @@ function val = get(rfb, propName)
 %  See also MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 try
     val = rfb.(propName);

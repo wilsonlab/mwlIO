@@ -20,7 +20,7 @@ function data = loadrange(frf, loadflds, irange, rangefield)
 %  Note: random access is not supported
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 fields = get(frf, 'fields');
 

@@ -9,14 +9,17 @@ function data = loadField(frf, loadfield, irange)
 %  start and end record indices of the range.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<2
     help(mfilename)
     return
 end
 
-fields = get(frf, 'fields');
+fields = get(frf, 'fields_interpretation');
+if isempty(fields)
+  fields = get(frf, 'fields');
+end
 nfields = numel(fields);
 nrecords = get(frf, 'nrecords');
 

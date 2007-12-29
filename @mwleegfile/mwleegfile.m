@@ -28,10 +28,10 @@ function ef = mwleegfile(varargin)
 %    %create new eeg file, with 16 channels and 1000 samples/channel
 %    f = mwleegfile( 'data.eeg', 'write', 16, 1000 );
 %
-%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
   ef = struct('nsamples', 0, 'nchannels', 0);
@@ -64,20 +64,26 @@ else
     ef.nchannels = 0;
     
     hdr = get(frf, 'header');
-    for h=1:len(hdr)
-      sh = hdr(h);
-      try
-        ef.nchannels = str2double(getParam(sh, 'nchannels'));
-      catch
-        continue
-      end
-    end
+    ef.nchannels = str2double( hdr('nchannels') );
+    
+    %for h=1:len(hdr)
+    %  sh = hdr(h);
+    %  try
+    %    ef.nchannels = str2double(getParam(sh, 'nchannels'));
+    %  catch
+    %    continue
+    %  end
+    %end
     
     if ef.nchannels == 0
       error('mwleegfile:mwleegfile:invalidFile', 'Cannot determine number of channels in file')
     end
     
     ef.nsamples = ef.nsamples ./ ef.nchannels;
+    
+    flds = get(frf,'fields');
+    flds(2).n = [ef.nchannels ef.nsamples];
+    frf = setFieldsInterp(frf,flds);    
     
   else
         

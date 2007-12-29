@@ -9,7 +9,7 @@ function retval = print( field )
 %    f = print( field );
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 n = numel(field);
 

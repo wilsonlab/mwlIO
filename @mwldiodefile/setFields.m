@@ -13,7 +13,7 @@ function pf = setFields(pf)
 %   | yback      | short      | 1          |
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin>1
     warning('mwldiodefile:setFields:invalidFields', ...

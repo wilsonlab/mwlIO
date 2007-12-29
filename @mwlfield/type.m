@@ -8,6 +8,6 @@ function retval = type( field )
 %    type( field )  % will return: 'ulong'
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 retval = mwltypemapping( [field.type], 'code2str');

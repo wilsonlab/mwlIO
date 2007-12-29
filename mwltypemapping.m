@@ -10,7 +10,7 @@ function retval = mwltypemapping(mwltype, mapping)
 %  code - numeric type code as used in mwl files
 %  str - string type code as used mwl files
 %  size - size of type
-%  mat - string type code as used matlab
+%  mat - string type code as used in matlab
 %  mex - numeric type code as used in mex files
 %
 %  Table of all mappings:
@@ -24,27 +24,31 @@ function retval = mwltypemapping(mwltype, mapping)
 %  |  6   | func   | -1   |         |  0  |
 %  |  7   | ffunc  | -1   |         |  0  |
 %  |  8   | ulong  |  4   |  uint32 | 13  |
+%  |  9   | int8   |  1   |   int8  |  8  |
+%  |  10  | string |  1   |  uint8  |  9  |
 %  ----------------------------------------
 %
 %  Example
 %    mwltypemapping('short', 'str2code') %returns 2
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin~=2
     help(mfilename)
     return
 end
 
-map = {'char', 'short', 'int', 'float', 'double', 'func', 'ffunc', 'ulong'};
-matmap = {'uint8', 'int16', 'int32', 'single', 'double', '', '', 'uint32'};
-mexmap = [9, 10, 12, 7, 6, 0, 0, 13];
-sizemap = [1 2 4 4 8 -1 -1 4];
+map =    {'char',  'short', 'int',   'float',  'double', 'func', 'ffunc',  'ulong', 'int8', 'string'};
+matmap = {'uint8', 'int16', 'int32', 'single', 'double',  '',     '',     'uint32', 'int8',  'uint8'};
+mexmap = [  9,       10,      12,      7,        6,       0,      0,        13,       8,       9    ];
+sizemap =[  1         2        4       4         8       -1      -1          4        1        1    ];
+
+ntypes = numel(map);
 
 switch mapping
     case 'code2str'
-        if ~isnumeric(mwltype) || any(mwltype<1) || any(mwltype>8)
+        if ~isnumeric(mwltype) || any(mwltype<1) || any(mwltype>ntypes)
             error('Invalid mwl type code')
         else
             retval = map(mwltype);
@@ -59,12 +63,12 @@ switch mapping
 
         mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
 
-        [dummy, retval] = ismember( mwltype, map );
+        [dummy, retval] = ismember( mwltype, map ); %#ok
         
         retval( retval == 0) = -1;
         
     case 'code2size'
-        if ~isnumeric(mwltype) || any(mwltype<1) || any(mwltype>8)
+        if ~isnumeric(mwltype) || any(mwltype<1) || any(mwltype>ntypes)
             error('Invalid mwl type code')
         else
             retval = sizemap(mwltype);
@@ -78,7 +82,7 @@ switch mapping
         end
         mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
            
-        [dummy, retval] = ismember( mwltype, map );
+        [dummy, retval] = ismember( mwltype, map ); %#ok
         
         retval( retval == 0) = -1;
         
@@ -93,8 +97,7 @@ switch mapping
         end
         mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
            
-        [dummy, id] = ismember( mwltype, map );        
-
+        [dummy, id] = ismember( mwltype, map ); %#ok
         retval={};
         retval( id==0 ) = {''};
         retval( id~=0 ) = matmap( id( id~=0 ) );
@@ -108,7 +111,7 @@ switch mapping
         end
         mwltype( ismember(mwltype, {'long'}) ) = {'ulong'};
            
-        [dummy, retval] = ismember( mwltype, map );
+        [dummy, retval] = ismember( mwltype, map ); %#ok
         
         retval( retval == 0) = -1;
         

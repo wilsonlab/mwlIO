@@ -8,7 +8,7 @@ function frf = set(frf,varargin)
 %  
 
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 frf.mwlrecordfilebase = set(frf.mwlrecordfilebase, varargin{:});
 

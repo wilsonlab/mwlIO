@@ -14,7 +14,7 @@ function pf = setFields(pf)
 %   | target y   |  char      |  1         |
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin>1
     warning('mwlposfile:setFields:invalidFields', ...

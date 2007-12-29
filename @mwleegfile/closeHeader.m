@@ -11,20 +11,12 @@ function ef = closeHeader(ef)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 hdr = get(ef, 'header');
 
-if len(hdr) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
-sh = setParam(sh, 'File Format', 'eeg');
-sh = setParam(sh, 'nelect_chan', ef.nchannels);
-
-hdr(1) = sh;
+hdr('File Format')= 'eeg';
+hdr('nchannels')= ef.nchannels;
 
 ef = set(ef, 'header', hdr);
 

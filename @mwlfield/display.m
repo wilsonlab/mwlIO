@@ -4,7 +4,7 @@ function display( field )
 %  DISPLAY(f) displays mwlfield object information
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 n = numel(field);
 retval{1} = sprintf('   %10s %7s %4s', 'Name', 'Type', 'N');

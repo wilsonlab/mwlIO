@@ -7,10 +7,10 @@ function val = get(wf, propName)
 %  nsamples - number of samples / channel in a waveform
 %  nchannels - number of data channels
 %
-%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 try
     val = wf.(propName);

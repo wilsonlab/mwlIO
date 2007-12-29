@@ -9,7 +9,7 @@ function e = eq( A, B )
 %    f1 == f2 %returns 0
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 if ~isa(A, 'mwlfield') || ~isa(B, 'mwlfield')
     e = 0;

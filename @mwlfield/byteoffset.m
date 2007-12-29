@@ -9,7 +9,7 @@ function retval = byteoffset( field )
 %    b = byteoffset( field );  %will return: [0 2]
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 retval = bytesize( field );
 retval = cumsum( [0 retval(1:end-1)] );

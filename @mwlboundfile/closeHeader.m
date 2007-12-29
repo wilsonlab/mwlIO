@@ -11,7 +11,7 @@ function bf = closeHeader(bf)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargout~=1
     warning('mwlboundfile:closeHeader:invalidOutput', 'It is safer to provide an output argument. Aborted.')

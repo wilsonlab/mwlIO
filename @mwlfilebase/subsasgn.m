@@ -11,7 +11,7 @@ function fb = subsasgn(fb,s, b)
 %  See also MWLFILEBASE/SET
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 switch s.type
 case '.'

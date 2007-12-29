@@ -9,7 +9,7 @@ function retval = length( field )
 %    length( field )  % will return: 2
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 
 retval = zeros( 1, numel(field) );

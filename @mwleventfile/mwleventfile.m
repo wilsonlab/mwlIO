@@ -21,10 +21,10 @@ function ef = mwleventfile(varargin)
 %    %create new file
 %    f = mwleventfile( 'events.dat', 'write', 100 );
 %
-%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
   ef = struct('string_size', 80);
@@ -33,6 +33,7 @@ if nargin==0
 elseif isa(varargin{1}, 'mwleventfile')
   ef = varargin{1};
 else
+
   frf = mwlfixedrecordfile(varargin{:});
   
   if ismember(frf.mode, {'read', 'append'})
@@ -49,6 +50,10 @@ else
     end
     
     ef.string_size = length(fields(2));
+    
+    flds = get(frf,'fields');
+    flds(2).type = 'string';
+    frf = setFieldsInterp(frf,flds) ;   
     
   else
     if nargin>2 && isscalar(varargin{3}) && ~ischar(varargin{3}) && varargin{3}>0

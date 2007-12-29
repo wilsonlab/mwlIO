@@ -23,4 +23,5 @@
 %   display      - show mwlfield object information
 %   eq           - equality test for mwlfield objects
 %   ismember     - true if set member
-%   bytesize     - BYTESIZE return the total field size in bytes
+%   bytesize     - return the total field size in bytes
+%   subsasgn     - subscripted assignment

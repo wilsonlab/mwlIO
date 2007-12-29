@@ -32,7 +32,7 @@ function fb = mwlfilebase(varargin)
 %  See also MWLFILEBASE/GET, MWLFILEBASE/SET
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     fb.mode = '';       % read, append, write or overwrite
@@ -46,18 +46,18 @@ if nargin==0
 elseif isa(varargin{1}, 'mwlfilebase')
     fb = varargin{1};
 elseif nargin>3
-    error('mwlfilebae:mwlfilebase:invalidArguments', 'Too many arguments')
+    error('mwlfilebase:mwlfilebase:invalidArguments', 'Too many arguments')
 else
     % check input parameters
     if ~ischar( varargin{1})
-        error('mwlfilebae:mwlfilebase:invalidArguments','Invalid file name')
+        error('mwlfilebase:mwlfilebase:invalidArguments','Invalid file name')
     else
         filename = varargin{1};
     end
-    if nargin>1
+    if nargin>1 && ~isempty(varargin{2})
         mode = varargin{2};
         if ~ismember(mode, {'read', 'append', 'write', 'overwrite'})
-            error('mwlfilebae:mwlfilebase:invalidArguments','Invalid mode parameter');
+            error('mwlfilebase:mwlfilebase:invalidArguments','Invalid mode parameter');
         end
     else
         mode = 'read';
@@ -89,19 +89,19 @@ else
         fid = fopen(fullfile(fb.path, fb.filename), 'rb');
     
         if fid == -1
-            error('mwlfilebae:mwlfilebase:invalidFile',['Cannot open file: ' fullfile(fb.path, fb.filename)])
+            error('mwlfilebase:mwlfilebase:invalidFile',['Cannot open file: ' fullfile(fb.path, fb.filename)])
         end
     
         [fb.header fb.headersize] = loadheader(fid);
         
         if fb.headersize == 0
             fclose(fid);
-            error('mwlfilebae:mwlfilebase:invalidFile','No valid header in file')
+            error('mwlfilebase:mwlfilebase:invalidFile','No valid header in file')
         end
 
-        fileformat = getParam(fb.header, 'File type');
+        fileformat = fb.header('File type');
 
-        if isempty(fileformat) || strcmp(fileformat{1}, 'Binary')
+        if isempty(fileformat) || strcmp(fileformat, 'Binary')
             fb.format = 'binary';
         else
             fb.format = 'ascii';
@@ -113,13 +113,13 @@ else
                     
     else % if file is opened in write mode
         if exist(filename, 'file') && ismember(fb.mode, {'write'})
-            error('mwlfilebae:mwlfilebase:invalidFile','Error creating new file: file already exists')
+            error('mwlfilebase:mwlfilebase:invalidFile','Error creating new file: file already exists')
         end
         
         fid = fopen(filename, 'w');
         
         if fid == -1
-            error('mwlfilebae:mwlfilebase:invalidFile','Cannot create file')
+            error('mwlfilebase:mwlfilebase:invalidFile','Cannot create file')
         end
         
         [fb.path, fb.filename, ext, versn] = fileparts(filename);

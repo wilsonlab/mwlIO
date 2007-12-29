@@ -16,7 +16,7 @@ function pf = mwlposfile(varargin)
 %  See also MWLRECORDFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     pf = struct('currentrecord', 0, 'currentoffset', 0, 'currenttimestamp', 0, 'nrecords', 0);

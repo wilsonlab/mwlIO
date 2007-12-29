@@ -1,18 +1,13 @@
 function retval = processFields(flds)
 %PROCESSFIELDS parse fields description
 %
-%   Syntax
-%   mwlfield = processFields( field_string )
-%
-%   This function will parse the value of the Fields parameter in mwl file
-%   headers and return them as a mwlField object
-%
-%   Examples
-%
-%   See also 
+%   mwlfield=processFields(field_string) This function will parse the
+%   value of the Fields parameter in mwl file headers and return them as
+%   a mwlField object.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin<1 || ~ischar(flds)
     error('Expecting fieldstring')
@@ -38,12 +33,12 @@ if ~isempty(strfind(flds, ','))
             error(['Cannot process field: ' fields{f}])
         else
             field_name{f} = attr{1};
-            field_type(f) = str2num( attr{2} );
-            field_size{f} = str2num( attr{4} );
+            field_type(f) = str2num( attr{2} ); %#ok
+            field_size{f} = str2num( attr{4} ); %#ok
         end
         
     end
-    
+
     retval = mwlfield( field_name, field_type, field_size );
     
 else
@@ -80,7 +75,7 @@ else
          end
         
     end
-    
+
     retval = mwlfield( field_name, field_type, field_size );
     
 end

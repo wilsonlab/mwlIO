@@ -11,10 +11,13 @@ function b = subsref(fb,s)
 %  See also MWLFILEBASE/GET
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
-switch s.type
+switch s(1).type
 case '.'
-    b = get(fb, s.subs);
+    b = get(fb, s(1).subs);
+    if numel(s)>1
+      b = subsref(b,s(2:end));
+    end
 end
 

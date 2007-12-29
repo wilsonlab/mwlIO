@@ -8,6 +8,6 @@ function retval = code( field )
 %    code( field )  % will return: 1
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 retval = [field.type];

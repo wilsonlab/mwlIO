@@ -19,7 +19,7 @@ function data = loadrange(frf, varargin)
 %    reads binary files.
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 
 if ismember(get(frf, 'format'), {'ascii'})

@@ -6,7 +6,7 @@ function retval = mex_fielddef( field )
 %
 
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 b = num2cell( byteoffset( field ) );
 m = num2cell( mexcode( field  ) );

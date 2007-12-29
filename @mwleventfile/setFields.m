@@ -10,7 +10,7 @@ function ef = setFields(ef)
 %   | string     | char       | string_size  |
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin>1
     warning('mwleventfile:setFields:invalidFields', ...
@@ -20,3 +20,6 @@ end
 fields = mwlfield({'timestamp', 'string'}, {'ulong', 'char'}, {1 ef.string_size});
 
 ef.mwlfixedrecordfile = setFields(ef.mwlfixedrecordfile, fields);
+
+fields(2).type = 'string';
+ef = setFieldsInterp(ef,fields);

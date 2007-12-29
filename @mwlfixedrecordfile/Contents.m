@@ -12,10 +12,12 @@
 % Writing
 %   appendData         - append new data to fixed record file
 %   setFields          - create fields for new fixed record file
+%   closeHeader        - write header to disk and reopen file in append mode
 %
 % Misc
 %   display            - display object information
 %   get                - get mwlfixedrecordfile properties
 %   set                - set object properties and return the updated object
-%   closeHeader        - CLOSEHEADER write header to disk and reopen file in append mode
-%   subsref            - SUBSREF subscripted indexing
+%   subsref            - subscripted indexing
+%   end                - end indexing
+%   setFieldsInterp    - set reinterpretation fields

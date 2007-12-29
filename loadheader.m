@@ -15,12 +15,16 @@ function [h, hsize] = loadheader(f)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
-h = header();
 [hdr hsize] = readHeader(f);
 
 subheaders = processHeader(hdr);
 
-h(1:length(subheaders)) = subheaders;
+if isempty(subheader)
+  h = header();
+else
+  h = header(subheaders);
+end
+
 

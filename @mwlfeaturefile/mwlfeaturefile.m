@@ -18,10 +18,10 @@ function ff = mwlfeaturefile(varargin)
 %  Example
 %    f = mwlfeaturefile('data.pxyabw');
 %
-%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     ff = struct();

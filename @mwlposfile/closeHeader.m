@@ -11,19 +11,11 @@ function pf = closeHeader(pf)
 %  See also HEADER
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 hdr = get(pf, 'header');
 
-if len(header) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
-sh = setParam(sh, 'File Format', 'rawpos');
-
-hdr(1) = sh;
+hdr('File Format') = 'rawpos';
 
 pf = set(pf, 'header', hdr);
 

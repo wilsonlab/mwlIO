@@ -9,7 +9,7 @@ function retval = mexcode( field )
 %    mexcode( field )  % will return: 9
 %
 
-%  Copyright 2006-2006 Fabian Kloosterman
+%  Copyright 2006-2008 Fabian Kloosterman
 
 typestr = mwltypemapping( [field.type], 'code2str');
 retval = mwltypemapping( typestr, 'str2mex');

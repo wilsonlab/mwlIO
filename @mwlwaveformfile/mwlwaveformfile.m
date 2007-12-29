@@ -28,10 +28,10 @@ function wf = mwlwaveformfile(varargin)
 %    %create new waveform file, with 8 channels and 64 samples/channel
 %    f = mwlwaveformfile( 'data.tt', 'write', 8, 64 );
 %
-%  See also MWLFIXEDRECORDFILE, MWLRECORDFILE, MWLFILEBASE
+%  See also MWLFIXEDRECORDFILE, MWLRECORDFILEBASE, MWLFILEBASE
 %
 
-%  Copyright 2005-2006 Fabian Kloosterman
+%  Copyright 2005-2008 Fabian Kloosterman
 
 if nargin==0
     wf = struct('nsamples', 0, 'nchannels', 0);
@@ -62,23 +62,32 @@ else
     
     wf.nsamples = length(fields(2));
     
-    wf.nchannels = 0;
+    wf.nchannels = [];
     
     hdr = get(frf, 'header');
+    
     for h=1:len(hdr)
-      sh = hdr(h);
-      try
-        wf.nchannels = str2double(getParam(sh, 'nelect_chan'));
-      catch
-        continue
+      wf.nchannels = hdr(h).('nelect_chan');
+      if isempty( wf.nchannels )
+        wf.nchannels = hdr(h).('nchannels');
+      end
+      if ~isempty(wf.nchannels)
+        break
       end
     end
+    wf.nchannels
     
-    if wf.nchannels == 0
+    if isempty(wf.nchannels)
       error('mwlwaveformfile:mwlwaveformfile:invalidFile', 'Cannot determine number of channels in file')
+    else
+      wf.nchannels = str2double(wf.nchannels);
     end
-    
+    wf.nchannels    
     wf.nsamples = wf.nsamples ./ wf.nchannels;
+
+    flds = get(frf,'fields');
+    flds(2).n = [wf.nchannels wf.nsamples];
+    frf = setFieldsInterp(frf,flds);    
     
   else
     
