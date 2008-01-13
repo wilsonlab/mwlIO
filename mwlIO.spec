@@ -6,15 +6,14 @@ License: GPL
 Group: MWL
 Prefix: /opt/matlabR14
 Requires: matlabR14 >= 7.0.1
-
-URL: http://www.mwl.mit.edu/
-Source0: mwlIO.tar.gz
-BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildArch: i386
+URL: http://www.mwl.mit.edu/
+Source0: %{name}-%{version}-%{release}.%{buildarch}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-buildroot
 AutoReqProv: no # don't try to figure out deps from the shared library (.so) files
 
 %description
-This package contains a library of usefull matlab functions
+This package contains a library of useful matlab functions
 
 #### DEFINES
 
@@ -28,7 +27,7 @@ mkdir $RPM_BUILD_ROOT
 
 
 #### SETUP
-%setup -n mwlIO
+%setup -n %{name}
 
 
 #### BUILD
@@ -56,9 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/opt/matlabR14/toolbox/mwlIO
 cp -rf $RPM_BUILD_DIR/mwlIO/* $RPM_BUILD_ROOT/opt/matlabR14/toolbox/mwlIO
 
-mkdir -p $RPM_BUILD_ROOT/opt/matlabR14/help/toolbox/mwlIO
-mv -f $RPM_BUILD_ROOT/opt/matlabR14/toolbox/mwlIO/doc/* $RPM_BUILD_ROOT/opt/matlabR14/help/toolbox/mwlIO
-rm -rf $RPM_BUILD_ROOT/opt/matlabR14/toolbox/mwlIO/doc
+#mkdir -p $RPM_BUILD_ROOT/opt/matlabR14/help/toolbox/mwlIO
+#mv -f $RPM_BUILD_ROOT/opt/matlabR14/toolbox/mwlIO/doc/* $RPM_BUILD_ROOT/opt/matlabR14/help/toolbox/mwlIO
+#rm -rf $RPM_BUILD_ROOT/opt/matlabR14/toolbox/mwlIO/doc
 
 
 #### POST-INSTALL
@@ -85,9 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 # don't mark this as config so we update them by default
-%docdir /opt/matlabR14/help/toolbox/mwlIO/
+#%docdir /opt/matlabR14/help/toolbox/mwlIO/
 /opt/matlabR14/toolbox/mwlIO
-/opt/matlabR14/help/toolbox/mwlIO
+#/opt/matlabR14/help/toolbox/mwlIO
 
 %changelog
 
