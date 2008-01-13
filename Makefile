@@ -7,7 +7,7 @@ BUILDMEX = no
 # yes/no build documentation (requires fkHelp toolbox)
 BUILDDOC = yes
 # command line options for matlab
-MATLABOPTIONS = -nosplash -nodisplay
+MATLABOPTIONS = -nosplash -nodesktop
 # matlab binary
 MATLABBIN = matlabR14
 # documentation path
