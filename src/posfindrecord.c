@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <math.h>
 #include <time.h>
 #include <mat.h>
@@ -25,9 +26,9 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   unsigned long nrecords = 0;
   char tval[6];
   double recid;
-  unsigned long timestamp = 0;
+  uint32_t timestamp = 0;
   int i;
-  unsigned long offset;
+  uint32_t offset;
 
   /*create empty outputs*/
   for (i=0; i<nlhs; i++) {
@@ -71,7 +72,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
     if (fread(tval, 1, 6, fid)==6) {
       offset = ftell(fid)-6;
       if (mxIsInf(recid)==0 && (nrecords == recid)) {
-	  timestamp = *((unsigned long*)(&(tval[2])));
+	  timestamp = *((uint32_t*)(&(tval[2])));
 	  break;
       }
       nrecords++;
@@ -81,7 +82,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 	offset = record_offset;
 	timestamp = 0;
      } else
-	timestamp = *((unsigned long*)(&(tval[2])));
+	timestamp = *((uint32_t*)(&(tval[2])));
       break;
     }
   }

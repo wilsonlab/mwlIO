@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <math.h>
 #include <time.h>
 #include <mat.h>
@@ -16,7 +17,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   int ncells;
   int nrows;
   int *ncol;
-  int *data_type;
+  mxClassID *data_type;
   int *element_size;
   int *col_offset;
   int matrix_width = 0;
@@ -60,7 +61,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   nrows = mxGetScalar(prhs[2]);
 
   ncol = (int*) calloc(ncells, sizeof(int));
-  data_type = (int*) calloc(ncells, sizeof(int));
+  data_type = (mxClassID*) calloc(ncells, sizeof(mxClassID));
   element_size = (int*) calloc(ncells, sizeof(int));
   col_offset = (int*) calloc(ncells, sizeof(int));
 
@@ -71,7 +72,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
       cell = mxGetFieldByNumber(prhs[1], 0, i);
 
     ncol[i] = (int) ( mxGetNumberOfElements(cell) / nrows );
-    data_type[i] = (int) mxGetClassID(cell);
+    data_type[i] = (mxClassID) mxGetClassID(cell);
     if (data_type[i]==mxCHAR_CLASS) {
         element_size[i] = 1;
     }

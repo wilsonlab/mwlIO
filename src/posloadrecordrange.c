@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <math.h>
 #include <time.h>
 #include <mat.h>
@@ -25,12 +26,12 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   mxArray *output_array;
   mxArray *itemArray, *frameArray, *timestampArray;
   unsigned char *pitem, *pframe;
-  unsigned long *ptimestamp;
-  long i;
+  uint32_t *ptimestamp;
+  int32_t i;
   char strFileName[MAXSTRING];
   FILE *fid=NULL;
   mxArray *posstruct, *xArray, *yArray;
-  short *px, *py;
+  int16_t *px, *py;
   int j;
   unsigned char y;
   unsigned char fieldmask=0;
@@ -81,25 +82,25 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   frameArray = mxCreateNumericMatrix(nrecords, 1, mxUINT8_CLASS, mxREAL);
   pframe = (unsigned char*)mxGetPr(frameArray);
   timestampArray = mxCreateNumericMatrix(nrecords, 1, mxUINT32_CLASS, mxREAL);
-  ptimestamp = (unsigned long*)mxGetPr(timestampArray);
+  ptimestamp = (uint32_t*)mxGetPr(timestampArray);
 
   for (i=0; i<nrecords; i++) {
 
     fread(&(pitem[i]), sizeof(char), 1, fid);
     fread(&(pframe[i]), sizeof(char), 1, fid);
-    fread(&(ptimestamp[i]), sizeof(unsigned long), 1, fid);
+    fread(&(ptimestamp[i]), sizeof(uint32_t), 1, fid);
 
     /* only when we want position data...*/
     if (fieldmask & 8) {
       xArray = mxCreateNumericMatrix(pitem[i], 1, mxINT16_CLASS, mxREAL);
       yArray = mxCreateNumericMatrix(pitem[i], 1, mxINT16_CLASS, mxREAL);
-      px = (short*)mxGetPr(xArray);
-      py = (short*)mxGetPr(yArray);
+      px = (int16_t*)mxGetPr(xArray);
+      py = (int16_t*)mxGetPr(yArray);
       
       for (j=0; j<pitem[i]; j++) {
 	fread(&(px[j]), sizeof(short), 1, fid);
 	fread(&y, sizeof(char), 1, fid);
-	py[j] = (short) y;
+	py[j] = (int16_t) y;
       }
       
       mxSetFieldByNumber(posstruct, i, 0, xArray);

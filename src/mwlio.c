@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <math.h>
 #include <time.h>
 #include <mat.h>
@@ -19,23 +20,34 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 {
 
   char strFileName[MAXSTRING];
+  char *record_data;
+  char **pdatatemp = NULL;
+
   FILE *fid=NULL;
-  unsigned long n_id;
-  unsigned long record_offset;
-  unsigned long file_size;
-  long n_records;
-  int record_size;
-  unsigned long i;
+
+  int64_t n_id;
+  int64_t record_offset;
+  int64_t file_size;
+  int64_t n_records;
+  int64_t record_size;
+
+  int i;
+  int *n_dim, *dims;
+  int subs;
+  int id2d[2];
+
   double *pid, *ptemp;
   double *pfield;
-  int id2d[2];
+
   int array_type;
-  int n_fields;
-  char *record_data;
+
+  size_t n_fields;
+
   int j;
-  int *n_dim, *num_elements, *num_bytes, *byte_offset, *field_type, *dims;
-  int subs;
-  char **pdatatemp = NULL;
+  int64_t *num_elements, *num_bytes, *byte_offset;
+
+  mxClassID *field_type;
+
 
   mxArray *output_array = NULL;
   mxArray *tempArray = NULL;
@@ -54,7 +66,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   if (!mxIsCell(prhs[2]))
     mexErrMsgTxt("Third argument should be a cell matrix of field descriptions");
 
-  n_fields = mxGetM(prhs[2]);
+  n_fields = (int32_t) mxGetM(prhs[2]);
   pfield = mxGetPr(prhs[2]);
 
   if (n_fields<1 || mxGetN(prhs[2])!=3)
@@ -64,20 +76,20 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   /* field descriptor = [ byte offset, type, number of elements ] */
   /* still to do... */
 
-  byte_offset = (int*) mxCalloc(n_fields, sizeof(int));
-  field_type = (int*) mxCalloc(n_fields, sizeof(int));
-  num_elements = (int*) mxCalloc(n_fields, sizeof(int));
-  num_bytes = (int*) mxCalloc(n_fields, sizeof(int));
+  byte_offset = (int64_t*) mxCalloc(n_fields, sizeof(int64_t));
+  field_type = (mxClassID*) mxCalloc(n_fields, sizeof(mxClassID));
+  num_elements = (int64_t*) mxCalloc(n_fields, sizeof(int64_t));
+  num_bytes = (int64_t*) mxCalloc(n_fields, sizeof(int64_t));
   n_dim = (int*) mxCalloc(n_fields, sizeof(int));
   
   for (i=0; i<n_fields; i++) {
     id2d[0]=i;
     id2d[1] = 0;
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
-    byte_offset[i] = (int) mxGetScalar(mxGetCell(prhs[2], subs) );
+    byte_offset[i] = (int64_t) mxGetScalar(mxGetCell(prhs[2], subs) );
     id2d[1] = 1;
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
-    field_type[i] = (int) mxGetScalar(mxGetCell(prhs[2], subs) );
+    field_type[i] = (mxClassID) mxGetScalar(mxGetCell(prhs[2], subs) );
     id2d[1] = 2;
     subs = mxCalcSingleSubscript(prhs[2], 2, id2d);
     n_dim[i] = mxGetNumberOfElements(mxGetCell(prhs[2], subs));
@@ -98,22 +110,28 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
           num_bytes[i] = num_elements[i] * sizeof(float);
 	break;
       case mxINT8_CLASS:
-         num_bytes[i] = num_elements[i] * sizeof(signed char); 
+         num_bytes[i] = num_elements[i] * sizeof(int8_t); 
 	break;
       case mxUINT8_CLASS:
-          num_bytes[i] = num_elements[i] * sizeof(unsigned char);
+          num_bytes[i] = num_elements[i] * sizeof(uint8_t);
 	break;
       case mxINT16_CLASS:
-          num_bytes[i] = num_elements[i] * sizeof(short);
+          num_bytes[i] = num_elements[i] * sizeof(int16_t);
 	break;
       case mxUINT16_CLASS:
-          num_bytes[i] = num_elements[i] * sizeof(unsigned short);
+          num_bytes[i] = num_elements[i] * sizeof(uint16_t);
 	break;
       case mxINT32_CLASS:
-          num_bytes[i] = num_elements[i] * sizeof(long);
+          num_bytes[i] = num_elements[i] * sizeof(int32_t);
 	break;
       case mxUINT32_CLASS:
-          num_bytes[i] = num_elements[i] * sizeof(unsigned long);
+          num_bytes[i] = num_elements[i] * sizeof(uint32_t);
+	break;
+      case mxINT64_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(int64_t);
+	break;
+      case mxUINT64_CLASS:
+          num_bytes[i] = num_elements[i] * sizeof(uint64_t);
 	break;
       }    
   }
@@ -126,16 +144,16 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   
   n_id = mxGetM(prhs[1]) * mxGetN(prhs[1]);
 
-  record_offset = (unsigned long) mxGetScalar(prhs[3]);
-  record_size = (int) mxGetScalar(prhs[4]);
+  record_offset = (int64_t) mxGetScalar(prhs[3]);
+  record_size = (int64_t) mxGetScalar(prhs[4]);
 
   mxGetString(prhs[0], strFileName, MAXSTRING);
   if ( (fid = fopen(strFileName, "rb")) == NULL )
     mexErrMsgTxt("Unable to open file");
 
   fseek(fid, 0, 2); /* end of file */
-  file_size = (unsigned long) ftell(fid);
-  n_records = (long) ( (file_size - record_offset) / record_size );
+  file_size = (int64_t) ftell(fid);
+  n_records = (int64_t) ( (file_size - record_offset) / record_size );
 
   /*mexPrintf("n_id: %ld, record_offset: %ld, record_size: %d, file_size: %ld, n_records: %d\n", n_id, record_offset, record_size, file_size, n_records);*/
 
@@ -148,7 +166,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   }
 
   /* construct output cell array */
-  output_array = mxCreateCellMatrix(n_fields, 1);
+  output_array = mxCreateCellMatrix((int) n_fields, 1);
 
   pdatatemp = (char **) mxCalloc(n_fields, sizeof(char*));
 
