@@ -19,7 +19,7 @@ if ~iscell(h)
     error('processheader:invalidArguments', 'Expecting cell array of strings')
 end
 
-rexp = '(?<param>[A-Za-z]([A-Za-z0-9 [\]_.])*):( |\t)+(?<value>[A-Za-z0-9 \-_:;/,.\t()[\]]+)';
+rexp = '(?<param>[A-Za-z]([A-Za-z0-9 [\]_.])*):( |\t)+(?<value>[A-Za-z0-9 \-_:;/,.\t()\[\]]+)';
 
 linetype = 1; %new header
 
