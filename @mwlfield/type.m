@@ -5,7 +5,7 @@ function retval = type( field )
 %
 %  Example
 %    field = mwlfield( 'test', 8, 1 );
-%    type( field )  % will return: 'ulong'
+%    type( field )  % will return: 'uint32'
 %
 
 %  Copyright 2006-2008 Fabian Kloosterman

@@ -6,8 +6,8 @@ function ef = setFields(ef)
 %  fields are fixed. An eeg file has the following fields:
 %   | field name | field type | field size     |
 %   --------------------------------------------
-%   | timestamp  | long       | 1              |
-%   | data       | short      | nchan*nsamples |
+%   | timestamp  | uint32     | 1              |
+%   | data       | int16      | nchan*nsamples |
 %
 
 %  Copyright 2005-2008 Fabian Kloosterman
@@ -17,7 +17,7 @@ if nargin>1
           'This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlfield({'timestamp', 'data'}, {'long', 'short'}, {1 ef.nchannels*ef.nsamples});
+fields = mwlfield({'timestamp', 'data'}, {'uint32', 'int16'}, {1 ef.nchannels*ef.nsamples});
 
 ef.mwlfixedrecordfile = setFields(ef.mwlfixedrecordfile, fields);
 

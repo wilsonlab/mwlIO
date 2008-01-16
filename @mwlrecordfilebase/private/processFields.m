@@ -72,6 +72,13 @@ else
             end
             
             field_type{f} = attr{1};
+            
+            %SPECIAL CASE !!!
+            if strcmp(field_type{f},'long')
+              field_type{f} = 'ulong';
+            end
+            %END SPECIAL CASE
+            
          end
         
     end

@@ -45,7 +45,7 @@ else
         end
         
         %check fields
-        fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
+        fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'uint8', 'uint8', 'uint32', 'int16', 'uint8'}, 1);
         if ~all( fields==rfb.fields )
             error('mwlposfile:mwlposfile:invalidFile', ...
                   'Invalid raw position file')

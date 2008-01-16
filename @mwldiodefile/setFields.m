@@ -6,11 +6,11 @@ function pf = setFields(pf)
 %  fields are fixed. A diode file has the following fields:
 %   | field name | field type | field size |
 %   ----------------------------------------
-%   | timestamp  | long       | 1          |
-%   | xfront     | short      | 1          |
-%   | xback      | short      | 1          |
-%   | yfront     | short      | 1          |
-%   | yback      | short      | 1          |
+%   | timestamp  | uint32     | 1          |
+%   | xfront     | int16      | 1          |
+%   | xback      | int16      | 1          |
+%   | yfront     | int16      | 1          |
+%   | yback      | int16      | 1          |
 %
 
 %  Copyright 2005-2008 Fabian Kloosterman
@@ -20,6 +20,6 @@ if nargin>1
             'This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlfield( {'timestamp', 'xfront', 'xback', 'yfront', 'yback'}, {'long', 'short', 'short', 'short', 'short'}, 1);
+fields = mwlfield( {'timestamp', 'xfront', 'xback', 'yfront', 'yback'}, {'uint32', 'int16', 'int16', 'int16', 'int16'}, 1);
 
 pf.mwlfixedrecordfile = setFields(pf.mwlfixedrecordfile, fields);

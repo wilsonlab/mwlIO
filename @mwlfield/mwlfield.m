@@ -11,7 +11,7 @@ function field = mwlfield(varargin)
 %
 %  f=MWLFIELD(name, type) specifies the data type of the fields. The type
 %  can be specified as either a string, a cell array of strings or a type
-%  code (default = 'short').
+%  code (default = 'int16').
 %
 %  f=MWLFIELD(name, type, size) specifies the dimensions of each
 %  field. Dimensions can be specified as a vector or as a cell array of
@@ -57,7 +57,7 @@ else
         error('mwlfield:mwlfield:invalidType', 'Invalid data type')
       end
     else
-      [field.type] = deal(2); %short
+      [field.type] = deal(2); %int16
     end
     
     if nargin>2

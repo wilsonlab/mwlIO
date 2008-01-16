@@ -7,11 +7,11 @@ function pf = setFields(pf)
 %  x' and 'target_y' repeat 0-255 times):
 %   | field name | field type | field size |
 %   ----------------------------------------
-%   | nitems     |  char      |  1         |
-%   | frame      |  char      |  1         |
-%   | timestamp  |  long      |  1         |
-%   | target x   |  short     |  1         |
-%   | target y   |  char      |  1         |
+%   | nitems     |  uint8     |  1         |
+%   | frame      |  uint8     |  1         |
+%   | timestamp  |  uint32    |  1         |
+%   | target x   |  int16     |  1         |
+%   | target y   |  uint8     |  1         |
 %
 
 %  Copyright 2005-2008 Fabian Kloosterman
@@ -21,7 +21,7 @@ if nargin>1
             'This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'char', 'char', 'long', 'short', 'char'}, 1);
+fields = mwlfield( {'nitems', 'frame', 'timestamp', 'target x', 'target y'}, {'uint8', 'uint8', 'uint32', 'int16', 'uint8'}, 1);
 
 pf.mwlrecordfilebase = setFields(pf.mwlrecordfilebase, fields);
 

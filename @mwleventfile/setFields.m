@@ -6,8 +6,9 @@ function ef = setFields(ef)
 %  fields are fixed. An event file has the following fields:
 %   | field name | field type | field size   |
 %   ------------------------------------------
-%   | timestamp  | long       | 1            |
+%   | timestamp  | uint32     | 1            |
 %   | string     | char       | string_size  |
+%  The 'string' field is reinterpreted as a string data type.
 %
 
 %  Copyright 2005-2008 Fabian Kloosterman
@@ -17,7 +18,7 @@ if nargin>1
             'This file format has fixed fields. Arguments are ignored.')
 end
 
-fields = mwlfield({'timestamp', 'string'}, {'ulong', 'char'}, {1 ef.string_size});
+fields = mwlfield({'timestamp', 'string'}, {'uint32', 'char'}, {1 ef.string_size});
 
 ef.mwlfixedrecordfile = setFields(ef.mwlfixedrecordfile, fields);
 
