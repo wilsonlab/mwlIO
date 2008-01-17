@@ -24,4 +24,4 @@ if sum( bytesize(fields) ) ~= frf.recordsize
                       'cannot change'])
 end
 
-frf.mwlrecordfilebaser = setFieldsInterp(frf.mwlrecordfilebase, fields);
+frf.mwlrecordfilebase = setFieldsInterp(frf.mwlrecordfilebase, fields);
