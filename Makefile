@@ -3,7 +3,7 @@
 # name of build directory
 BUILD_DIR = build
 # yes/no build mex files
-BUILDMEX = no
+BUILDMEX = yes
 # yes/no build documentation (requires fkHelp toolbox)
 BUILDDOC = yes
 # command line options for matlab
