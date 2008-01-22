@@ -92,10 +92,14 @@ else %ascii file
     end
     
     %transform data to matrix if necessary
-    nrows = numel(data{1});
-    data = cell2mat(data);
-    nd = numel( size(fields(fieldid)) );
-    data = permute( reshape( data, [ nrows size(fields(fieldid))] ), [(1:nd)+1 1]);
+    if strcmp(type(fields(fieldid)), 'string')
+      data = data{1}(:)';
+    else
+      nrows = numel(data{1});
+      data = cell2mat(data);
+      nd = numel( size(fields(fieldid)) );
+      data = permute( reshape( data, [ nrows size(fields(fieldid))] ), [(1:nd)+1 1]);
+    end
     
 end
 

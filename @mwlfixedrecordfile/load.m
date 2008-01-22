@@ -139,9 +139,14 @@ else %ascii
             if strcmp(type(fields(field_id(f))), 'string')
                 outdata.(name(fields(field_id(f)))) = data{1 + ofs}';
                 sz = size(fields(f));
+                if numel(sz)==1
+                  sz = 1;
+                else
+                  sz = sz(2:end);
+                end
                 outdata.(name(fields(field_id(f)))) = shiftdim( reshape( ...
-                    cat( 2, data{(1:prod(sz(2:end)))+ofs} ), [nrows sz(2:end)]), 1 );
-                ofs = ofs + prod(sz(2:end));
+                    cat( 2, data{(1:prod(sz))+ofs} ), [nrows sz]), 1 );
+                ofs = ofs + prod(sz);
             else
                 outdata.(name(fields(field_id(f)))) = shiftdim( reshape( ...
                     cell2mat( data( ( 1:length(fields(field_id(f))) ) + ofs ) ), [ nrows size(fields(field_id(f)))] ), 1) ;

@@ -20,6 +20,8 @@ function varargout = subsref(h,s)
 
 %  Copyright 2005-2008 Fabian Kloosterman
 
+varargout{1} = [];
+
 n = length(s);
 
 switch s(1).type

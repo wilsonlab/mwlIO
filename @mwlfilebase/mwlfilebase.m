@@ -34,6 +34,9 @@ function fb = mwlfilebase(varargin)
 
 %  Copyright 2005-2008 Fabian Kloosterman
 
+fb = struct( 'mode', '', 'filename', '', 'path', '', 'header', [], ...
+             'headersize', 0, 'format', '');
+
 if nargin==0
     fb.mode = '';       % read, append, write or overwrite
     fb.filename = '';   % name of the file + extension

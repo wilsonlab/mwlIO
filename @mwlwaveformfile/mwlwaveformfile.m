@@ -75,14 +75,13 @@ else
         break
       end
     end
-    wf.nchannels
     
     if isempty(wf.nchannels)
       error('mwlwaveformfile:mwlwaveformfile:invalidFile', 'Cannot determine number of channels in file')
     else
       wf.nchannels = str2double(wf.nchannels);
     end
-    wf.nchannels    
+
     wf.nsamples = wf.nsamples ./ wf.nchannels;
 
     flds = get(frf,'fields');
