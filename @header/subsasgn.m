@@ -23,13 +23,13 @@ nh = length(h.subheaders);
 
 switch s(1).type
  case '()'
-  if ischar(s(1).subs{1}) && ~strcmp(s(1).subs{1},':')
-    if nh>0
-      h.subheaders(1) = setParam(h.subheaders(1), s(1).subs{1}, b);
-    else
-      h.subheaders = subheader(s(1).subs{1},b);
-    end
-  else
+  %if ischar(s(1).subs{1}) && ~strcmp(s(1).subs{1},':')
+  %  if nh>0
+  %    h.subheaders(1) = setParam(h.subheaders(1), s(1).subs{1}, b);
+  %  else
+  %    h.subheaders = subheader(s(1).subs{1},b);
+  %  end
+  %else
     ind = s(1).subs{1};
     if isequal(ind,':')
       ind = 1:nh;
@@ -63,7 +63,7 @@ switch s(1).type
         end
       end
     end
-  end
+  %end
  case '.'
   nh = length(h.subheaders);
   for k=1:nh

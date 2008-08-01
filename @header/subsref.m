@@ -26,30 +26,31 @@ n = length(s);
 
 switch s(1).type
  case '()'
-  if ischar(s(1).subs{1}) && ~strcmp(s(1).subs{1},':')
-    nh = length(h.subheaders);
-    varargout{1} = [];
-    for k=1:nh
-      try
-        varargout{1}=getParam( h.subheaders(k), s(1).subs{1});
-        break % return on first success
-      end
-    end
-  else
+   % if ischar(s(1).subs{1}) && ~strcmp(s(1).subs{1},':')
+   % nh = length(h.subheaders);
+   % varargout{1} = [];
+   % for k=1:nh
+   %   try
+   %     varargout{1}=getParam( h.subheaders(k), s(1).subs{1});
+   %     break % return on first success
+   %   end
+   % end
+   %else
     varargout{1} = header( h.subheaders(s(1).subs{:} ) );
     if n>1
       varargout{1} = subsref( varargout{1}, s(2:end) );
     end
-  end
+   %end
  case '.'
-  nh = length(h.subheaders);
-  varargout = cell(nh,1);
-  for k=1:nh
-    try
-      varargout{k} = getParam( h.subheaders(k), s(1).subs );
-    catch
-      varargout{k} = [];
-    end
+  if ~all( hasParam( h, s(1).subs ) )
+      error('header:subsref', ['Parameter is not defines in all ' ...
+                          'subheaders'])
+  else
+      nh = length(h.subheaders);
+      varargout = cell(nh,1);
+      for k=1:nh
+          varargout{k} = getParam( h.subheaders(k), s(1).subs );
+      end
   end
  otherwise
   error('header:subsref:invalidIndexing', 'Invalid indexing')
