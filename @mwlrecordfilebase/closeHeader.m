@@ -20,7 +20,7 @@ fldstr = print( rfb.fields );
 
 hdr = get(rfb, 'header');
 
-hdr('Fields') = fldstr;
+hdr(1).('Fields') = fldstr;
 
 rfb = set(rfb, 'header', hdr);
 

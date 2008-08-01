@@ -9,7 +9,6 @@ function varargout = subsref(h,s)
 %                                   of subheaders
 %   4. [v1,...,vi]=h(i).('parameter') - idem as 3
 %   5. h = h(i) - slicing, returns new header with subset of subheaders
-%   6. h('parameter') - returns value of first subheader with parameter
 %   
 %  Example
 %    hdr = header('parm1', 1, 'parameter two', 2);

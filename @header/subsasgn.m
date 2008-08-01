@@ -6,9 +6,8 @@ function h = subsasgn(h,s,b)
 %  following syntaxes are supported:
 %   1. h.parameter=value - set parameter in all subheaders
 %   2. h.('parameter')=value - idem as 1
-%   3. h('parameter')=value - set parameter in first subheader only
-%   4. h(i)=header/subheader - replace subheaders
-%   5. h(i).parameter=value - set parameter for subset of subheaders
+%   3. h(i)=header/subheader - replace subheaders
+%   4. h(i).parameter=value - set parameter for subset of subheaders
 %  Note that if value is empty, the parameter or subheader is deleted.
 %
 %  Example

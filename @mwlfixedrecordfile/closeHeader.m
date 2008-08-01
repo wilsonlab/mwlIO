@@ -15,9 +15,9 @@ function f = closeHeader(f)
 
 hdr = get(f, 'header');
 
-fileformat = hdr('File Format');
+fileformat = getFirstParam(hdr,'File Format');
 if isempty(fileformat)
-  hdr('File Format') = 'fixedrecord';
+  hdr(1).('File Format') = 'fixedrecord';
 end
 
 f = set(f, 'header', hdr);

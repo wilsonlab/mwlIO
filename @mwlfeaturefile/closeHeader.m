@@ -15,7 +15,7 @@ function ff = closeHeader(ff)
 
 hdr = get(ff, 'header');
 
-hdr('File Format') = 'feature';
+hdr(1).('File Format') = 'feature';
 
 ff = set(ff, 'header', hdr);
 

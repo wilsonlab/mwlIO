@@ -23,13 +23,13 @@ end
 hdr = get(fb, 'header');
 
 if ismember(fb.format, 'binary')
-  hdr('File type') = 'Binary';
+  hdr(1).('File type') = 'Binary';
 else
-  hdr('File type') = 'Ascii';
+  hdr(1).('File type') = 'Ascii';
 end
 
-hdr('Program') = 'Matlab mwlIO toolbox';  
-hdr('Program version') = 'local';  
+hdr(1).('Program') = 'Matlab mwlIO toolbox';  
+hdr(1).('Program version') = 'local';  
 
 fb = set(fb, 'header', hdr);
 

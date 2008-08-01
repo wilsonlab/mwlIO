@@ -15,8 +15,8 @@ function ef = closeHeader(ef)
 
 hdr = get(ef, 'header');
 
-hdr('File Format')= 'event';
-hdr('Extraction type') ='event strings';
+hdr(1).('File Format')= 'event';
+hdr(1).('Extraction type') ='event strings';
 
 
 ef = set(ef, 'header', hdr);

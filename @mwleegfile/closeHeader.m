@@ -15,8 +15,8 @@ function ef = closeHeader(ef)
 
 hdr = get(ef, 'header');
 
-hdr('File Format')= 'eeg';
-hdr('nchannels')= ef.nchannels;
+hdr(1).('File Format')= 'eeg';
+hdr(1).('nchannels')= ef.nchannels;
 
 ef = set(ef, 'header', hdr);
 

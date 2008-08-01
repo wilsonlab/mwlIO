@@ -15,7 +15,7 @@ function pf = closeHeader(pf)
 
 hdr = get(pf, 'header');
 
-hdr('File Format') = 'rawpos';
+hdr(1).('File Format') = 'rawpos';
 
 pf = set(pf, 'header', hdr);
 

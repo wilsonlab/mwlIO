@@ -15,8 +15,8 @@ function wf = closeHeader(wf)
 
 hdr = get(wf, 'header');
 
-hdr('File Format') = 'waveform';
-hdr('nchannels') = wf.nchannels;
+hdr(1).('File Format') = 'waveform';
+hdr(1).('nchannels') = wf.nchannels;
 
 wf = set(wf, 'header', hdr);
 
