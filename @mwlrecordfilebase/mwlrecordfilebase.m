@@ -33,7 +33,7 @@ else
     
     if ismember(bf.mode, {'read', 'append'})
         hdr = bf.header;
-        flds = hdr('Fields');
+        flds = getFirstParam( hdr, 'Fields');
         if isempty(flds)
             error('mwlrecordfilebase:mwlrecordfilebase:noFields', 'No Fields parameter in header')
         end

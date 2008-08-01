@@ -64,7 +64,7 @@ else
     ef.nchannels = 0;
     
     hdr = get(frf, 'header');
-    ef.nchannels = str2double( hdr('nchannels') );
+    ef.nchannels = str2double( getFirstParam( hdr, 'nchannels') );
     
     %for h=1:len(hdr)
     %  sh = hdr(h);
