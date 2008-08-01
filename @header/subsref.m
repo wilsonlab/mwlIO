@@ -28,10 +28,11 @@ switch s(1).type
  case '()'
   if ischar(s(1).subs{1}) && ~strcmp(s(1).subs{1},':')
     nh = length(h.subheaders);
+    varargout{1} = [];
     for k=1:nh
-      varargout{1}=getParam( h.subheaders(k), s(1).subs{1});
-      if ~isempty(varargout{1})
-        break
+      try
+        varargout{1}=getParam( h.subheaders(k), s(1).subs{1});
+        break % return on first success
       end
     end
   else
@@ -44,7 +45,11 @@ switch s(1).type
   nh = length(h.subheaders);
   varargout = cell(nh,1);
   for k=1:nh
-    varargout{k} = getParam( h.subheaders(k), s(1).subs );
+    try
+      varargout{k} = getParam( h.subheaders(k), s(1).subs );
+    catch
+      varargout{k} = [];
+    end
   end
  otherwise
   error('header:subsref:invalidIndexing', 'Invalid indexing')

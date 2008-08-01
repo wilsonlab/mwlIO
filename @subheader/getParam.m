@@ -24,7 +24,8 @@ if (length(id)>1)
 end
 
 if isempty(id)
-  val = [];
+  error('subheader:getParam:Error',...
+        'Internal error: requested parameter does not exist');
 else
   val = sh.parms{id,2};
 end
