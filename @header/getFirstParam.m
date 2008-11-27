@@ -12,7 +12,7 @@ if nargin<2
     return
 end
 
-if ~ischar(param) || strcmp(param, '')
+if isempty(param) || ~ischar(param)
   error('header:getFirstParam:invalidParameter', ...
         'Parameter name should be non-empty string')
 end
@@ -21,14 +21,14 @@ nh = length(h.subheaders);
 
 val = NaN;
 
-for k=1:nh
-    if hasParam( h.subheaders(k), param )
-        val = getParam( h.subheaders(k), param );
-        break
-    end
+b = hasParam( h, param );
+
+idx = find( b, 1, 'first' );
+
+if isempty(idx)
+      error('header:getFirstParam', ['Parameter ' param  ' is not defined in any ' ...
+                          'subheader'])
+else
+    val = getParam( h.subheaders(idx), param );
 end
 
-if isnan(val)
-      error('header:getFirstParam', ['Parameter is not defined in any ' ...
-                          'subheader'])
-end
