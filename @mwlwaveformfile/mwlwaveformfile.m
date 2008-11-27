@@ -66,22 +66,18 @@ else
     
     hdr = get(frf, 'header');
     
-    for h=1:len(hdr)
-      wf.nchannels = hdr(h).('nelect_chan');
-      if isempty( wf.nchannels )
-        wf.nchannels = hdr(h).('nchannels');
-      end
-      if ~isempty(wf.nchannels)
-        break
-      end
+    p1 = find( hasParam( hdr, 'nelect_chan' ), 1, 'first' );
+    p2 = find( hasParam( hdr, 'nchannels' ), 1, 'first' );
+    
+    if ~isempty(p1) && (isempty(p2) || p1<=p2)
+        wf.nchannels = str2double( hdr(p1).('nelect_chan') );
+    elseif ~isempty(p2) && (isempty(p1) || p2<=p1)
+        wf.nchannels = str2double( hdr(p2).('nchannels') );        
+    else        
+        error('mwlwaveformfile:mwlwaveformfile:invalidFile', ['Cannot ' ...
+                            'determine number of channels in file'])
     end
     
-    if isempty(wf.nchannels)
-      error('mwlwaveformfile:mwlwaveformfile:invalidFile', 'Cannot determine number of channels in file')
-    else
-      wf.nchannels = str2double(wf.nchannels);
-    end
-
     wf.nsamples = wf.nsamples ./ wf.nchannels;
 
     flds = get(frf,'fields');
