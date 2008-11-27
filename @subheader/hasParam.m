@@ -12,9 +12,28 @@ if nargin<2
     return
 end
 
-if ~ischar(param) || strcmp(param, '')
+if isempty(param) || (~ischar(param) && ~iscellstr(param))
   error('subheader:hasParam:invalidParameter', ...
-        'Parameter name should be non-empty string')
+        ['Parameter name should be non-empty string or cell array of ' ...
+         'strings'])
 end
 
-b = any( strcmp(sh.parms(:,1), param) );
+if ischar(param)
+    
+    b = any( strcmp(sh.parms(:,1), param) );
+    
+else
+    
+    n = numel(param);
+    b=false(1,n);
+    
+    for k=1:n
+        
+        b(k) = any( strcmp(sh.parms(:,1), param{k} ) );
+        
+    end
+    
+end
+
+        
+        

@@ -12,17 +12,22 @@ if nargin<2
     return
 end
 
-if ~ischar(param) || strcmp(param, '')
+if isempty(param) || (~ischar(param) && ~iscellstr(param))
   error('header:hasParam:invalidParameter', ...
-        'Parameter name should be non-empty string')
+        ['Parameter name should be non-empty string or cell array of ' ...
+         'strings'])
 end
 
 nh = length(h.subheaders);
 
-b = false(nh,1);
+if ischar(param)
+    b = false(nh,1);
+else
+    b = false(nh, numel(param));
+end
 
 for k=1:nh
     
-    b(k) = hasParam( h.subheaders(k), param );
+    b(k,:) = hasParam( h.subheaders(k), param );
     
 end
