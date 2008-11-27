@@ -20,4 +20,6 @@ case '.'
     else
         b = subsref(ef.mwlfixedrecordfile, s);
     end
+otherwise
+    b = subsref(ef.mwlfixedrecordfile, s);
 end

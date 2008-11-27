@@ -10,14 +10,18 @@ function b = subsref(ef,s)
 
 switch s(1).type
 case '.'
-    flds = {'nsamples' 'nchannels'};
-    id = find( strcmp(flds, s(1).subs) );
-    if ~isempty(id)
-        b = ef.(flds{id});
-        if numel(s)>1
+  flds = {'nsamples' 'nchannels'};
+  id = find( strcmp(flds, s(1).subs) );
+  if ~isempty(id)
+      b = ef.(flds{id});
+      if numel(s)>1
           b = subsref(b, s(2:end) );
-        end
-    else
-        b = subsref(ef.mwlfixedrecordfile, s);
-    end
+      end
+  else
+      b = subsref(ef.mwlfixedrecordfile, s);
+  end
+otherwise
+  
+  b = subsref(ef.mwlfixedrecordfile, s);
+
 end
