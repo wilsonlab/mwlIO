@@ -33,9 +33,16 @@ switch s(1).type
     if isequal(ind,':')
       ind = 1:nh;
     end
-    if any( ind<1 | ind>nh )
-      error('header:subsasgn:invalidIndexing', 'Invalid index')
+    %add new subheaders if necessary
+    if (max(ind)>nh)
+        if nh==0
+            h.subheaders = subheader();
+        end
+        h.subheaders(max(ind)) = subheader();
     end
+    %if any( ind<1 | ind>nh )
+    %  error('header:subsasgn:invalidIndexing', 'Invalid index')
+    %end
     if length(s)>1 && strcmp(s(2).type,'.')
       for k=1:numel(ind)
         h.subheaders(ind(k)) = setParam(h.subheaders(ind(k)),s(2).subs,b);
