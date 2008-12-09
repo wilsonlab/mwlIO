@@ -102,8 +102,12 @@ else
             error('mwlfilebase:mwlfilebase:invalidFile','No valid header in file')
         end
 
-        fileformat = getFirstParam( fb.header, 'File type' );
-
+        if any( hasParam(fb.header, 'File type') )
+            fileformat = getFirstParam( fb.header, 'File type' );
+        else    
+            fileformat = [];
+        end
+    
         if isempty(fileformat) || strcmp(fileformat, 'Binary')
             fb.format = 'binary';
         else
