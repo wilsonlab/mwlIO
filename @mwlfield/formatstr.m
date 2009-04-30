@@ -31,9 +31,11 @@ end
 
 if nargin<4 || isempty(fmttype) || fmttype==0
   %mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32'};
-  mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32', 'd8', 's'};    
+  mapping = {'u8', 'd16', 'd32', 'f', 'f', 's', 's', 'd32', 'd8', ...
+             's', 'u16', 'd64', 'u64'};    
 else
-    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd', 'd', 's'};
+    mapping = {'d', 'd', 'd', 'f', 'f', 's', 's', 'd', 'd', 's', ...
+               'd', 'd', 'd'};
 end
 
 fmtstr = '';
@@ -54,7 +56,7 @@ for f=1:nfields
     %    else
     %        fmt = [fmt mapping{field_type(f)}];
     %    end
-    if field_type(f)>=1 && field_type(f)<=10
+    if field_type(f)>=1 && field_type(f)<=13
         fmt = [fmt mapping{field_type(f)}];
     else
         error('mwlfield:formatstr:invalidType', 'Incorrect field type')
