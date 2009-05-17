@@ -55,5 +55,9 @@ else
     
     idrange = findrecord( fullfile( get(frf, 'path'), get(frf, 'filename') ), irange, fielddef(fieldid,:), get(frf, 'headersize'), get(frf, 'recordsize') );
     
+    if any(idrange==-1)
+        error('mwlfixedrecordfile:loadrange:invalidRange', 'Invalid range - out of bounds')
+    end
+
     data = load(frf, varargin{1}, idrange(1):idrange(2));
 end
