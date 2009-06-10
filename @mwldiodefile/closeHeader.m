@@ -15,16 +15,8 @@ function pf = closeHeader(pf)
 
 hdr = get(pf, 'header');
 
-if len(header) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
-sh = setParam(sh, 'File Format', 'diode');
-sh = setParam(sh, 'Extraction type', 'extended dual diode position');
-
-hdr(1) = sh;
+hdr(1).('File Format') = 'diode';
+hdr(1).('Extract type') = 'extended dual diode position';
 
 pf = set(pf, 'header', hdr);
 
