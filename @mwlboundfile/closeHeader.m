@@ -20,15 +20,7 @@ end
 
 hdr = get(bf, 'header');
 
-if len(hdr) == 0
-    sh = subheader();
-else
-    sh  = hdr(1);
-end
-
-sh = setParam(sh, 'File Format', 'clbound');
-
-hdr(1) = sh;
+hdr(1).('File Format') = 'clbound';
 
 bf = set(bf, 'header', hdr);
 
