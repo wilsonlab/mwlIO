@@ -41,7 +41,7 @@ ifeq ($(BUILDMEX),yes)
 BUILDMEXCMD = makesources,
 endif
 
-MATLABCOMMAND = p=pwd;cd('~');startup;cd(p);$(BUILDMEXCMD)$(BUILDDOCCMD)
+MATLABCOMMAND = $(BUILDMEXCMD)$(BUILDDOCCMD)
 
 PKGNAME = $(RPM_NAME)-$(RPM_VER)-$(RPM_REL).$(MWLARCH)
 
