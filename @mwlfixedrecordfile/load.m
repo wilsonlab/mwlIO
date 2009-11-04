@@ -122,10 +122,10 @@ else %ascii
         %fseek to header offset
         fseek(fid, get(frf, 'headersize'), -1);    
         if i==-1
-            data = textscan(fid, fmt, 'whitespace', '\t');
+            data = textscan(fid, fmt, 'delimiter', '\t');
         else
             data = textscan(fid, fmt, length(i), 'headerLines', i(1), ...
-                            'whitespace', '\t');
+                'delimiter', '\t');
         end
     
         outdata = struct();
