@@ -28,20 +28,21 @@ RELDATE=$(shell date +%d-%b-%Y)
 # computer architecture (for creating rpm)
 MWLARCH=$(shell sed -e '/^BuildArch: */!d; s///;q' $(RPM_NAME).spec)
 # matlab command (leave empty)
-MATLABCOMMAND = 
+CMD = 
 BUILDDOCCMD = 
 BUILDMEXCMD = 
 
 # construct matlab command
 ifeq ($(BUILDDOC),yes)
-BUILDDOCCMD = generate_help('.','$(RPM_NAME)'),quit
+BUILDDOCCMD = generate_help('.','$(RPM_NAME)')
 endif
 
 ifeq ($(BUILDMEX),yes)
 BUILDMEXCMD = makesources,
 endif
 
-MATLABCOMMAND = $(BUILDMEXCMD)$(BUILDDOCCMD)
+CMD = $(BUILDMEXCMD)$(BUILDDOCCMD)
+MATLABCOMMAND = v=ver('matlab');if(str2double(v.Version)<7.6)&&(exist('~/startup.m','file')),run('~/startup.m');end,$(CMD),quit
 
 PKGNAME = $(RPM_NAME)-$(RPM_VER)-$(RPM_REL).$(MWLARCH)
 
@@ -67,7 +68,7 @@ build:
 mex: build
 	cd $(BUILD_DIR)/$(RPM_NAME) ; \
 	sed -i -e "/Program version/s/'local'/'$(RPM_VER)-$(RPM_REL)'/g" \@mwlfilebase/closeHeader.m ; \
-	if test -n "$(MATLABCOMMAND)"; then $(MATLABBIN) $(MATLABOPTIONS) -r "$(MATLABCOMMAND)"; fi ;\
+	if test -n "$(CMD)"; then $(MATLABBIN) $(MATLABOPTIONS) -r "$(MATLABCOMMAND)"; fi ;\
 	if test "$(BUILDDOC)" = "yes"; then sed -i -e "s/VERSIONNUMBER/$(RPM_VER)-$(RPM_REL)/g" $(DOCPATH)/$(RPM_NAME)_product_page.html ; fi ;\
 	if test "$(BUILDDOC)" = "yes"; then sed -i -e "s/RELEASEDATE/$(RELDATE)/g" $(DOCPATH)/$(RPM_NAME)_product_page.html ; fi
 
