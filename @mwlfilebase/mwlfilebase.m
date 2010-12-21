@@ -84,10 +84,10 @@ else
     % if file is opened in read mode
     if ismember(fb.mode, {'read', 'append'})
 
-        [fb.path, fb.filename, ext, versn] = fileparts(fullpath(filename));
+        [fb.path, fb.filename, ext] = fileparts(fullpath(filename));
         
         fb.format = ''; %will be set later
-        fb.filename = [fb.filename ext versn];
+        fb.filename = [fb.filename ext];
     
         fid = fopen(fullfile(fb.path, fb.filename), 'rb');
     
@@ -129,8 +129,8 @@ else
             error('mwlfilebase:mwlfilebase:invalidFile','Cannot create file')
         end
         
-        [fb.path, fb.filename, ext, versn] = fileparts(filename);
-        fb.filename = [fb.filename ext versn];
+        [fb.path, fb.filename, ext] = fileparts(filename);
+        fb.filename = [fb.filename ext];
         fb.format = isbin;
 
     end
