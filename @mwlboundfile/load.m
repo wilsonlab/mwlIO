@@ -64,7 +64,7 @@ while ( ~feof(fid) )
         
         ncoord = fscanf(fid, '%d', 1);
         
-        cb(cluster_id).bounds(end).vertices = fscanf(fid, '%f', [ncoord 2]);
+        cb(cluster_id).bounds(end).vertices = fscanf(fid, '%f', [2 ncoord])';
         
     end
     
