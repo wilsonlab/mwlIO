@@ -35,9 +35,12 @@ else
         base = mwlfilebase(varargin{1}, 'read', 'ascii');
     end
             
-
-    if ~strcmp( getFileType(base), 'clbound')
-        error('mwlboundfile:mwlboundfile:invalidFile', 'Not a cluster bounds file')
+    if ismember(base.mode, {'read', 'append'})
+    
+        if ~strcmp( getFileType(base), 'clbound')
+            error('mwlboundfile:mwlboundfile:invalidFile', 'Not a cluster bounds file')
+        end
+    
     end
     
     if ismember(base.format, {'binary'})
