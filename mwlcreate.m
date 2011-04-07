@@ -60,6 +60,8 @@ switch filetype
     case 'cluster'
         %f = mwlfixedrecordfile(filename, 'w');
         error('mwlcreate:notImplemented', 'Not implemented')
+    case 'clbound'
+        f = mwlboundfile(filename, args.Mode, 'ascii');
     otherwise
         error('mwlcreate:unknownFileType', 'Unsupported file type')
 end
