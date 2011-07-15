@@ -88,11 +88,11 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   }
 
   if (nlhs>0)
-    plhs[0] = mxCreateScalarDouble( nrecords );
+    plhs[0] = mxCreateDoubleScalar( nrecords );
   if (nlhs>1)
-    plhs[1] = mxCreateScalarDouble( offset );
+    plhs[1] = mxCreateDoubleScalar( offset );
   if (nlhs>2)
-    plhs[2] = mxCreateScalarDouble( timestamp );
+    plhs[2] = mxCreateDoubleScalar( timestamp );
 
   fclose(fid);
 
