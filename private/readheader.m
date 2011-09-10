@@ -57,10 +57,13 @@ end
 
 hsize = numel(magic_start);
 
+nb = length(fgets(f)); %number of bytes for a new line, assume the same for every line in file
+hsize = hsize + nb;
+
 while 1
   l = fgetl(f);
-  hsize = hsize + length(l) + 1;
-  
+  hsize = hsize + length(l) + nb;
+
   if strcmp(l, magic_end)
     break
   end
