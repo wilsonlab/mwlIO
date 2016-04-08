@@ -161,7 +161,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
   for (i=0; i<n_id; i++) {
     if (pid[i]<0 || pid[i]>n_records-1){
       fclose(fid);
-      mxErrMsgTxt("Index out of bounds");
+      mexErrMsgTxt("Index out of bounds");
     }
   }
 
@@ -229,7 +229,6 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 
 
 
-/* $Log: mwlio.c,v $
-/* Revision 1.1  2005/10/09 21:07:28  fabian
-/* *** empty log message ***
-/* */
+/* $Log: mwlio.c,v $ */
+/* Revision 1.1  2005/10/09 21:07:28  fabian */
+
