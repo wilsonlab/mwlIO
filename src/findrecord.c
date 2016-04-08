@@ -409,7 +409,6 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 }
 
 
-/* $Log: findrecord.c,v $
-/* Revision 1.1  2005/10/09 21:06:38  fabian
-/* *** empty log message ***
-/* */
+/* $Log: findrecord.c,v $ */
+/* Revision 1.1  2005/10/09 21:06:38  fabian */
+
