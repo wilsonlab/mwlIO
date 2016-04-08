@@ -140,7 +140,6 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 }
 
 
-/* $Log: posloadrecordrange.c,v $
-/* Revision 1.1  2005/10/09 21:09:26  fabian
-/* *** empty log message ***
-/* */
+/* $Log: posloadrecordrange.c,v $ */
+/* Revision 1.1  2005/10/09 21:09:26  fabian */
+

@@ -100,7 +100,5 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 
 
 
-/* $Log: posfindrecord.c,v $
-/* Revision 1.1  2005/10/09 21:08:31  fabian
-/* *** empty log message ***
-/* */
+/* $Log: posfindrecord.c,v $ */
+/* Revision 1.1  2005/10/09 21:08:31  fabian */

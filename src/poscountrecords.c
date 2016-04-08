@@ -90,7 +90,6 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 
 
 
-/* $Log: poscountrecords.c,v $
-/* Revision 1.1  2005/10/09 21:07:56  fabian
-/* *** empty log message ***
-/* */
+/* $Log: poscountrecords.c,v $ */
+/* Revision 1.1  2005/10/09 21:07:56  fabian */
+
