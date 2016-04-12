@@ -84,7 +84,8 @@ else
     % if file is opened in read mode
     if ismember(fb.mode, {'read', 'append'})
 
-        [fb.path, fb.filename, ext] = fileparts(fullpath(filename));
+       % [fb.path, fb.filename, ext] = fileparts(fullpath(filename));
+	 [fb.path, fb.filename, ext] = fileparts(filename);
         
         fb.format = ''; %will be set later
         fb.filename = [fb.filename ext];
