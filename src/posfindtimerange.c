@@ -118,7 +118,7 @@ void mexFunction( int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[] )
 
 
 
-/* $Log: posfindtimerange.c,v $
-/* Revision 1.1  2005/10/09 21:08:57  fabian
-/* *** empty log message ***
-/* */
+/* $Log: posfindtimerange.c,v $ */
+/* Revision 1.1  2005/10/09 21:08:57  fabian */
+
+
